@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ class Figure
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=140)
      */
     private $name;
 
@@ -25,6 +26,12 @@ class Figure
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", length=190, unique=true)
+     */
+    private $slug;
 
     public function getId()
     {
@@ -53,5 +60,18 @@ class Figure
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
     }
 }

@@ -22,8 +22,9 @@ class FigFixtures extends Fixture
 
         for ($i = 0; $i < 15; $i++) {
             $figure = new Figure();
-            $figure->setName($faker->sentence(3, true));
+            $figure->setName($faker->words(2, true));
             $figure->setDescription($faker->text(140));
+            $figure->setSlug($faker->slug(3, true));
             $manager->persist($figure);
         }
 

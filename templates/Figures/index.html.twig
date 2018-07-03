@@ -7,7 +7,9 @@
     {% if figures %}
         <ul>
         {% for figure in figures %}
-            <li>{{ figure.name }}</li>
+            <li>
+                <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
+            </li>
         {% endfor %}
         </ul>
     {% else %}

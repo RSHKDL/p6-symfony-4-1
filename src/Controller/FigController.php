@@ -33,7 +33,14 @@ class FigController extends Controller
         if (!$slug) {
             throw $this->createNotFoundException('This figure does not exist');
         }
-        return $this->render('Figures/view.html.twig');
+
+        $figure = $this->getDoctrine()
+            ->getRepository(Figure::class)
+            ->findOneBy(array('slug' => $slug));
+
+        return $this->render('Figures/view.html.twig', [
+            'figure' => $figure
+        ]);
     }
 
     /**
