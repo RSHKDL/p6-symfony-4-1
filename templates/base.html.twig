@@ -23,7 +23,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li>
                             <span class="navbar-text">Welcome {{ app.user.username }} !</span>
                         </li>

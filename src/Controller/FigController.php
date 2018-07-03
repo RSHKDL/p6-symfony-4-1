@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Figure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FigController extends Controller
@@ -44,7 +45,7 @@ class FigController extends Controller
     }
 
     /**
-     * @Route("/figures/add")
+     * @Route("/figures/add", name="add_figure")
      */
     public function add()
     {
@@ -52,18 +53,33 @@ class FigController extends Controller
     }
 
     /**
-     * @Route("/figures/edit/{id}", requirements={"id"="\d+"})
+     * @Route("/figures/edit/{id}", name="edit_figure", requirements={"id"="\d+"})
      */
-    public function edit()
+    public function edit($id)
     {
+        $item = $this->getDoctrine()
+            ->getRepository(Figure::class)
+            ->find($id);
+
+        if ($item === null) {
+            throw new NotFoundHttpException('Figure '.$id.' does not exist');
+        }
+
         return $this->render('figures/edit.html.twig');
     }
 
     /**
-     * @Route("/figures/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/figures/delete/{id}", name="delete_figure", requirements={"id"="\d+"})
      */
-    public function delete()
+    public function delete($id)
     {
+        $item = $this->getDoctrine()
+            ->getRepository(Figure::class)
+            ->find($id);
+
+        if ($item === null) {
+            throw new NotFoundHttpException('Figure '.$id.' does not exist');
+        }
         return $this->render('figures/delete.html.twig');
     }
 
