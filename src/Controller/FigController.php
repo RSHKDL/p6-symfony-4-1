@@ -11,7 +11,7 @@ class FigController extends Controller
 {
 
     /**
-     * @Route("/{page}", name="index_figure", requirements={"page"="\d+"})
+     * @Route("/figures/{page}", name="index_figure", requirements={"page"="\d+"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index($page = 1)
@@ -19,13 +19,13 @@ class FigController extends Controller
         $listFigures = $this->getDoctrine()
             ->getRepository(Figure::class)
             ->findAll();
-        return $this->render('Figures/index.html.twig', [
+        return $this->render('figures/index.html.twig', [
             'figures' => $listFigures
         ]);
     }
 
     /**
-     * @Route("/{slug}", name="view_figure")
+     * @Route("/figures/{slug}", name="view_figure")
      * @param $slug
      */
     public function view($slug)
@@ -38,33 +38,33 @@ class FigController extends Controller
             ->getRepository(Figure::class)
             ->findOneBy(array('slug' => $slug));
 
-        return $this->render('Figures/view.html.twig', [
+        return $this->render('figures/view.html.twig', [
             'figure' => $figure
         ]);
     }
 
     /**
-     * @Route("/add")
+     * @Route("/figures/add")
      */
     public function add()
     {
-        return $this->render('Figures/add.html.twig');
+        return $this->render('figures/add.html.twig');
     }
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Route("/figures/edit/{id}", requirements={"id"="\d+"})
      */
     public function edit()
     {
-        return $this->render('Figures/edit.html.twig');
+        return $this->render('figures/edit.html.twig');
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/figures/delete/{id}", requirements={"id"="\d+"})
      */
     public function delete()
     {
-        return $this->render('Figures/delete.html.twig');
+        return $this->render('figures/delete.html.twig');
     }
 
 }
