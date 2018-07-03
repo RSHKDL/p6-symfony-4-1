@@ -4,4 +4,14 @@
 
 <h2>Nos figures</h2>
 
+    {% if figures %}
+        <ul>
+        {% for figure in figures %}
+            <li>{{ figure.name }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No figures yet</p>
+    {% endif %}
+
 {% endblock %}

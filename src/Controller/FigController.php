@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Figure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +16,12 @@ class FigController extends Controller
      */
     public function index($page = 1)
     {
-        return $this->render('Figures/index.html.twig');
+        $listFigures = $this->getDoctrine()
+            ->getRepository(Figure::class)
+            ->findAll();
+        return $this->render('Figures/index.html.twig', [
+            'figures' => $listFigures
+        ]);
     }
 
     /**
