@@ -28,7 +28,7 @@
                             <span class="navbar-text">Welcome {{ app.user.username }} !</span>
                         </li>
                         <li>
-                            <a class="nav-link" href="#">Logout</a>
+                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li>
