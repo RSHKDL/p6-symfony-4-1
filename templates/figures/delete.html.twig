@@ -1,6 +1,7 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-{% endblock %}
-
+<form action="{{ url('delete_figure', {id: figure.id}) }}" method="post" data-confirmation="true" id="delete-form">
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+    <button type="submit" class="btn btn-sm btn-danger">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+    </button>
+</form>

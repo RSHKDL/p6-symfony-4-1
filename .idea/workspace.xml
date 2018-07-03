@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f36e164a-8317-455d-8d66-0f0afca81391" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FigController.php" afterPath="$PROJECT_DIR$/src/Controller/FigController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" afterPath="$PROJECT_DIR$/templates/base.html.twig" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Figure.php" afterPath="$PROJECT_DIR$/src/Entity/Figure.php" />
+      <change beforePath="$PROJECT_DIR$/templates/figures/add.html.twig" afterPath="$PROJECT_DIR$/templates/figures/add.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/figures/delete.html.twig" afterPath="$PROJECT_DIR$/templates/figures/delete.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/figures/edit.html.twig" afterPath="$PROJECT_DIR$/templates/figures/edit.html.twig" />
       <change beforePath="$PROJECT_DIR$/templates/figures/index.html.twig" afterPath="$PROJECT_DIR$/templates/figures/index.html.twig" />
       <change beforePath="$PROJECT_DIR$/templates/figures/view.html.twig" afterPath="$PROJECT_DIR$/templates/figures/view.html.twig" />
     </list>
@@ -36,19 +40,94 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FigController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FigController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/FigController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
-              <caret line="76" column="42" lean-forward="true" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+            <state relative-caret-position="688">
+              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
               <folding>
                 <element signature="e#35#57#0#PHP" expanded="true" />
-                <element signature="e#614#639#0#PHP" expanded="true" />
-                <element signature="e#1101#1125#0#PHP" expanded="true" />
-                <element signature="e#1306#1329#1#PHP" expanded="true" />
-                <element signature="e#1728#1752#1#PHP" expanded="true" />
-                <element signature="e#2156#2182#1#PHP" expanded="true" />
+                <element signature="e#796#821#0#PHP" expanded="true" />
+                <element signature="e#1315#1339#0#PHP" expanded="true" />
+                <element signature="e#1996#2019#0#PHP" expanded="true" />
+                <element signature="e#2912#2936#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/figures/form.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <folding>
+                <element signature="e#20#48#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/figures/add.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="47" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/figures/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/figures/view.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Figure.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Figure.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FigureType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/FigureType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="1" />
+              <folding>
+                <element signature="e#28#50#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="delete.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/figures/delete.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,18 +145,8 @@
       <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/figures/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/figures/view.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+            <state relative-caret-position="432">
+              <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -95,8 +164,6 @@
         <option value="$PROJECT_DIR$/templates/Figures/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/Figures/delete.html.twig" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/Entity/Figure.php" />
-        <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
         <option value="$PROJECT_DIR$/src/DataFixtures/FigFixtures.php" />
         <option value="$PROJECT_DIR$/templates/Figures/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/Figures/view.html.twig" />
@@ -109,9 +176,18 @@
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/figures/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/figures/view.html.twig" />
+        <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
+        <option value="$PROJECT_DIR$/config/config.yaml" />
+        <option value="$PROJECT_DIR$/src/Form/FigureType.php" />
+        <option value="$PROJECT_DIR$/templates/figures/add.html.twig" />
+        <option value="$PROJECT_DIR$/templates/figures/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Figure.php" />
+        <option value="$PROJECT_DIR$/templates/figures/form.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/FigureDeleteType.php" />
         <option value="$PROJECT_DIR$/src/Controller/FigController.php" />
+        <option value="$PROJECT_DIR$/templates/figures/view.html.twig" />
+        <option value="$PROJECT_DIR$/templates/figures/index.html.twig" />
+        <option value="$PROJECT_DIR$/templates/figures/delete.html.twig" />
       </list>
     </option>
   </component>
@@ -271,25 +347,25 @@
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="routes" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="DataFixtures" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Form" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
@@ -301,18 +377,6 @@
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="figures" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="home" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="security" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -354,27 +418,28 @@
       <option name="presentableId" value="Default" />
       <updated>1530604392968</updated>
       <workItem from="1530604394512" duration="17764000" />
-      <workItem from="1530626776439" duration="6560000" />
+      <workItem from="1530626776439" duration="24945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24324000" />
+    <option name="totallyTimeSpent" value="42709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2047729" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.050808314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.059276365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.050808314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -382,7 +447,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -403,11 +467,10 @@
           <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
             <element signature="e#35#57#0#PHP" expanded="true" />
-            <element signature="e#614#639#0#PHP" expanded="true" />
-            <element signature="e#1101#1125#0#PHP" expanded="true" />
-            <element signature="e#1306#1329#1#PHP" expanded="true" />
-            <element signature="e#1728#1752#1#PHP" expanded="true" />
-            <element signature="e#2156#2182#1#PHP" expanded="true" />
+            <element signature="e#796#821#0#PHP" expanded="true" />
+            <element signature="e#1315#1339#0#PHP" expanded="true" />
+            <element signature="e#1996#2019#0#PHP" expanded="true" />
+            <element signature="e#2912#2936#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -416,9 +479,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <element signature="e#30#68#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -466,27 +527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/figures/add.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/figures/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/figures/delete.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -520,24 +560,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Figure.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-          <folding>
-            <element signature="e#30#68#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -594,9 +616,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/UserFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding>
+            <element signature="e#37#57#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="207" column="20" lean-forward="false" selection-start-line="207" selection-start-column="20" selection-end-line="207" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/prod/doctrine.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-540">
+        <state relative-caret-position="324">
           <caret line="18" column="7" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
           <folding>
             <element signature="e#31#63#0#PHP" expanded="false" />
@@ -604,12 +668,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataFixtures/UserFixtures.php">
+    <entry file="file://$PROJECT_DIR$/config/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+        <state relative-caret-position="72">
+          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/figures/add.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="47" />
           <folding>
-            <element signature="e#37#57#0#PHP" expanded="false" />
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Figure.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FigureDeleteType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FigureType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="1" />
+          <folding>
+            <element signature="e#28#50#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/figures/form.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding>
+            <element signature="e#20#48#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FigController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+          <folding>
+            <element signature="e#35#57#0#PHP" expanded="true" />
+            <element signature="e#796#821#0#PHP" expanded="true" />
+            <element signature="e#1315#1339#0#PHP" expanded="true" />
+            <element signature="e#1996#2019#0#PHP" expanded="true" />
+            <element signature="e#2912#2936#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,34 +760,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/figures/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/figures/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        <state relative-caret-position="288">
+          <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="93" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/figures/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        <state relative-caret-position="432">
+          <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FigController.php">
+    <entry file="file://$PROJECT_DIR$/templates/figures/delete.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
-          <caret line="76" column="42" lean-forward="true" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
-          <folding>
-            <element signature="e#35#57#0#PHP" expanded="true" />
-            <element signature="e#614#639#0#PHP" expanded="true" />
-            <element signature="e#1101#1125#0#PHP" expanded="true" />
-            <element signature="e#1306#1329#1#PHP" expanded="true" />
-            <element signature="e#1728#1752#1#PHP" expanded="true" />
-            <element signature="e#2156#2182#1#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="36">
+          <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

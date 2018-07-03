@@ -4,7 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Figure;
+use App\Form\FigureDeleteType;
+use App\Form\FigureType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,16 +21,18 @@ class FigController extends Controller
      */
     public function index($page = 1)
     {
-        $listFigures = $this->getDoctrine()
-            ->getRepository(Figure::class)
-            ->findAll();
+        $repo = $this->getDoctrine()->getRepository(Figure::class);
+        $listItems = $repo->findAll();
+        $nbItems = $repo->count([]);
+
         return $this->render('figures/index.html.twig', [
-            'figures' => $listFigures
+            'figures' => $listItems,
+            'nbItems' => $nbItems
         ]);
     }
 
     /**
-     * @Route("/figures/{slug}", name="view_figure")
+     * @Route("/figure/{slug}", name="view_figure")
      * @param $slug
      */
     public function view($slug)
@@ -47,15 +53,32 @@ class FigController extends Controller
     /**
      * @Route("/figures/add", name="add_figure")
      */
-    public function add()
+    public function add(Request $request)
     {
-        return $this->render('figures/add.html.twig');
+        $figure = new Figure();
+        $form = $this->createForm(FigureType::class, $figure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($figure);
+            $manager->flush();
+
+            return $this->redirectToRoute('view_figure', array(
+                'slug' => $figure->getSlug()
+            ));
+        }
+
+        return $this->render('figures/add.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/figures/edit/{id}", name="edit_figure", requirements={"id"="\d+"})
+     * @Route("/figure/edit/{id}", name="edit_figure", requirements={"id"="\d+"})
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $item = $this->getDoctrine()
             ->getRepository(Figure::class)
@@ -65,22 +88,42 @@ class FigController extends Controller
             throw new NotFoundHttpException('Figure '.$id.' does not exist');
         }
 
-        return $this->render('figures/edit.html.twig');
+        $form = $this->createForm(FigureType::class, $item);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($item);
+            $manager->flush();
+
+            return $this->redirectToRoute('view_figure', array(
+                'slug' => $item->getSlug()
+            ));
+        }
+
+        return $this->render('figures/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/figures/delete/{id}", name="delete_figure", requirements={"id"="\d+"})
+     * @Route("/figure/delete/{id}",
+     *  name="delete_figure",
+     *  requirements={"id"="\d+"}),
+     *  methods={"POST"}
      */
-    public function delete($id)
+    public function delete(Request $request, Figure $figure): Response
     {
-        $item = $this->getDoctrine()
-            ->getRepository(Figure::class)
-            ->find($id);
-
-        if ($item === null) {
-            throw new NotFoundHttpException('Figure '.$id.' does not exist');
+        if(!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('index_figure');
         }
-        return $this->render('figures/delete.html.twig');
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($figure);
+        $manager->flush();
+
+        return $this->redirectToRoute('index_figure');
     }
 
 }

@@ -14,7 +14,7 @@
             <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
         </li>
         <li class="nav-item">
-            <a class="btn btn-danger btn-sm" href="{{ path('delete_figure', {id: figure.id}) }}">Delete</a>
+            {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
         </li>
         {% endif %}
     </ul>

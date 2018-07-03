@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
  */
 class Figure
@@ -28,10 +29,10 @@ class Figure
     private $description;
 
     /**
-     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=190, unique=true)
      */
     private $slug;
+
 
     public function getId()
     {
@@ -43,9 +44,10 @@ class Figure
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName($name): self
     {
         $this->name = $name;
+        $this->setSlug($this->name);
 
         return $this;
     }
@@ -67,11 +69,32 @@ class Figure
         return $this->slug;
     }
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug(string $slug)
+    public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = $this->slugify($slug);
     }
+
+    function slugify($text) {
+        // replace non letter or digits by -
+        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
+        // trim
+        $text = trim($text, '-');
+        // transliterate
+        if (function_exists('iconv'))
+        {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+        // lowercase
+        $text = strtolower($text);
+        // remove unwanted characters
+        $text = preg_replace('#[^-\w]+#', '', $text);
+
+        if (empty($text))
+        {
+            return 'n-a';
+        }
+
+        return $text;
+    }
+
 }

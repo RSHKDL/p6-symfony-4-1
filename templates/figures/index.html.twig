@@ -2,7 +2,13 @@
 
 {% block body %}
 
-<h2>All our Figures</h2>
+
+<div class="jumbotron">
+    <h2>All our Figures</h2>
+    <p class="lead">We already have {{ nbItems }} figure{% if nbItems > 1 %}s{% endif %}.
+        If you think a figure is missing, feel free to add it.</p>
+    <a class="btn btn-success" href="{{ path('add_figure') }}">Add a figure</a>
+</div>
 
     {% if figures %}
         <ul class="list-group">
@@ -11,7 +17,7 @@
                 <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="{{ path('delete_figure', {id: figure.id}) }}">Delete</a>
+                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
                 {% endif %}
             </li>
         {% endfor %}
