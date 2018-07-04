@@ -19,5 +19,31 @@
         {% endif %}
     </ul>
 
+    <div id="post-add-comment" class="well">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% set z = figure.id %}
+            {{ dump(z) }}
+            {{ render(controller('App\\Controller\\FigController::commentForm', {id: z})) }}
+        {% else %}
+            <p>You must be logged in to post a comment</p>
+        {% endif %}
+    </div>
+
+    {% for comment in figure.comments %}
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>{{ comment.author.username }}</h5>
+                <em>{{ comment.createdAt | date("m/d/Y h:i:s") }}</em>
+            </div>
+            <div class="col-sm-9">
+                {{ comment.content }}
+            </div>
+        </div>
+    {% else %}
+        <div class="post-comment">
+            <p>No comments yet</p>
+        </div>
+    {% endfor %}
+
 {% endblock %}
 

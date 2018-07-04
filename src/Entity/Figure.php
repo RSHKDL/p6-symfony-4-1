@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,24 @@ class Figure
      * @ORM\Column(type="string", length=190, unique=true)
      */
     private $slug;
+
+    /**
+     * @var Comment[]|ArrayCollection
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Comment",
+     *      mappedBy="figure",
+     *      orphanRemoval=true,
+     *      cascade={"persist"}
+     * )
+     * @ORM\OrderBy({"createdAt": "DESC"})
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
 
     public function getId()
@@ -95,6 +115,28 @@ class Figure
         }
 
         return $text;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(?Comment $comment): void
+    {
+        $comment->setFigure($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+    }
+
+    public function removeComment(Comment $comment): void
+    {
+        $comment->setFigure(null);
+        $this->comments->removeElement($comment);
     }
 
 }
