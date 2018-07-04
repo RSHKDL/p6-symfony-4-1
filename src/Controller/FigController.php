@@ -21,13 +21,27 @@ class FigController extends Controller
      */
     public function index($page = 1)
     {
+        if ($page < 1) {
+            throw new NotFoundHttpException('The page '.$page. ' does not exist.');
+        }
+
+        $nbPerPage = 15;
         $repo = $this->getDoctrine()->getRepository(Figure::class);
-        $listItems = $repo->findAll();
         $nbItems = $repo->count([]);
+
+        $listItems = $repo->getFigures($page, $nbPerPage);
+
+        $nbPages = ceil(count($listItems) / $nbPerPage);
+
+        if ($page > $nbPages) {
+            throw new NotFoundHttpException('The page '.$page. ' does not exist.');
+        }
 
         return $this->render('figures/index.html.twig', [
             'figures' => $listItems,
-            'nbItems' => $nbItems
+            'nbItems' => $nbItems,
+            'nbPages' => $nbPages,
+            'page' => $page
         ]);
     }
 

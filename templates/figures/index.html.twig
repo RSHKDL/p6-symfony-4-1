@@ -2,7 +2,6 @@
 
 {% block body %}
 
-
 <div class="jumbotron">
     <h2>All our Figures</h2>
     <p class="lead">We already have {{ nbItems }} figure{% if nbItems > 1 %}s{% endif %}.
@@ -10,20 +9,33 @@
     <a class="btn btn-success" href="{{ path('add_figure') }}">Add a figure</a>
 </div>
 
-    {% if figures %}
-        <ul class="list-group">
-        {% for figure in figures %}
-            <li class="list-group-item">
-                <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
-                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
-                {% endif %}
-            </li>
+{% if figures %}
+    {% for row in figures | batch(5) %}
+        <div class="row card-deck mb-3">
+        {% for figure in row %}
+            <div class="card col-sm">
+                <div class="card-body">
+                    <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
+                        {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
+        </div>
+    {% endfor %}
+    <nav aria-label="Figures pagination">
+        <ul class="pagination justify-content-center">
+            {% for p in range(1, nbPages) %}
+                <li{% if p == page %} class="page-item"{% endif %}>
+                    <a class="page-link" href="{{ path('index_figure', {'page': p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
         </ul>
-    {% else %}
-        <p>No figures yet</p>
-    {% endif %}
+    </nav>
+{% else %}
+    <p>No figures yet</p>
+{% endif %}
 
 {% endblock %}
