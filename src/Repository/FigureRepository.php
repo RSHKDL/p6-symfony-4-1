@@ -22,7 +22,10 @@ class FigureRepository extends ServiceEntityRepository
 
     public function getFigures($page, $nbPerPage)
     {
-        $query = $this->createQueryBuilder('f')->getQuery();
+        $query = $this->createQueryBuilder('f')
+            ->leftJoin('f.categories', 'c')
+            ->addSelect('c')
+            ->getQuery();
 
         $query->setFirstResult(($page - 1) * $nbPerPage)->setMaxResults($nbPerPage);
 

@@ -5,6 +5,11 @@
     <section class="mb-3">
         <h2>{{ figure.name }}</h2>
         <p>{{ figure.description }}</p>
+        <ul class="list-group">
+            {% for category in figure.categories %}
+            <li>{{ category.name }}</li>
+            {% endfor %}
+        </ul>
         <ul class="nav w-75 mx-auto justify-content-center">
             <li class="nav-item mx-1">
                 <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">Back</a>
