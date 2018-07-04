@@ -2,48 +2,50 @@
 
 {% block body %}
 
-    <h2>{{ figure.name }}</h2>
-    <p>{{ figure.description }}</p>
-
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">Back</a>
-        </li>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <li class="nav-item">
-            <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
-        </li>
-        <li class="nav-item">
-            {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
-        </li>
-        {% endif %}
-    </ul>
-
-    <div id="post-add-comment" class="well">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {% set z = figure.id %}
-            {{ dump(z) }}
-            {{ render(controller('App\\Controller\\FigController::commentForm', {id: z})) }}
-        {% else %}
-            <p>You must be logged in to post a comment</p>
-        {% endif %}
-    </div>
-
-    {% for comment in figure.comments %}
-        <div class="row">
-            <div class="col-sm-3">
-                <h5>{{ comment.author.username }}</h5>
-                <em>{{ comment.createdAt | date("m/d/Y h:i:s") }}</em>
-            </div>
-            <div class="col-sm-9">
-                {{ comment.content }}
-            </div>
+    <section class="mb-3">
+        <h2>{{ figure.name }}</h2>
+        <p>{{ figure.description }}</p>
+        <ul class="nav w-75 mx-auto justify-content-center">
+            <li class="nav-item mx-1">
+                <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">Back</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item mx-1">
+                    <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
+                </li>
+                <li class="nav-item mx-1">
+                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
+                </li>
+            {% endif %}
+        </ul>
+    </section>
+    <section class="mb-3">
+        <div class="mb-3">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% set id = figure.id %}
+                {{ render(controller('App\\Controller\\FigController::commentForm', {id: id})) }}
+            {% else %}
+                <p>You must be logged in to post a comment</p>
+            {% endif %}
         </div>
-    {% else %}
-        <div class="post-comment">
-            <p>No comments yet</p>
+        <div class="w-75 mx-auto">
+            {% for comment in figure.comments %}
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <small class="text-muted">#{{ comment.id }}</small>
+                    {{ comment.author.username }}
+                    <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y h:i:s") }}</i></small>
+
+                </div>
+                <div class="col-sm-8">
+                    {{ comment.content }}
+                </div>
+            </div>
+            {% else %}
+            <p class="mb-3">No comments yet</p>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </section>
 
 {% endblock %}
 
