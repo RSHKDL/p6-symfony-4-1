@@ -25,7 +25,7 @@
                 <ul class="navbar-nav">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li>
-                            <span class="navbar-text">Welcome {{ app.user.username }} !</span>
+                            <a class="nav-link" href="{{ path('user_profile', {id: app.user.id}) }}">{{ app.user.username }}</a>
                         </li>
                         <li>
                             <a class="nav-link" href="{{ path('logout') }}">Logout</a>
