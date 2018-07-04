@@ -37,8 +37,14 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string
      * @Assert\NotBlank()
+     * @Assert\Length(max="4096")
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
 
@@ -154,5 +160,21 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password
             ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 }

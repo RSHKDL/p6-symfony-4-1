@@ -4,8 +4,8 @@ namespace App\Controller;
 
 
 use App\Entity\Figure;
-use App\Form\FigureDeleteType;
 use App\Form\FigureType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,6 +52,7 @@ class FigController extends Controller
 
     /**
      * @Route("/figures/add", name="add_figure")
+     * @Security("has_role('ROLE_USER')")
      */
     public function add(Request $request)
     {
