@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="app_categories")
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category

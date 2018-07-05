@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
+ * @ORM\Table(name="app_figures")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
  */
@@ -50,6 +50,7 @@ class Figure
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
+     * @ORM\JoinTable(name="app_figures_categories")
      */
     private $categories;
 
