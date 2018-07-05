@@ -15,7 +15,7 @@ final class Version20180704135613 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE figure_comments ADD author_id INT NOT NULL, DROP user_id, CHANGE content content LONGTEXT NOT NULL, CHANGE figure_id figure_id INT NOT NULL');
+        $this->addSql('CREATE TABLE figure_comments (id INT AUTO_INCREMENT NOT NULL, figure_id INT NOT NULL, author_id INT NOT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE figure_comments ADD CONSTRAINT FK_5C222B9F5C011B5 FOREIGN KEY (figure_id) REFERENCES figure (id)');
         $this->addSql('ALTER TABLE figure_comments ADD CONSTRAINT FK_5C222B9FF675F31B FOREIGN KEY (author_id) REFERENCES app_users (id)');
         $this->addSql('CREATE INDEX IDX_5C222B9F5C011B5 ON figure_comments (figure_id)');
@@ -31,6 +31,6 @@ final class Version20180704135613 extends AbstractMigration
         $this->addSql('ALTER TABLE figure_comments DROP FOREIGN KEY FK_5C222B9FF675F31B');
         $this->addSql('DROP INDEX IDX_5C222B9F5C011B5 ON figure_comments');
         $this->addSql('DROP INDEX IDX_5C222B9FF675F31B ON figure_comments');
-        $this->addSql('ALTER TABLE figure_comments ADD user_id VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, DROP author_id, CHANGE figure_id figure_id VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, CHANGE content content VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('DROP TABLE figure_comments');
     }
 }
