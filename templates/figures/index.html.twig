@@ -13,7 +13,10 @@
     {% for row in figures | batch(5) %}
         <div class="row card-deck mb-3">
         {% for figure in row %}
-            <div class="card col-sm">
+            <div class="card">
+                {% if figure.featuredImage %}
+                    <img class="card-img-top" src="{{ asset('uploads/images/' ~ figure.featuredImage) }}" alt="Image of {{ figure.name }}">
+                {% endif %}
                 <div class="card-body">
                     <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}

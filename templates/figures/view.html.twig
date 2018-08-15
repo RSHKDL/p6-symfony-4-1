@@ -3,6 +3,9 @@
 {% block body %}
 
     <section class="mb-3">
+        {% if figure.featuredImage %}
+            <img src="{{ asset('uploads/images/' ~ figure.featuredImage) }}" alt="Image of {{ figure.name }}">
+        {% endif %}
         <h2>{{ figure.name }}</h2>
         <p>{{ figure.description }}</p>
         <ul class="list-group">

@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Entity\Figure;
 use App\Form\CommentType;
 use App\Form\FigureType;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -63,7 +64,7 @@ class FigController extends AbstractController
      * @Route("/figures/add", name="add_figure")
      * @Security("has_role('ROLE_USER')")
      */
-    public function add(Request $request)
+    public function add(Request $request, FileUploader $fileUploader)
     {
         $figure = new Figure();
         $form = $this->createForm(FigureType::class, $figure);

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_figures")
@@ -53,6 +54,12 @@ class Figure
      * @ORM\JoinTable(name="app_figures_categories")
      */
     private $categories;
+
+    /**
+     * @ORM\Column(name="featured_image", type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypesMessage="The file must be a valid image")
+     */
+    private $featuredImage;
 
     public function __construct()
     {
@@ -170,6 +177,22 @@ class Figure
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFeaturedImage()
+    {
+        return $this->featuredImage;
+    }
+
+    /**
+     * @param mixed $featuredImage
+     */
+    public function setFeaturedImage($featuredImage): void
+    {
+        $this->featuredImage = $featuredImage;
     }
 
 }
