@@ -61,10 +61,21 @@ class Figure
      */
     private $featuredImage;
 
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Image",
+     *     mappedBy="figure",
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
+     * )
+     */
+    private $images;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
 
@@ -193,6 +204,37 @@ class Figure
     public function setFeaturedImage($featuredImage): void
     {
         $this->featuredImage = $featuredImage;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getFigure() === $this) {
+                $image->setFigure(null);
+            }
+        }
+
+        return $this;
     }
 
 }

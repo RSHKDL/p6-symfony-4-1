@@ -1,4 +1,18 @@
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {{ form_start(form) }}
-{{ form_widget(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.categories) }}
+    {{ form_row(form.featuredImage) }}
+
+    {# The Prototype to use for generating items of collection #}
+    <div id="filesProto" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"></div>
+
+    {# An empty div which will hold the generated image fields #}
+    <div class="row">
+        <div class="col col-xs-12" id="filesBox">
+        </div>
+    </div>
+
+    {{ form_row(form.save) }}
 {{ form_end(form) }}

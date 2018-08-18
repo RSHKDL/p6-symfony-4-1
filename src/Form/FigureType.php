@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Figure;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,17 @@ class FigureType extends AbstractType
                 'multiple'     => true
             ))
             ->add('featuredImage', FileType::class, array(
-                'label' => 'Add an image (jpg, png)'
+                'label' => 'Add the featured image (jpg, png)',
+                'data_class' => null
+            ))
+            ->add('images', CollectionType::class, array(
+                'entry_type'    => ImageType::class,
+                'prototype'		=> true,
+                'allow_add'		=> true,
+                'allow_delete'	=> true,
+                'by_reference' 	=> false,
+                'required'		=> false,
+                'label'         => false
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Create trick'
