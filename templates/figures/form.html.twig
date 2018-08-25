@@ -5,14 +5,35 @@
     {{ form_row(form.categories) }}
     {{ form_row(form.featuredImage) }}
 
-    {# The Prototype to use for generating items of collection #}
-    <div id="filesProto" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"></div>
+    <ul id="image-fields-list"
+        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}">
+        {% for imageField in form.images %}
+            <li>
+                {{ form_errors(imageField) }}
+                {{ form_widget(imageField) }}
+            </li>
+        {% endfor %}
+    </ul>
 
-    {# An empty div which will hold the generated image fields #}
-    <div class="row">
-        <div class="col col-xs-12" id="filesBox">
-        </div>
-    </div>
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list="#image-fields-list">Add another image</button>
+
+    <ul id="video-fields-list"
+        data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}">
+        {% for videoField in form.videos %}
+            <li>
+                {{ form_errors(videoField) }}
+                {{ form_widget(videoField) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list="#video-fields-list">Add another video</button>
 
     {{ form_row(form.save) }}
 {{ form_end(form) }}

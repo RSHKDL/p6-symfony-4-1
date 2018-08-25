@@ -1,0 +1,23 @@
+[33m17f6a92[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m multiple files upload iteration 2 (basic upload logic)
+[33mc5e02cf[m[33m ([m[1;31morigin/master[m[33m)[m multiple files upload iteration 1 (upload logic not working)
+[33m5f395f7[m add featured image to figures
+[33m279f629[m fix migrations issues for good this time + change table name for consistency
+[33m7ac6877[m Merge branch 'master' of https://github.com/RSHKDL/p6-symfony-4-1
+[33m0c00387[m fix migrations issues and cleanup some sql + add phpstorm dir to gitignore
+[33m0737795[m Create README.md
+[33mefeddd1[m add category entity + improve fixtures
+[33m2a9367f[m improve comments and figure view lisibility
+[33m79a9bca[m add basic comments to figures + refactor FigController
+[33mc2e667b[m add pagination to figures index + display improvments w bootstrap
+[33m08c4d1c[m add basic user profile
+[33mc1e6329[m add registration form
+[33m3cde739[m add form to create, update and delete entities
+[33m643fa7c[m small cleanup before implementing form
+[33ma4726db[m add the forgotten logout
+[33m05ae6ac[m add home and security controller + auth w login + routes update + bootstrap 4
+[33m12f08f7[m add user entity + basic security
+[33m58f4b4a[m add view figure and slug w sluggable
+[33m52db7db[m add basic figure entity + fixtures w faker
+[33mb65fc3b[m add basic figure controller
+[33mc2a90d3[m add sensiolabs security checker
+[33md286c4e[m initial commit

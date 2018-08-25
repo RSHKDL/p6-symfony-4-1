@@ -71,11 +71,22 @@ class Figure
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Video",
+     *     mappedBy="figure",
+     *     orphanRemoval=true,
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    private $videos;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
 
@@ -119,6 +130,10 @@ class Figure
         $this->slug = $this->slugify($slug);
     }
 
+    /**
+     * @param $text
+     * @return null|string|string[]
+     */
     function slugify($text) {
         // replace non letter or digits by -
         $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
@@ -231,6 +246,37 @@ class Figure
             // set the owning side to null (unless already changed)
             if ($image->getFigure() === $this) {
                 $image->setFigure(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getFigure() === $this) {
+                $video->setFigure(null);
             }
         }
 
