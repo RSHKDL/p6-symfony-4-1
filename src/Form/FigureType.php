@@ -25,7 +25,8 @@ class FigureType extends AbstractType
             ))
             ->add('featuredImage', FileType::class, array(
                 'label' => 'Add the featured image (jpg, png)',
-                'data_class' => null
+                'data_class' => null,
+                'required' => false
             ))
             ->add('images', CollectionType::class, array(
                 'entry_type'    => ImageType::class,

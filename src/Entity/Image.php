@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -22,12 +23,12 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $alt;
+    private $extension;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="images")
@@ -35,33 +36,46 @@ class Image
      */
     private $figure;
 
+    /* @var UploadedFile $file */
+    private $file;
+
+    private $tempFilename;
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function getUrl(): ?string
+    /**
+     * @return string
+     */
+    public function getName()
     {
-        return $this->url;
+        return $this->name;
     }
 
-    public function setUrl(): self
+    /**
+     * @param string $name
+     */
+    public function setName($name): void
     {
-        $this->url = $this->id.'.'.$this->extension;
-        return $this;
+        $this->name = $name;
     }
 
-    public function getAlt(): ?string
+    /**
+     * @return string
+     */
+    public function getExtension()
     {
-        return $this->alt;
+        return $this->extension;
     }
 
-    public function setAlt()
+    /**
+     * @param string $extension
+     */
+    public function setExtension($extension): void
     {
-        $figureId = $this->figure->id;
-        $this->alt = "image-".$this->id."-figure-".$figureId;
-
-        return $this;
+        $this->extension = $extension;
     }
 
     public function getFigure(): ?Figure
@@ -72,23 +86,11 @@ class Image
     public function setFigure(?Figure $figure): self
     {
         $this->figure = $figure;
-
         return $this;
     }
 
-    // Upload logic
-
-    /* @var UploadedFile $file */
-    private $file;
-
-    private $tempFilename;
-
-    private $extension;
-
-    private $originalName;
-
     /**
-     * @return mixed
+     * @return File
      */
     public function getFile()
     {
@@ -96,31 +98,34 @@ class Image
     }
 
     /**
-     * @param mixed $file
+     * @param UploadedFile $file
      */
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
+
+        if (null !== $this->name) {
+            $this->tempFilename = $this->name;
+            $this->name = null;
+            $this->extension = null;
+        }
     }
 
     /**
+     * If no file is set, do nothing,
+     * Else store the file extension and original name
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
     public function preUpload()
     {
-        // If no file is set, do nothing
         if (null === $this->file)
         {
             return;
         }
 
-        // The file name is the entity's ID
-        // We also need to store the file extension
-        $this->extension = $this->file->guessExtension();
-
-        // And we keep the original name
-        $this->originalName = $this->file->getClientOriginalName();
+        $this->setName($this->file->getClientOriginalName());
+        $this->setExtension($this->file->guessExtension());
     }
 
     /**
@@ -138,17 +143,18 @@ class Image
         // A file is present, remove it
         if (null !== $this->tempFilename)
         {
-            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            $oldFile = $this->getUploadDirectory()."image-".$this->id.".".$this->extension;
             if (file_exists($oldFile))
             {
                 unlink($oldFile);
             }
         }
 
+        $figureId = $this->getFigure()->getId();
         // Move the file to the upload folder
         $this->file->move(
-            $this->getUploadRootDir(),
-            $this->id.'.'.$this->extension
+            $this->getUploadDirectory(),
+            "image-".$this->id."-figure-".$figureId.".".$this->extension
         );
     }
 
@@ -158,7 +164,8 @@ class Image
     public function preRemoveUpload()
     {
         // Save the name of the file we would want to remove
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->extension;
+        $figureId = $this->getFigure()->getId();
+        $this->tempFilename = $this->getUploadDirectory()."image-".$this->id."-figure-".$figureId.".".$this->extension;
     }
 
     /**
@@ -174,15 +181,14 @@ class Image
         }
     }
 
-    public function getUploadDir()
+    public function getUploadDirectory()
     {
-        // Upload directory
-        return 'uploads/images/';
+        return 'uploads/tests';
     }
 
-    protected function getUploadRootDir()
+    public function getWebPath()
     {
-        // Image location (PHP)
-        return __DIR__.'/../../../../public/'.$this->getUploadDir();
+        $figureId = $this->getFigure()->getId();
+        return $this->getUploadDirectory()."/image-".$this->id."-figure-".$figureId.".".$this->extension;
     }
 }

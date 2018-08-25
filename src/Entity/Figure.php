@@ -66,7 +66,7 @@ class Figure
      *     targetEntity="App\Entity\Image",
      *     mappedBy="figure",
      *     orphanRemoval=true,
-     *     cascade={"persist"}
+     *     cascade={"persist", "remove"}
      * )
      */
     private $images;

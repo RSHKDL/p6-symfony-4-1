@@ -13,6 +13,23 @@
             <li>{{ category.name }}</li>
             {% endfor %}
         </ul>
+        {% if figure.images %}
+            {% for row in figure.images | batch(5) %}
+            <div class="row card-deck mb-3">
+                {% for image in row %}
+                    <div class="card">
+                        <img
+                                class="w-100"
+                                src="{{ asset(image.getWebPath()) }}"
+                                alt="{{ image.name }}"
+                        >
+                    </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="mb-3">No images yet</p>
+        {% endif %}
         <ul class="nav w-75 mx-auto justify-content-center">
             <li class="nav-item mx-1">
                 <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">Back</a>
