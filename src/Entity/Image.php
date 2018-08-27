@@ -143,18 +143,17 @@ class Image
         // A file is present, remove it
         if (null !== $this->tempFilename)
         {
-            $oldFile = $this->getUploadDirectory()."image-".$this->id.".".$this->extension;
+            $oldFile = $this->getUploadDirectory().$this->id.".".$this->extension;
             if (file_exists($oldFile))
             {
                 unlink($oldFile);
             }
         }
 
-        $figureId = $this->getFigure()->getId();
         // Move the file to the upload folder
         $this->file->move(
             $this->getUploadDirectory(),
-            "image-".$this->id."-figure-".$figureId.".".$this->extension
+            $this->id.".".$this->extension
         );
     }
 
@@ -164,8 +163,7 @@ class Image
     public function preRemoveUpload()
     {
         // Save the name of the file we would want to remove
-        $figureId = $this->getFigure()->getId();
-        $this->tempFilename = $this->getUploadDirectory()."image-".$this->id."-figure-".$figureId.".".$this->extension;
+        $this->tempFilename = $this->getUploadDirectory().$this->id.".".$this->extension;
     }
 
     /**
@@ -188,7 +186,6 @@ class Image
 
     public function getWebPath()
     {
-        $figureId = $this->getFigure()->getId();
-        return $this->getUploadDirectory()."/image-".$this->id."-figure-".$figureId.".".$this->extension;
+        return $this->getUploadDirectory()."/".$this->id.".".$this->extension;
     }
 }

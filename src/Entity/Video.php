@@ -169,7 +169,7 @@ class Video
 
     }
 
-    private function generateUrl()
+    private function generateUrl(): string
     {
         $type = $this->getType();
         $videoId = strip_tags($this->getVideoId());
@@ -191,7 +191,7 @@ class Video
         }
     }
 
-    public function generateVideo()
+    public function generateVideo(): string
     {
         $video = "<iframe width='100%' 
                           height='100%' 

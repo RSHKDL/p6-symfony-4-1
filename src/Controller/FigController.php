@@ -84,7 +84,8 @@ class FigController extends AbstractController
         }
 
         return $this->render('figures/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'trick' => null
         ]);
     }
 
@@ -116,7 +117,8 @@ class FigController extends AbstractController
         }
 
         return $this->render('figures/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'trick' => $item
         ]);
     }
 

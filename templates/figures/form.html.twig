@@ -1,39 +1,88 @@
+{% import _self as formMacros %}
+
+{% macro printCollectionImagesWidget(imageField) %}
+    <div class="js-collection-fields-item">
+        <button type='button'
+                class='js-remove-collection-field btn btn-danger btn-xs'>remove
+        </button>
+        {{ form_errors(imageField) }}
+        {{ form_widget(imageField) }}
+    </div>
+{% endmacro %}
+
+{% macro printCollectionVideosWidget(videoField) %}
+    <div class="js-collection-fields-item">
+        <button type='button'
+                class='js-remove-collection-field btn btn-danger btn-xs'>remove
+        </button>
+        {{ form_errors(videoField) }}
+        {{ form_widget(videoField) }}
+    </div>
+{% endmacro %}
+
+{% block h2 %}{% endblock %}
+
 {{ form_start(form) }}
+    {#<div class="debug">
+    {% if trick %}
+        {% for video in trick.videos %}
+        <pre>{{ dump(video.id, video.videoId, video.type) }}</pre>
+        {% endfor %}
+    {% else %}
+        trick is null
+    {% endif %}
+    </div>#}
     {{ form_errors(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.categories) }}
-    {{ form_row(form.featuredImage) }}
-
-    <ul id="image-fields-list"
-        data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}">
-        {% for imageField in form.images %}
-            <li>
-                {{ form_errors(imageField) }}
-                {{ form_widget(imageField) }}
-            </li>
-        {% endfor %}
-    </ul>
-
-    <button type="button"
-            class="add-another-collection-widget"
-            data-list="#image-fields-list">Add another image</button>
-
-    <ul id="video-fields-list"
-        data-prototype="{{ form_widget(form.videos.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}">
-        {% for videoField in form.videos %}
-            <li>
-                {{ form_errors(videoField) }}
-                {{ form_widget(videoField) }}
-            </li>
-        {% endfor %}
-    </ul>
-
-    <button type="button"
-            class="add-another-collection-widget"
-            data-list="#video-fields-list">Add another video</button>
-
-    {{ form_row(form.save) }}
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_help(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description, {
+            'attr': {'class': 'form-control', 'rows': 5} }) }}
+        {{ form_help(form.description) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.categories) }}
+        {{ form_errors(form.categories) }}
+        {{ form_widget(form.categories, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_help(form.categories) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.featuredImage) }}
+        {{ form_errors(form.featuredImage) }}
+        {{ form_widget(form.featuredImage, { 'attr': {'class': 'form-control-file'} }) }}
+        {{ form_help(form.featuredImage) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.images, 'Add images (jpg, png)') }}
+        <div class="js-img-collection-fields-holder"
+             data-prototype="{{ formMacros.printCollectionImagesWidget(form.images.vars.prototype.file)|e }}"
+             data-index="{{ form.images|length }}">
+            {% for imageField in form.images %}
+                {{ formMacros.printCollectionImagesWidget(imageField) }}
+            {% endfor %}
+            <button type="button"
+                class="js-add-another-collection-field btn btn-primary btn-xs">Add another image
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.videos, 'Add videos (youtube, dailymotion or vimeo)') }}
+        <div class="js-vid-collection-fields-holder"
+             data-prototype="{{ formMacros.printCollectionVideosWidget(form.videos.vars.prototype.url)|e }}"
+             data-index="{{ form.videos|length }}">
+            {% for videoField in form.videos %}
+                {{ formMacros.printCollectionVideosWidget(videoField) }}
+            {% endfor %}
+            <button type="button"
+                    class="js-add-another-collection-field btn btn-primary btn-xs">Add another video
+            </button>
+        </div>
+    </div>
+    {{ form_row(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
 {{ form_end(form) }}

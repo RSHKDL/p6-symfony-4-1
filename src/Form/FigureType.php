@@ -47,7 +47,7 @@ class FigureType extends AbstractType
                 'label'         => false
             ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Create trick'
+                'label' => 'Save the trick'
             ));
     }
 

@@ -1,41 +1,32 @@
-var fileCount = $('#filesBox').children().length;
-var videoCount = $('#videosBox').children().length;
-var fileProto = "#filesProto";
-var videoProto = "#videosProto";
-var videoHtml = '#figure_videos_';
-var removeButton = "<button type='button' class='btn btn-danger btn-xs' onclick='removeFile($(this));'>remove</button>";
-var addVideoButton = "<button type='button' class='btn btn-success btn-xs' onclick='addVideo(videoCount);'>add other video</button>";
+$(document).ready(function() {
+    // var holder = $('.js-collection-fields-holder');
+    var imagesHolder = $('.js-img-collection-fields-holder');
+    var videosHolder = $('.js-vid-collection-fields-holder');
+    console.log(videosHolder);
 
-/*
- * Delete the current line of added files.
- */
-function removeFile(ob)
-{
-    ob.parent().parent().remove();
-}
+    imagesHolder.on('click', '.js-remove-collection-field', function (e) {
+        $(this).closest('.js-collection-fields-item').remove();
+    });
 
-$(document).ready(function(){
-    jQuery('.add-another-collection-widget').click(function (e) {
-        var list = jQuery(jQuery(this).attr('data-list'));
-        // Try to find the counter of the list
-        var counter = list.data('widget-counter') | list.children().length;
-        // If the counter does not exist, use the length of the list
-        if (!counter) {
-            counter = list.children().length;
-        }
-        // grab the prototype template
-        var newWidget = list.attr('data-prototype');
-        // replace the "__name__" used in the id and name of the prototype
-        // with a number that's unique to your emails
-        // end name attribute looks like name="contact[emails][2]"
-        newWidget = newWidget.replace(/__name__/g, counter);
-        // Increase the counter
-        counter++;
-        // And store it, the length cannot be used if deleting widgets is allowed
-        list.data(' widget-counter', counter);
+    imagesHolder.on('click', '.js-add-another-collection-field', function (e) {
+        e.preventDefault();
+        var prototype = imagesHolder.data('prototype');
+        var index = imagesHolder.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+        imagesHolder.data('index', index + 1);
+        $(this).before(newForm);
+    });
 
-        // create a new list element and add it to the list
-        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
-        newElem.appendTo(list);
+    videosHolder.on('click', '.js-remove-collection-field', function (e) {
+        $(this).closest('.js-collection-fields-item').remove();
+    });
+
+    videosHolder.on('click', '.js-add-another-collection-field', function (e) {
+        e.preventDefault();
+        var prototype = videosHolder.data('prototype');
+        var index = videosHolder.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+        videosHolder.data('index', index + 1);
+        $(this).before(newForm);
     });
 });
