@@ -66,7 +66,7 @@ class FigController extends AbstractController
      * @Route("/figures/add", name="add_figure")
      * @Security("has_role('ROLE_USER')")
      */
-    public function add(Request $request, FileUploader $fileUploader)
+    public function add(Request $request): Response
     {
         $figure = new Figure();
         $form = $this->createForm(FigureType::class, $figure);
@@ -77,6 +77,8 @@ class FigController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($figure);
             $manager->flush();
+
+            $this->addFlash('success', 'Trick created successfully');
 
             return $this->redirectToRoute('view_figure', array(
                 'slug' => $figure->getSlug()
@@ -99,7 +101,7 @@ class FigController extends AbstractController
             ->find($id);
 
         if ($item === null) {
-            throw new NotFoundHttpException('Figure '.$id.' does not exist');
+            throw new NotFoundHttpException('Trick '.$id.' does not exist');
         }
 
         $form = $this->createForm(FigureType::class, $item);
@@ -110,6 +112,8 @@ class FigController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($item);
             $manager->flush();
+
+            $this->addFlash('success', 'Trick updated successfully');
 
             return $this->redirectToRoute('view_figure', array(
                 'slug' => $item->getSlug()
@@ -138,6 +142,8 @@ class FigController extends AbstractController
         $manager->remove($figure);
         $manager->flush();
 
+        $this->addFlash('success', 'Trick deleted successfully');
+
         return $this->redirectToRoute('index_figure');
     }
 
@@ -162,6 +168,8 @@ class FigController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($comment);
             $manager->flush();
+
+            $this->addFlash('success', 'Comment added successfully');
 
             return $this->redirectToRoute('view_figure', ['slug' => $figure->getSlug()]);
         }

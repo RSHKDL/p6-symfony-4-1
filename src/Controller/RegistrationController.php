@@ -42,6 +42,8 @@ class RegistrationController extends Controller
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
+            $this->addFlash('success', 'New user successfully created. Welcome !');
+
             return $this->redirectToRoute('index_figure');
         }
 
