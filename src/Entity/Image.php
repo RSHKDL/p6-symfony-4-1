@@ -163,7 +163,7 @@ class Image
     public function preRemoveUpload()
     {
         // Save the name of the file we would want to remove
-        $this->tempFilename = $this->getUploadDirectory().$this->id.".".$this->extension;
+        $this->tempFilename = $this->getUploadDirectory()."/".$this->id.".".$this->extension;
     }
 
     /**
@@ -181,7 +181,7 @@ class Image
 
     public function getUploadDirectory()
     {
-        return 'uploads/tests';
+        return 'uploads/images';
     }
 
     public function getWebPath()

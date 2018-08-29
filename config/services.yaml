@@ -39,3 +39,7 @@ services:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpload }
             - { name: doctrine.event_listener, event: postLoad }
+
+    App\EventListener\ImageUploadListener:
+            tags:
+                - { name: doctrine.event_listener, event: preUpload }

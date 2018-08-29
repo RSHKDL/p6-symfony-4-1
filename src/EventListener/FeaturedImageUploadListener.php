@@ -55,5 +55,10 @@ class FeaturedImageUploadListener
             $fileName = $this->uploader->upload($file);
             $entity->setFeaturedImage($fileName);
         }
+        // prevents the full file path being saved on updates
+        // as the path is set on the postLoad listener
+        /*elseif ($file instanceof File) {
+            $entity->setFeaturedImage($file->getFilename());
+        }*/
     }
 }
