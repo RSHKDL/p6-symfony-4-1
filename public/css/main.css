@@ -1,3 +1,7 @@
 .test {
     color: rgba(170, 167, 165, 0.63);
 }
+
+#delete-form {
+    display: inline;
+}

@@ -3,16 +3,25 @@
 {% block body %}
 
     <section class="mb-3">
+        <ul class="nav">
+            <li class="nav-item mx-1">
+                <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">
+                    <span class="fas fa-arrow-left" aria-hidden="true"></span> Back to tricks list</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item mx-1">
+                    <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">
+                        <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
+                </li>
+                <li class="nav-item mx-1">
+                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
+                </li>
+            {% endif %}
+        </ul>
         {% if figure.featuredImage %}
             <img src="{{ asset('uploads/images/' ~ figure.featuredImage) }}" alt="Image of {{ figure.name }}">
         {% endif %}
         <h2>{{ figure.name }}</h2>
-        <p>{{ figure.description }}</p>
-        <ul class="list-group">
-            {% for category in figure.categories %}
-            <li>{{ category.name }}</li>
-            {% endfor %}
-        </ul>
         {% if figure.images %}
             {% for row in figure.images | batch(5) %}
             <div class="row card-deck mb-3">
@@ -43,22 +52,18 @@
                 <p class="mb-3">No videos yet</p>
             {% endfor %}
         {% endif %}
-        <ul class="nav w-75 mx-auto justify-content-center">
-            <li class="nav-item mx-1">
-                <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">Back</a>
-            </li>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li class="nav-item mx-1">
-                    <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">Edit</a>
+        <p>{{ figure.description }}</p>
+        <ul class="list-inline list-unstyled">
+            {% for category in figure.categories %}
+                <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
+                    <span class="fas fa-tag" aria-hidden="true"></span>
+                     {{ category.name }}
                 </li>
-                <li class="nav-item mx-1">
-                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
-                </li>
-            {% endif %}
+            {% endfor %}
         </ul>
     </section>
     <section class="mb-3">
-        <div class="mb-3">
+        <div class="mb-4">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% set id = figure.id %}
                 {{ render(controller('App\\Controller\\FigController::commentForm', {id: id})) }}
