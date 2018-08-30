@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Figure;
+use App\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,17 +17,18 @@ class FigureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, array(
+                'help' => 'The name will generate the url of the trick'
+            ))
             ->add('description')
             ->add('categories', EntityType::class, array(
-                'class'        => 'App\Entity\Category',
-                'choice_label' => 'name',
-                'multiple'     => true
-            ))
-            ->add('featuredImage', FileType::class, array(
-                'label' => 'Add the featured image (jpg, png)',
-                'data_class' => null,
-                'required' => false
+                'class'         => Category::class,
+                'choice_label'  => 'name',
+                'query_builder' => function(CategoryRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                },
+                'multiple'      => true,
+                'help'          => 'Choose between 1 and 3 categories'
             ))
             ->add('images', CollectionType::class, array(
                 'entry_type'    => ImageType::class,
@@ -35,7 +37,8 @@ class FigureType extends AbstractType
                 'allow_delete'	=> true,
                 'by_reference' 	=> false,
                 'required'		=> false,
-                'label'         => false
+                'label'         => false,
+                'help'          => 'Must be a valid jpg or png file (500ko max)'
             ))
             ->add('videos', CollectionType::class, array(
                 'entry_type'    => VideoType::class,
@@ -44,10 +47,8 @@ class FigureType extends AbstractType
                 'allow_delete'	=> true,
                 'by_reference' 	=> false,
                 'required'		=> false,
-                'label'         => false
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Save the trick'
+                'label'         => false,
+                'help'          => 'Must be the raw url of the video (youtube, dailymotion or vimeo)'
             ));
     }
 

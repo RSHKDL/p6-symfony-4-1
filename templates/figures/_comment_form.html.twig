@@ -4,20 +4,23 @@
         'attr': {'class': 'form-inline justify-content-center'}
     })
 }}
+{% form_theme form 'form/template.html.twig' %}
 
 {{ form_errors(form) }}
 
-<div class="form-group">
+<div class="form-group {% if not form.content.vars.valid %}has-error{% endif %}">
     {{ form_errors(form.content) }}
-    {{ form_widget(form.content, {
-        'attr': {'class': 'form-control', 'rows': 1 } }) }}
-    {{ form_help(form.content) }}
+    {{ form_widget(form.content) }}
 </div>
 
 <div class="form-group ml-2">
-    <button class="btn btn-primary pull-right" type="submit">
+    <button class="btn btn-primary pull-right" type="submit" formnovalidate>
         <i class="fa fa-paper-plane" aria-hidden="true"></i> Leave a comment
     </button>
+</div>
+
+<div>
+    {{ form_help(form.content) }}
 </div>
 
 {{ form_end(form) }}

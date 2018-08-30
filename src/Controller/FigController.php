@@ -173,7 +173,7 @@ class FigController extends AbstractController
 
             return $this->redirectToRoute('view_figure', ['slug' => $figure->getSlug()]);
         }
-        return $this->render('figures/_comment_form_error.html.twig', [
+        return $this->render('figures/_comment_form_errors.html.twig', [
             'figure' => $figure,
             'form' => $form->createView(),
         ]);

@@ -14,10 +14,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                // 'help' => 'Comments not complying with our Code of Conduct will be moderated.',
+                'help' => 'Comments not complying with our Code of Conduct will be moderated.',
                 'attr' => [
                     'class' => 'form-control mr-3',
-                    'rows' => 2
+                    'rows' => 1
                 ]
 
             ])

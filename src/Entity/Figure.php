@@ -5,12 +5,17 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_figures")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="This Trick already exist"
+ * )
  */
 class Figure
 {
@@ -23,11 +28,13 @@ class Figure
 
     /**
      * @ORM\Column(type="string", length=140)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -52,12 +59,17 @@ class Figure
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
      * @ORM\JoinTable(name="app_figures_categories")
+     * @Assert\Count(
+     *      min = 1,
+     *      max = 3,
+     *      minMessage = "You must choose at least one category",
+     *      maxMessage = "You cannot choose more than {{ limit }} category"
+     * )
      */
     private $categories;
 
     /**
      * @ORM\Column(name="featured_image", type="string", length=255, nullable=true)
-     * @Assert\Image(mimeTypesMessage="The file must be a valid image")
      */
     private $featuredImage;
 
@@ -68,6 +80,7 @@ class Figure
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
+     * @Assert\Valid()
      */
     private $images;
 
@@ -78,6 +91,7 @@ class Figure
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
+     * @Assert\Valid()
      */
     private $videos;
 

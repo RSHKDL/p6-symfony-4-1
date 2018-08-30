@@ -1,9 +1,9 @@
 {% import _self as formMacros %}
 
 {% macro printCollectionImagesWidget(imageField) %}
-    <div class="js-collection-fields-item">
-        <button type='button'
-                class='js-remove-collection-field btn btn-danger btn-xs'>remove
+    <div class="js-collection-fields-item mt-2">
+        <button type='button' class='js-remove-collection-field btn btn-danger btn-sm'>
+            <span class="fas fa-times"></span>
         </button>
         {{ form_errors(imageField) }}
         {{ form_widget(imageField) }}
@@ -11,18 +11,21 @@
 {% endmacro %}
 
 {% macro printCollectionVideosWidget(videoField) %}
-    <div class="js-collection-fields-item">
-        <button type='button'
-                class='js-remove-collection-field btn btn-danger btn-xs'>remove
+    <div class="js-collection-fields-item mt-2">
+        <button type='button' class='js-remove-collection-field btn btn-danger btn-sm'>
+            <span class="fas fa-times"></span>
         </button>
         {{ form_errors(videoField) }}
         {{ form_widget(videoField) }}
     </div>
 {% endmacro %}
 
+{# https://symfony.com/doc/current/form/form_customization.html #}
+
 {% block h2 %}{% endblock %}
 
 {{ form_start(form) }}
+    {% form_theme form 'form/template.html.twig' %}
     {#<div class="debug">
     {% if trick %}
         {% for video in trick.videos %}
@@ -32,7 +35,6 @@
         trick is null
     {% endif %}
     </div>#}
-    {{ form_errors(form) }}
     <div class="form-group">
         {{ form_label(form.name) }}
         {{ form_errors(form.name) }}
@@ -44,7 +46,6 @@
         {{ form_errors(form.description) }}
         {{ form_widget(form.description, {
             'attr': {'class': 'form-control', 'rows': 5} }) }}
-        {{ form_help(form.description) }}
     </div>
     <div class="form-group">
         {{ form_label(form.categories) }}
@@ -53,36 +54,35 @@
         {{ form_help(form.categories) }}
     </div>
     <div class="form-group">
-        {{ form_label(form.featuredImage) }}
-        {{ form_errors(form.featuredImage) }}
-        {{ form_widget(form.featuredImage, { 'attr': {'class': 'form-control-file'} }) }}
-        {{ form_help(form.featuredImage) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.images, 'Add images (jpg, png)') }}
+        {{ form_label(form.images, 'Add images') }}
+        {{ form_help(form.images) }}
         <div class="js-img-collection-fields-holder"
              data-prototype="{{ formMacros.printCollectionImagesWidget(form.images.vars.prototype.file)|e }}"
              data-index="{{ form.images|length }}">
             {% for imageField in form.images %}
                 {{ formMacros.printCollectionImagesWidget(imageField) }}
             {% endfor %}
-            <button type="button"
-                class="js-add-another-collection-field btn btn-primary btn-xs">Add another image
+            <button type="button" class="js-add-another-collection-field btn btn-primary mt-2">
+                Add another image
             </button>
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.videos, 'Add videos (youtube, dailymotion or vimeo)') }}
+        {{ form_label(form.videos, 'Add videos') }}
+        {{ form_help(form.videos) }}
         <div class="js-vid-collection-fields-holder"
              data-prototype="{{ formMacros.printCollectionVideosWidget(form.videos.vars.prototype.url)|e }}"
              data-index="{{ form.videos|length }}">
             {% for videoField in form.videos %}
                 {{ formMacros.printCollectionVideosWidget(videoField) }}
             {% endfor %}
-            <button type="button"
-                    class="js-add-another-collection-field btn btn-primary btn-xs">Add another video
+            <button type="button" class="js-add-another-collection-field btn btn-primary mt-2">
+                Add another video
             </button>
         </div>
     </div>
-    {{ form_row(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
+    <button class="btn btn-success" formnovalidate>
+        <span class="far fa-save" aria-hidden="true"></span>
+         Save the trick
+    </button>
 {{ form_end(form) }}

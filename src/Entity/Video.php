@@ -39,7 +39,7 @@ class Video
      * @Assert\Regex(
      *     pattern="#^(http|https)://(www.youtube.com|www.dailymotion.com|vimeo.com)/#",
      *     match=true,
-     *     message="The url must match a valid Youtube, DailyMotion or Vimeo video"
+     *     message="The url must match a valid Youtube, DailyMotion or Vimeo video raw url"
      * )
      */
     private $url;

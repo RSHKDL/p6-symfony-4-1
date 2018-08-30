@@ -1,0 +1,20 @@
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul class="list-unstyled mb-0">
+                {% for error in errors %}
+                    <li class="text-danger">
+                        <span class="fas fa-exclamation-triangle" aria-hidden="true"></span>
+                         {{ error.message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block form_help %}
+    {% spaceless %}
+        <small class="text-muted">{{ help }}</small>
+    {% endspaceless %}
+{% endblock form_help %}

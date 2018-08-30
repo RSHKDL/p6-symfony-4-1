@@ -22,12 +22,10 @@ class Comment
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="comment.blank")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *     min=5,
-     *     minMessage="comment.too_short",
-     *     max=10000,
-     *     maxMessage="comment.too_long"
+     *     max=240
      * )
      */
     private $content;

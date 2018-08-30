@@ -10,6 +10,7 @@
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
 
-    <button type="submit">Register!</button>
+    <button class="btn btn-success" type="submit">
+        Register me <span class="fas fa-check" aria-hidden="true"></span></button>
     {{ form_end(form) }}
 {% endblock %}
