@@ -33,6 +33,12 @@ class Image
     private $extension;
 
     /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    // private $isFeatured = false;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -87,6 +93,22 @@ class Image
     public function setExtension($extension): void
     {
         $this->extension = $extension;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->isFeatured;
+    }
+
+    /**
+     * @param bool $isFeatured
+     */
+    public function setIsFeatured(bool $isFeatured): void
+    {
+        $this->isFeatured = $isFeatured;
     }
 
     public function getFigure(): ?Figure
