@@ -18,3 +18,12 @@
         <small class="text-muted">{{ help }}</small>
     {% endspaceless %}
 {% endblock form_help %}
+
+{% block file_widget %}
+    {% spaceless %}
+        {{ block('form_widget') }}
+        {% if image_name is not null %}
+            <span>{{ image_name }}</span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock file_widget %}

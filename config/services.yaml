@@ -34,12 +34,20 @@ services:
             arguments:
                 $targetDirectory: '%images_directory%'
 
-    App\EventListener\FeaturedImageUploadListener:
+    App\EventListener\BetaListener:
+        arguments:
+            $endDate: "2018-10-30"
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+    App\EventListener\ImageListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpload }
-            - { name: doctrine.event_listener, event: postLoad }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+            - { name: doctrine.event_listener, event: postRemove }
 
-    App\EventListener\ImageUploadListener:
-            tags:
-                - { name: doctrine.event_listener, event: preUpload }
+    App\Form\Extension\ImageTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }

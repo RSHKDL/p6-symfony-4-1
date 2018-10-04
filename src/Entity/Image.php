@@ -45,7 +45,7 @@ class Image
     private $figure;
 
     /**
-     * @var UploadedFile $file
+     * @var UploadedFile|null $file
      * @Assert\Image(
      *     maxSize = "500k",
      *     allowPortrait = false,
@@ -56,7 +56,7 @@ class Image
      */
     private $file;
 
-    private $tempFilename;
+    private $oldFile;
 
     public function getId()
     {
@@ -97,7 +97,7 @@ class Image
 
     /**
      * @return bool
-     */
+     *
     public function isFeatured(): bool
     {
         return $this->isFeatured;
@@ -105,17 +105,23 @@ class Image
 
     /**
      * @param bool $isFeatured
-     */
+     *
     public function setIsFeatured(bool $isFeatured): void
     {
         $this->isFeatured = $isFeatured;
     }
 
+    /**
+     *
+     */
     public function getFigure(): ?Figure
     {
         return $this->figure;
     }
 
+    /*
+     *
+     */
     public function setFigure(?Figure $figure): self
     {
         $this->figure = $figure;
@@ -133,92 +139,27 @@ class Image
     /**
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file = null)
+    public function setFile($file = null)
     {
         $this->file = $file;
 
-        if (null !== $this->name) {
-            $this->tempFilename = $this->name;
+        if (isset($this->name)) {
+            $this->oldFile = $this->name;
             $this->name = null;
             $this->extension = null;
         }
     }
 
     /**
-     * If no file is set, do nothing,
-     * Else store the file extension and original name
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * @return mixed
      */
-    public function preUpload()
+    public function getOldFile()
     {
-        if (null === $this->file)
-        {
-            return;
-        }
-
-        $this->setName($this->file->getClientOriginalName());
-        $this->setExtension($this->file->guessExtension());
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        // If no file is set, do nothing
-        if (null === $this->file)
-        {
-            return;
-        }
-
-        // A file is present, remove it
-        if (null !== $this->tempFilename)
-        {
-            $oldFile = $this->getUploadDirectory().$this->id.".".$this->extension;
-            if (file_exists($oldFile))
-            {
-                unlink($oldFile);
-            }
-        }
-
-        // Move the file to the upload folder
-        $this->file->move(
-            $this->getUploadDirectory(),
-            $this->id.".".$this->extension
-        );
-    }
-
-    /**
-     * @ORM\PreRemove()
-     */
-    public function preRemoveUpload()
-    {
-        // Save the name of the file we would want to remove
-        $this->tempFilename = $this->getUploadDirectory()."/".$this->id.".".$this->extension;
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        // PostRemove => We no longer have the entity's ID => Use the name we saved
-        if (file_exists($this->tempFilename))
-        {
-            // Remove file
-            unlink($this->tempFilename);
-        }
-    }
-
-    public function getUploadDirectory()
-    {
-        return 'uploads/images';
+        return $this->oldFile;
     }
 
     public function getWebPath()
     {
-        return $this->getUploadDirectory()."/".$this->id.".".$this->extension;
+        return "uploads/images/".$this->name;
     }
 }

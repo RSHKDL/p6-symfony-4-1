@@ -1,5 +1,8 @@
-.test {
-    color: rgba(170, 167, 165, 0.63);
+.beta-banner {
+    background-color: #F5871F;
+    color: #f6f6f6;
+    text-align: center;
+    padding: .75em 0;
 }
 
 #delete-form {
