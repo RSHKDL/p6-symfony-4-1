@@ -19,17 +19,17 @@ class FigFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create('en_GB');
+        $faker = Faker\Factory::create('en_US');
 
         for ($i = 0; $i < 20; $i++) {
             $figure = new Figure();
             $figure->setName($faker->catchPhrase());
             $figure->setDescription($faker->realText(360));
             $figure->addCategory($this->getReference('category'));
+            $figure->setCreatedAt($faker->dateTimeThisYear('now', 'Europe/Paris'));
             $manager->persist($figure);
         }
 
         $manager->flush();
-
     }
 }

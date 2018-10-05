@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -44,6 +44,16 @@ class Figure
     private $slug;
 
     /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @var Comment[]|ArrayCollection
      *
      * @ORM\OneToMany(
@@ -69,11 +79,6 @@ class Figure
     private $categories;
 
     /**
-     * @ORM\Column(name="featured_image", type="string", length=255, nullable=true)
-     */
-    private $featuredImage;
-
-    /**
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Image",
      *     mappedBy="figure",
@@ -97,6 +102,7 @@ class Figure
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
@@ -171,6 +177,38 @@ class Figure
         return $text;
     }
 
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
     /**
      * @return Collection
      */
@@ -217,22 +255,6 @@ class Figure
         }
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFeaturedImage()
-    {
-        return $this->featuredImage;
-    }
-
-    /**
-     * @param mixed $featuredImage
-     */
-    public function setFeaturedImage($featuredImage): void
-    {
-        $this->featuredImage = $featuredImage;
     }
 
     /**

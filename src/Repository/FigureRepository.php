@@ -25,6 +25,7 @@ class FigureRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('f')
             ->leftJoin('f.categories', 'c')
             ->addSelect('c')
+            ->orderBy('f.createdAt', 'DESC')
             ->getQuery();
 
         $query->setFirstResult(($page - 1) * $nbPerPage)->setMaxResults($nbPerPage);

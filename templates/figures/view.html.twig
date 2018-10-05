@@ -17,9 +17,9 @@
                 </li>
             {% endif %}
         </ul>
-        {% if figure.featuredImage %}
+        {#{% if figure.featuredImage %}
             <img src="{{ asset('uploads/images/' ~ figure.featuredImage) }}" alt="Image of {{ figure.name }}">
-        {% endif %}
+        {% endif %}#}
         <h2>{{ figure.name }}</h2>
         {% if figure.images %}
             {% for row in figure.images | batch(5) %}
@@ -60,6 +60,18 @@
                      {{ category.name }}
                 </li>
             {% endfor %}
+            <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
+                <span class="fa fa-calendar-alt" aria-hidden="true"></span>
+                 {{ figure.createdAt|date("m/d/Y h:i") }}
+            </li>
+            <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
+                <span class="fa fa-calendar-alt" aria-hidden="true"></span>
+                {% if figure.updatedAt %}
+                    Edited: {{ figure.updatedAt|date("m/d/Y h:i") }}
+                {% else %}
+                    Never edited
+                {% endif %}
+            </li>
         </ul>
     </section>
     <section class="mb-3">
