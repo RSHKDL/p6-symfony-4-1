@@ -17,14 +17,22 @@
                 </li>
             {% endif %}
         </ul>
-        {#{% if figure.featuredImage %}
-            <img src="{{ asset('uploads/images/' ~ figure.featuredImage) }}" alt="Image of {{ figure.name }}">
-        {% endif %}#}
+        {% if figure.images %}
+            {% for image in figure.images %}
+                {% if image.featured %}
+                <img
+                        src="{{ asset(image.webPath) }}"
+                        alt="{{ figure.name }}"
+                >
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         <h2>{{ figure.name }}</h2>
         {% if figure.images %}
             {% for row in figure.images | batch(5) %}
             <div class="row card-deck mb-3">
                 {% for image in row %}
+                    {% if not image.featured %}
                     <div class="card">
                         <img
                                 class="w-100"
@@ -33,6 +41,7 @@
                         >
                         <span>{{ image.name }}</span>
                     </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             {% else %}

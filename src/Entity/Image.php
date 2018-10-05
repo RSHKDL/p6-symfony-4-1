@@ -28,15 +28,10 @@ class Image
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var boolean $isFeatured
+     * @ORM\Column(type="boolean", name="is_featured")
      */
-    private $extension;
-
-    /**
-     * @var boolean
-     * @ORM\Column(type="boolean")
-     */
-    // private $isFeatured = false;
+    private $isFeatured = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="images")
@@ -80,24 +75,8 @@ class Image
     }
 
     /**
-     * @return string
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
-     * @param string $extension
-     */
-    public function setExtension($extension): void
-    {
-        $this->extension = $extension;
-    }
-
-    /**
      * @return bool
-     *
+     */
     public function isFeatured(): bool
     {
         return $this->isFeatured;
@@ -105,7 +84,7 @@ class Image
 
     /**
      * @param bool $isFeatured
-     *
+     */
     public function setIsFeatured(bool $isFeatured): void
     {
         $this->isFeatured = $isFeatured;
@@ -146,7 +125,6 @@ class Image
         if (isset($this->name)) {
             $this->oldFile = $this->name;
             $this->name = null;
-            $this->extension = null;
         }
     }
 
