@@ -32,4 +32,14 @@ class FigureRepository extends ServiceEntityRepository
 
         return new Paginator($query, true);
     }
+
+    public function getLastTricks(int $limit)
+    {
+        $query = $this->findBy(
+            [],
+            ['createdAt' => 'DESC'],
+            $limit);
+
+        return $query;
+    }
 }
