@@ -92,8 +92,8 @@
                 <p>You must be logged in to post a comment</p>
             {% endif %}
         </div>
-        <div class="w-75 mx-auto">
-            {% for comment in figure.comments %}
+        <div class="w-75 mx-auto comments-container">
+        {% for comment in comments %}
             <div class="row mb-3">
                 <div class="col-sm-4">
                     <small class="text-muted">#{{ comment.id }}</small>
@@ -105,10 +105,24 @@
                     {{ comment.content }}
                 </div>
             </div>
-            {% else %}
+        {% else %}
             <p class="mb-3">No comments yet</p>
-        </div>
         {% endfor %}
+        </div>
+        {% if figure.comments is not empty %}
+        <button
+                class="btn btn-primary js-load-more"
+                data-id="{{ figure.id }}"
+                data-url="{{ path('display_comment', {id: figure.id}) }}"
+                data-total="{{ total_comments }}">
+            Load more comments
+        </button>
+        {% endif %}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/load-more.js') }}"></script>
 {% endblock %}
 

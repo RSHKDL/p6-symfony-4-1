@@ -1,8 +1,6 @@
 $(document).ready(function() {
-    // var holder = $('.js-collection-fields-holder');
     var imagesHolder = $('.js-img-collection-fields-holder');
     var videosHolder = $('.js-vid-collection-fields-holder');
-    console.log(videosHolder);
 
     imagesHolder.on('click', '.js-remove-collection-field', function (e) {
         $(this).closest('.js-collection-fields-item').remove();

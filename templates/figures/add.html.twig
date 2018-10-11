@@ -6,3 +6,8 @@
     <h2>Add a new Trick</h2>
     {% block form %}{{ include('figures/_form.html.twig') }}{% endblock %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/add-collection-widget.js') }}"></script>
+{% endblock %}

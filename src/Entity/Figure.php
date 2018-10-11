@@ -59,6 +59,7 @@ class Figure
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Comment",
      *      mappedBy="figure",
+     *      fetch="EXTRA_LAZY",
      *      orphanRemoval=true,
      *      cascade={"persist"}
      * )

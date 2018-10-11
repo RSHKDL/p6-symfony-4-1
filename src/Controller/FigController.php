@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Comment;
 use App\Entity\Figure;
 use App\Entity\Image;
@@ -13,9 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -59,7 +56,16 @@ class FigController extends AbstractController
      */
     public function view(Figure $figure): Response
     {
-        return $this->render('figures/view.html.twig', ['figure' => $figure]);
+        $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $repo->getCommentsBatch($figure->getId(), 3,0);
+        $comments2 = $figure->getComments()->slice(0,3);
+        $totalComments = $figure->getComments()->count();
+
+        return $this->render('figures/view.html.twig', [
+            'figure' => $figure,
+            'comments' => $comments2,
+            'total_comments' => $totalComments
+        ]);
     }
 
     /**
@@ -181,10 +187,10 @@ class FigController extends AbstractController
 
     /**
      * This controller is called directly via the render() function in the
-     * blog/post_show.html.twig template. That's why it's not needed to define
+     * Trick_show.html.twig template. That's why it's not needed to define
      * a route name for it.
      *
-     * The "id" of the Post is passed in and then turned into a Post object
+     * The "id" of the Trick is passed in and then turned into a Trick object
      * automatically by the ParamConverter.
      */
     public function commentForm(Figure $figure): Response
@@ -194,5 +200,35 @@ class FigController extends AbstractController
             'figure' => $figure,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/figure/{id}/comment",
+     *     methods={"POST"},
+     *     name="display_comment",
+     *     requirements={"id"="\d+"}
+     *     )
+     */
+    public function commentDisplay($id, Request $request)
+    {
+        if($request->isXmlHttpRequest()) {
+            $offset = $request->request->get('offset');
+            $repo = $this->getDoctrine()->getRepository(Comment::class);
+            $batch = $repo->getCommentsBatch($id, 3, $offset);
+
+            $figure = $this->getDoctrine()->getRepository(Figure::class)->find($id);
+            $comments = $figure->getComments();
+            $total = $comments->count();
+            $batchTest = $comments->slice(2,2);
+
+            $response = [
+                'total' => $total,
+                'batch' => $batch,
+                'batchTest' => $batchTest,
+                'figureTest' => $figure
+            ];
+            return new JsonResponse($response);
+        }
+        return new JsonResponse('No results');
     }
 }
