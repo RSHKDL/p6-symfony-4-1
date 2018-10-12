@@ -70,6 +70,18 @@ class User implements UserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @var string
+     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
+     */
+    private $passwordRequestedAt;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
@@ -220,5 +232,37 @@ class User implements UserInterface, \Serializable
         }
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param string|null $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken): void
+    {
+        $this->confirmationToken = $confirmationToken;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /**
+     * @param \DateTime|null $passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt): void
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
     }
 }

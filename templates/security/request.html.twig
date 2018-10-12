@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Forgotten password{% endblock %}
+
+{% block body %}
+    <h2>Forgotten password</h2>
+    {% form_theme request_form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(request_form) }}
+    {{ form_widget(request_form) }}
+    <button class="btn btn-primary" type="submit">
+        <span class="fas fa-key" aria-hidden="true"></span> Request new password
+    </button>
+    {{ form_end(request_form) }}
+{% endblock %}

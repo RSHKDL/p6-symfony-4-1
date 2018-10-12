@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Reset password{% endblock %}
+
+{% block body %}
+    <h2>Change your password</h2>
+    {% form_theme reset_form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(reset_form) }}
+    {{ form_widget(reset_form) }}
+    <button class="btn btn-primary" type="submit">
+        <span class="fas fa-edit" aria-hidden="true"></span> Change password
+    </button>
+    {{ form_end(reset_form) }}
+{% endblock %}
