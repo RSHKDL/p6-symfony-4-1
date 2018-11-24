@@ -29,9 +29,6 @@ class ImageListener
             return;
         }
 
-        if ($entity->getFile()) {
-            $entity->setExtension($entity->getFile()->guessExtension());
-        }
         $this->uploadImage($entity);
     }
 
@@ -42,9 +39,6 @@ class ImageListener
             return;
         }
 
-        if ($entity->getFile()) {
-            $entity->setExtension($entity->getFile()->guessExtension());
-        }
         $this->uploadImage($entity);
 
         if ($entity->getOldFile()) {

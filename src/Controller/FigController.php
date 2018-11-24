@@ -4,10 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Figure;
-use App\Entity\Image;
 use App\Form\CommentType;
 use App\Form\FigureType;
-use App\Service\FileUploader;
+use Doctrine\Common\Collections\Collection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -56,14 +55,12 @@ class FigController extends AbstractController
      */
     public function view(Figure $figure): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repo->getCommentsBatch($figure->getId(), 3,0);
-        $comments2 = $figure->getComments()->slice(0,3);
+        $comments = $figure->getComments()->slice(0,3);
         $totalComments = $figure->getComments()->count();
 
         return $this->render('figures/view.html.twig', [
             'figure' => $figure,
-            'comments' => $comments2,
+            'comments' => $comments,
             'total_comments' => $totalComments
         ]);
     }
@@ -209,25 +206,30 @@ class FigController extends AbstractController
      *     requirements={"id"="\d+"}
      *     )
      */
-    public function commentDisplay($id, Request $request)
+    public function commentDisplay(Request $request, int $id)
     {
         if($request->isXmlHttpRequest()) {
             $offset = $request->request->get('offset');
-            $repo = $this->getDoctrine()->getRepository(Comment::class);
-            $batch = $repo->getCommentsBatch($id, 3, $offset);
+            /*$repo = $this->getDoctrine()->getRepository(Comment::class);
+            $batch = $repo->getCommentsBatch($id, 3, $offset);*/
 
             $figure = $this->getDoctrine()->getRepository(Figure::class)->find($id);
+            /** @var Collection $comments */
             $comments = $figure->getComments();
-            $total = $comments->count();
-            $batchTest = $comments->slice(2,2);
 
-            $response = [
-                'total' => $total,
+            $batch = [];
+            foreach($comments->slice($offset,3) as $comment) {
+                $batch[] = [
+                    'id' => $comment->getId(),
+                    'content' => $comment->getContent(),
+                ];
+            }
+
+            $data = [
                 'batch' => $batch,
-                'batchTest' => $batchTest,
-                'figureTest' => $figure
+                'offset' => $offset+3
             ];
-            return new JsonResponse($response);
+            return new JsonResponse($data);
         }
         return new JsonResponse('No results');
     }

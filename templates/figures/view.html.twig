@@ -111,9 +111,10 @@
         </div>
         {% if figure.comments is not empty %}
         <button
+                id="button"
                 class="btn btn-primary js-load-more"
-                data-id="{{ figure.id }}"
                 data-url="{{ path('display_comment', {id: figure.id}) }}"
+                data-offset="3"
                 data-total="{{ total_comments }}">
             Load more comments
         </button>
