@@ -6,7 +6,7 @@
     <h2>All our Tricks</h2>
     <p class="lead">We already have {{ nbItems }} trick{% if nbItems > 1 %}s{% endif %}.
         If you think a trick is missing, feel free to add it.</p>
-    <a class="btn btn-success" href="{{ path('add_figure') }}">
+    <a class="btn btn-success" href="{{ path('trick_create') }}">
         <span class="fas fa-plus-circle" aria-hidden="true"></span> Add a trick
     </a>
 </div>
@@ -28,7 +28,7 @@
                     {% endfor %}
                 {% endif %}
                 <div class="card-body">
-                    <a href="{{ path('view_figure', {slug: figure.slug}) }}">{{ figure.name }}</a>
+                    <a href="{{ path('trick_view', {slug: figure.slug}) }}">{{ figure.name }}</a>
                 </div>
                 <div class="card-footer">
                     <p class="trick-tag text-muted mb-0">
@@ -38,7 +38,7 @@
                         {% endfor %}
                     </p>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">
+                        <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: figure.id}) }}">
                             <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
                         {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
                     {% endif %}
@@ -51,13 +51,13 @@
         <ul class="pagination justify-content-center">
             {% for p in range(1, nbPages) %}
                 <li{% if p == page %} class="page-item"{% endif %}>
-                    <a class="page-link" href="{{ path('index_figure', {'page': p}) }}">{{ p }}</a>
+                    <a class="page-link" href="{{ path('trick_index', {'page': p}) }}">{{ p }}</a>
                 </li>
             {% endfor %}
         </ul>
     </nav>
 {% else %}
-    <p>No figures yet</p>
+    <p>No Tricks yet</p>
 {% endif %}
 
 {% endblock %}

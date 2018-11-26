@@ -4,12 +4,12 @@
     <section class="mb-3">
         <ul class="nav">
             <li class="nav-item mx-1">
-                <a class="btn btn-primary btn-sm" href="{{ path('index_figure') }}">
+                <a class="btn btn-primary btn-sm" href="{{ path('trick_index') }}">
                     <span class="fas fa-arrow-left" aria-hidden="true"></span> Back to tricks list</a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item mx-1">
-                    <a class="btn btn-warning btn-sm" href="{{ path('edit_figure', {id: figure.id}) }}">
+                    <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: figure.id}) }}">
                         <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
                 </li>
                 <li class="nav-item mx-1">
@@ -71,15 +71,10 @@
             {% endfor %}
             <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
                 <span class="fa fa-calendar-alt" aria-hidden="true"></span>
-                 {{ figure.createdAt|date("m/d/Y h:i") }}
-            </li>
-            <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
-                <span class="fa fa-calendar-alt" aria-hidden="true"></span>
-                {% if figure.updatedAt %}
-                    Edited: {{ figure.updatedAt|date("m/d/Y h:i") }}
-                {% else %}
-                    Never edited
-                {% endif %}
+                 Published the {{ figure.createdAt|date("d/m/Y H:i") }}
+                {%- if figure.updatedAt -%}
+                    , edited the {{ figure.updatedAt|date("d/m/Y H:i") }}
+                {%- endif -%}
             </li>
         </ul>
     </section>
@@ -87,7 +82,10 @@
         <div class="mb-4">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% set id = figure.id %}
-                {{ render(controller('App\\Controller\\FigController::commentForm', {id: id})) }}
+                {{ render(controller(
+                    'App\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
+                    {id: id}))
+                }}
             {% else %}
                 <p>You must be logged in to post a comment</p>
             {% endif %}
@@ -98,7 +96,7 @@
                 <div class="col-sm-4">
                     <small class="text-muted">#{{ comment.id }}</small>
                     {{ comment.author.username }}
-                    <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y h:i:s") }}</i></small>
+                    <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y H:i:s") }}</i></small>
 
                 </div>
                 <div class="col-sm-8">
@@ -113,7 +111,7 @@
         <button
                 id="button"
                 class="btn btn-primary js-load-more"
-                data-url="{{ path('display_comment', {id: figure.id}) }}"
+                data-url="{{ path('comments_load_more', {id: figure.id}) }}"
                 data-offset="3"
                 data-total="{{ total_comments }}">
             Load more comments

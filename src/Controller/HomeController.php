@@ -2,24 +2,61 @@
 
 namespace App\Controller;
 
+use App\Controller\Interfaces\HomeControllerInterface;
 use App\Entity\Figure;
+use App\Repository\FigureRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Twig\Environment;
+use Twig_Error_Loader;
+use Twig_Error_Runtime;
+use Twig_Error_Syntax;
 
-class HomeController extends Controller
+final class HomeController implements HomeControllerInterface
 {
     /**
-     * @Route("/", name="home")
+     * @var FigureRepository
      */
-    public function index()
-    {
-        $repo = $this->getDoctrine()->getRepository(Figure::class);
-        $lastItems = $repo->getLastTricks(3);
-        $nbItems = $repo->count([]);
+    private $repository;
+    /**
+     * @var Environment
+     */
+    private $environment;
 
-        return $this->render('home/index.html.twig', [
-            'items'    => $lastItems,
-            'nb_items'      => $nbItems
-        ]);
+    /**
+     * HomeControllerInterface constructor.
+     * @param FigureRepository $repository
+     * @param Environment $environment
+     */
+    public function __construct(
+        FigureRepository $repository,
+        Environment $environment
+    ) {
+
+        $this->repository = $repository;
+        $this->environment = $environment;
+    }
+
+    /**
+     * @Route("/", name="home")
+     *
+     * @return Response
+     *
+     * @throws Twig_Error_Loader  When the template cannot be found
+     * @throws Twig_Error_Syntax  When an error occurred during compilation
+     * @throws Twig_Error_Runtime When an error occurred during rendering
+     */
+    public function index(): Response
+    {
+        $lastItems = $this->repository->getLastTricks(3);
+        $nbItems = $this->repository->count([]);
+
+        return new Response(
+            $this->environment->render('home/index.html.twig', [
+                'items'    => $lastItems,
+                'nb_items'      => $nbItems
+            ])
+        );
     }
 }

@@ -20,7 +20,7 @@ class FigureRepository extends ServiceEntityRepository
         parent::__construct($registry, Figure::class);
     }
 
-    public function getFigures($page, $nbPerPage)
+    public function getPaginatedTricks($page, $nbPerPage)
     {
         $query = $this->createQueryBuilder('f')
             ->leftJoin('f.categories', 'c')
@@ -41,5 +41,29 @@ class FigureRepository extends ServiceEntityRepository
             $limit);
 
         return $query;
+    }
+
+    /**
+     * Save the trick into the database
+     *
+     * @param Figure $figure
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Figure $figure)
+    {
+        $this->_em->persist($figure);
+        $this->_em->flush();
+    }
+
+    /**
+     * Update a trick
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update()
+    {
+        $this->_em->flush();
     }
 }

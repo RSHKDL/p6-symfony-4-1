@@ -1,6 +1,6 @@
 {{ form_start(form, {
         method: 'POST',
-        action: path('comment_new', {'figureSlug': figure.slug}),
+        action: path('comments_create', {'figureSlug': figure.slug}),
         'attr': {'class': 'form-inline justify-content-center'}
     })
 }}
