@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,8 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields="username", message="Username already taken")
- * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already exist")
+ * @UniqueEntity(fields="email", message="Email already exist")
  */
 class User implements UserInterface, \Serializable
 {
@@ -56,6 +55,7 @@ class User implements UserInterface, \Serializable
     private $roles;
 
     /**
+     * @var bool
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -85,7 +85,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
-        $this->isActive = true;
+        $this->isActive = false;
         $this->comments = new ArrayCollection();
     }
 
@@ -264,5 +264,21 @@ class User implements UserInterface, \Serializable
     public function setPasswordRequestedAt($passwordRequestedAt): void
     {
         $this->passwordRequestedAt = $passwordRequestedAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }

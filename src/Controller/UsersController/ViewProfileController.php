@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\UsersController;
 
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class UserController extends Controller
+class ViewProfileController extends AbstractController
 {
     /**
-     * @Route("/profile/{id}", name="user_profile", requirements={"id"="\d+"})
+     * @Route("/profile/{id}", name="user_profile", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function view($id)
     {

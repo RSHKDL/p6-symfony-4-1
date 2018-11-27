@@ -17,8 +17,8 @@ security:
             anonymous: true
             provider: db_provider
             form_login:
-                login_path: login
-                check_path: login
+                login_path: user_login
+                check_path: user_login
                 csrf_token_generator: security.csrf.token_manager
             logout:
                 path: /logout

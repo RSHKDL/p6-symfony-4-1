@@ -39,7 +39,7 @@ final class HomeController implements HomeControllerInterface
     }
 
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home", methods={"GET"})
      *
      * @return Response
      *
