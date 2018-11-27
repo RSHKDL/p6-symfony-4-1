@@ -30,7 +30,6 @@ final class Mailer implements MailerInterface
      * @param array $from
      * @param string $to
      * @param string $body
-     * @return \Swift_Message
      */
     public function sendMail($subject, $from = [], $to, $body)
     {

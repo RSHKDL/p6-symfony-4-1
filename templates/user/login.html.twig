@@ -22,7 +22,7 @@
                 <input type="checkbox" name="_remember_me"> Remember me
             </label>
         </div>
-        <p><a href="{{ path('forgot_password') }}">I have forgot my password</a></p>
+        <p><a href="{{ path('user_forgot_password') }}">I have forgot my password</a></p>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

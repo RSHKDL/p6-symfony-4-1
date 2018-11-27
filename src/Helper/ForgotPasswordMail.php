@@ -2,11 +2,11 @@
 
 namespace App\Helper;
 
-use App\Helper\Interfaces\RegisterUserMailInterface;
+use App\Helper\Interfaces\ForgotPasswordMailInterface;
 use App\Service\Interfaces\MailerInterface;
 use Twig\Environment;
 
-final class RegisterUserMail implements RegisterUserMailInterface
+final class ForgotPasswordMail implements ForgotPasswordMailInterface
 {
 
     /**
@@ -33,7 +33,8 @@ final class RegisterUserMail implements RegisterUserMailInterface
     }
 
     /**
-     * Create and send a mail when a new User register, with a validation token.
+     * Create and send a mail when a User has forgot his password,
+     * with a validation token.
      *
      * @param string $email
      * @param string $username
@@ -45,10 +46,10 @@ final class RegisterUserMail implements RegisterUserMailInterface
     public function createMail(string $email, string $username, string $token)
     {
         $this->mailer->sendMail(
-            'Validate your Snowtricks Account',
+            'You forgot your Snowtricks password!',
             $this->adminMail,
             $email,
-            $this->environment->render('emails/validate_registration.html.twig', [
+            $this->environment->render('emails/forgotten_password.html.twig', [
                 'username' => $username,
                 'token' => $token
             ])

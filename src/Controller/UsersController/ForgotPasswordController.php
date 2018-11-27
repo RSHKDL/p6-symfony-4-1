@@ -2,8 +2,8 @@
 
 namespace App\Controller\UsersController;
 
-use App\Form\UserRegisterType;
-use App\FormHandler\RegisterUserHandler;
+use App\Form\ForgotPasswordType;
+use App\FormHandler\ForgotPasswordHandler;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,20 +13,19 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 /**
- * Class RegisterUserController
- * @package App\Controller\UserController
+ * Class ForgotPasswordController
+ * @package App\Controller\UsersController
  */
-final class RegisterUserController
+final class ForgotPasswordController
 {
-
+    /**
+     * @var ForgotPasswordHandler
+     */
+    private $handler;
     /**
      * @var FormFactoryInterface
      */
     private $formFactory;
-    /**
-     * @var RegisterUserHandler
-     */
-    private $handler;
     /**
      * @var Environment
      */
@@ -38,21 +37,20 @@ final class RegisterUserController
 
     public function __construct(
         FormFactoryInterface $formFactory,
-        RegisterUserHandler $handler,
         Environment $environment,
-        UrlGeneratorInterface $urlGenerator
-    ){
-        $this->formFactory = $formFactory;
+        UrlGeneratorInterface $urlGenerator,
+        ForgotPasswordHandler $handler
+    ) {
         $this->handler = $handler;
+        $this->formFactory = $formFactory;
         $this->environment = $environment;
         $this->urlGenerator = $urlGenerator;
     }
 
     /**
-     * @Route("/user/register", name="user_register", methods={"GET", "POST"})
+     * @Route("/user/forgot-password", name="user_forgot_password", methods={"GET", "POST"})
      *
      * @param Request $request
-     *
      * @return RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -60,16 +58,16 @@ final class RegisterUserController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function registerUser(Request $request)
+    public function forgotPassword(Request $request)
     {
-        $form = $this->formFactory->create(UserRegisterType::class)->handleRequest($request);
+        $form = $this->formFactory->create(ForgotPasswordType::class)->handleRequest($request);
         if ($this->handler->handle($form)) {
             return new RedirectResponse(
                 $this->urlGenerator->generate('home')
             );
         }
         return new Response(
-            $this->environment->render('user/register.html.twig', [
+            $this->environment->render('user/reset.html.twig', [
                 'form' => $form->createView()
             ])
         );

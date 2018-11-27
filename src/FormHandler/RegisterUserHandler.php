@@ -3,6 +3,7 @@
 namespace App\FormHandler;
 
 use App\Entity\User;
+use App\Helper\Interfaces\RegisterUserMailInterface;
 use App\Helper\RegisterUserMail;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
@@ -31,7 +32,7 @@ final class RegisterUserHandler
      */
     private $flashBag;
     /**
-     * @var RegisterUserMail
+     * @var RegisterUserMailInterface
      */
     private $registerUserMail;
 
@@ -40,7 +41,7 @@ final class RegisterUserHandler
         UserPasswordEncoderInterface $passwordEncoder,
         TokenGeneratorInterface $tokenGenerator,
         FlashBagInterface $flashBag,
-        RegisterUserMail $registerUserMail
+        RegisterUserMailInterface $registerUserMail
 
     ) {
         $this->passwordEncoder = $passwordEncoder;

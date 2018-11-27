@@ -73,7 +73,7 @@ final class ValidateUserController
             $this->flashBag->set('success', 'Your account was successfully validated, log in now');
 
             return new RedirectResponse(
-                $this->urlGenerator->generate('login')
+                $this->urlGenerator->generate('user_login')
             );
         }
         return new Response(
