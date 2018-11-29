@@ -3,6 +3,7 @@
 parameters:
     locale: 'en'
     images_directory: '%kernel.project_dir%/public/uploads/images'
+    default_directory: '%kernel.project_dir%/public/uploads/default'
     admin_mail: rshkdl86@gmail.com
 
 services:

@@ -82,6 +82,12 @@ class User implements UserInterface, \Serializable
      */
     private $passwordRequestedAt;
 
+    /**
+     * @var string|null
+     * @ORM\Column(name="avatar", type="string", nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
@@ -280,5 +286,21 @@ class User implements UserInterface, \Serializable
     public function setIsActive($isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = $avatar;
     }
 }

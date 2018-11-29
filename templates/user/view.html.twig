@@ -1,17 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello{% endblock %}
+{% block title %}Hello {{ user.username }}{% endblock %}
 
 {% block body %}
-<div>
-    <h2>Hello {{ user.username }} !</h2>
-    <ul>
-        <li>Id: {{ user.id }}</li>
-        <li>Email: {{ user.email }}</li>
-    </ul>
-</div>
-<div>
-    <h2>for debug purpose</h2>
-    {{ dump(users) }}
-</div>
-{% endblock %}
+<section>
+    <div class="float-right avatar">
+        {% if user.avatar is null %}
+            <img src="{{ asset('uploads/default/default_avatar.png') }}"
+                 alt="default_avatar"
+                 class="img-thumbnail"
+            >
+        {% else %}
+            <img src="{{ asset(user.avatar) }}">
+        {% endif %}
+    </div>
+    <div>
+        <h2>Hello {{ user.username }} !</h2>
+        <ul class="list-unstyled">
+            <li>Your Email: {{ user.email }}</li>
+            <li>Tricks posted: 0</li>
+            <li>Comments posted: {{ user.comments.count }}</li>
+        </ul>
+    </div>
+</section>
+<section class="mb-2">
+    {% set id = user.id %}
+    <h4>Actions</h4>
+    <h5>Change your password</h5>
+    {{ render(controller(
+        'App\\Controller\\UsersController\\ChangePasswordController::renderForm',
+        {id: id}))
+    }}
+    <h5>Change your avatar</h5>
+    {{ render(controller(
+        'App\\Controller\\UsersController\\ChangeAvatarController::renderForm',
+        {id: id}))
+    }}
+</section>
+<section>
+    <h4>Other snowtricks contributors</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Tricks written</th>
+            <th scope="col">Comments posted</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.username }}</td>
+            <td>0</td>
+            <td>{{ user.comments.count }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock body %}

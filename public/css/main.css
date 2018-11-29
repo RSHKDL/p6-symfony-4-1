@@ -1,8 +1,12 @@
 .beta-banner {
-    background-color: #F5871F;
+    background-color: #f53e59;
     color: #f6f6f6;
     text-align: center;
     padding: .75em 0;
+}
+
+.avatar {
+    width: 140px;
 }
 
 #delete-form {
