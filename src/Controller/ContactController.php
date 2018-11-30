@@ -2,40 +2,59 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\Interfaces\ContactControllerInterface;
+use App\Form\ContactType;
+use App\FormHandler\Interfaces\ContactHandlerInterface;
+use App\Responder\Interfaces\TwigRedirectResponderInterface;
+use App\Responder\Interfaces\TwigResponderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ContactController extends AbstractController
+/**
+ * @Route("/contact", name="contact" , methods={"GET", "POST"})
+ *
+ * Class ContactController
+ * @package App\Controller
+ */
+final class ContactController implements ContactControllerInterface
 {
+
     /**
-     * @Route("/contact", name="contact")
-     *
-     * To send mail, replace "setYourEmailHere" by your email address.
-     * To use Gmail, read : https://symfony.com/doc/current/email.html#using-gmail-to-send-emails
-     * You'll need to update the .env file.
+     * @var FormFactoryInterface
      */
-    public function index(Request $request, \Swift_Mailer $mailer)
-    {
-        $form = $this->createForm('App\Form\ContactType');
-        $form->handleRequest($request);
+    private $formFactory;
+    /**
+     * @var ContactHandlerInterface
+     */
+    private $handler;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+    /**
+     * @inheritdoc
+     */
+    public function __construct(
+        ContactHandlerInterface $handler,
+        FormFactoryInterface $formFactory
+    ) {
+        $this->handler = $handler;
+        $this->formFactory = $formFactory;
+    }
 
-            $message = (new \Swift_Message('Mail from Snowtricks'))
-                ->setFrom($data['email'], $data['name'])
-                ->setTo('rshkdl86@gmail.com')
-                ->setSubject($data['subject'])
-                ->setBody($data['message'], 'text/plain');
+    /**
+     * @inheritdoc
+     */
+    public function __invoke(
+        Request $request,
+        TwigResponderInterface $responder,
+        TwigRedirectResponderInterface $redirectResponder
+    ) {
+        $form = $this->formFactory->create(ContactType::class)->handleRequest($request);
 
-            $mailer->send($message);
-
-            $this->addFlash('success', 'Message successfully sent. Thank you !');
-            return $this->redirectToRoute('contact');
+        if ($this->handler->handle($form)) {
+            return $redirectResponder('contact');
         }
-        return $this->render('contact/index.html.twig', [
-            'contact_form' => $form->createView(),
+        return $responder('contact/index.html.twig', [
+            'contact_form' => $form->createView()
         ]);
     }
 }
