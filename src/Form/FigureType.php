@@ -37,8 +37,7 @@ class FigureType extends AbstractType
                 'allow_delete'	=> true,
                 'by_reference' 	=> false,
                 'required'		=> false,
-                'label'         => false,
-                'help'          => 'Must be a valid jpg or png file (500ko max)'
+                'label'         => false
             ))
             ->add('videos', CollectionType::class, array(
                 'entry_type'    => VideoType::class,
@@ -47,8 +46,7 @@ class FigureType extends AbstractType
                 'allow_delete'	=> true,
                 'by_reference' 	=> false,
                 'required'		=> false,
-                'label'         => false,
-                'help'          => 'Must be the raw url of the video (youtube, dailymotion or vimeo)'
+                'label'         => false
             ));
     }
 

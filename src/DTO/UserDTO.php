@@ -2,9 +2,9 @@
 
 namespace App\DTO;
 
-use App\DTO\Interfaces\ContactDTOInterface;
+use App\DTO\Interfaces\UserDTOInterface;
 
-final class ContactDTO implements ContactDTOInterface
+final class UserDTO implements UserDTOInterface
 {
 
     /**

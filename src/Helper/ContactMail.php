@@ -60,7 +60,8 @@ final class ContactMail implements ContactMailInterface
             [$from],
             $this->adminMail,
             $this->environment->render('emails/_email_contact.html.twig', [
-                'message' => $message
+                'message' => $message,
+                'username' => $username
             ])
         );
     }

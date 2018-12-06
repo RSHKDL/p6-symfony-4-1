@@ -2,7 +2,7 @@
 
 namespace App\DTO\Interfaces;
 
-interface ContactDTOInterface
+interface UserDTOInterface
 {
 
     /**

@@ -14,7 +14,8 @@ class VideoType extends AbstractType
     {
         $builder
             ->add('url', TextType::class, array(
-                'label' => false
+                'label' => false,
+                'help' => 'Must be the raw url of the video (youtube, dailymotion or vimeo)'
             ));
     }
 

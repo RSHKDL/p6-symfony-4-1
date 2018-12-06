@@ -2,14 +2,14 @@
 
 namespace App\Builder;
 
-use App\DTO\ContactDTO;
-use App\DTO\Interfaces\ContactDTOInterface;
+use App\DTO\UserDTO;
+use App\DTO\Interfaces\UserDTOInterface;
 use App\Entity\ContactMessage;
 
-class ContactBuilder
+class UserBuilder
 {
 
-    public function create(ContactDTO $contactDTO): ContactMessage
+    public function create(UserDTO $contactDTO): ContactMessage
     {
         $contactMessage = new ContactMessage(
             $contactDTO->name,

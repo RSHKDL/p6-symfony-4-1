@@ -23,6 +23,7 @@ class ImageType extends AbstractType
                 'data_class'        => null,
                 'required'          => false,
                 'image_property'    => 'name',
+                'help'          => 'Must be a valid jpg or png file (500ko max)',
                 'constraints'       => array(
                     new File()
                 )
