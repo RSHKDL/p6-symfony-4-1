@@ -2,7 +2,7 @@
 
 namespace App\Controller\TricksController;
 
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use App\Responder\Interfaces\TwigRedirectResponderInterface;
 use App\Responder\Interfaces\TwigResponderInterface;
 use App\Responder\TwigResponder;
@@ -24,7 +24,7 @@ class DeleteTricksController
 {
 
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
 
@@ -40,12 +40,12 @@ class DeleteTricksController
 
     /**
      * DeleteTricksController constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      * @param DirectoryRemoverInterface $remover
      * @param FlashBagInterface $flashBag
      */
     public function __construct(
-        FigureRepository $repository,
+        TrickRepository $repository,
         DirectoryRemoverInterface $remover,
         FlashBagInterface $flashBag
     ) {

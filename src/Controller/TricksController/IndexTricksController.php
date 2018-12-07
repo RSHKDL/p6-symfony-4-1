@@ -2,7 +2,7 @@
 
 namespace App\Controller\TricksController;
 
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +15,7 @@ use Twig\Environment;
 class IndexTricksController
 {
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
     /**
@@ -25,11 +25,11 @@ class IndexTricksController
 
     /**
      * TricksIndexController constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      * @param Environment $environment
      */
     public function __construct(
-        FigureRepository $repository,
+        TrickRepository $repository,
         Environment $environment
     ) {
         $this->repository = $repository;
@@ -64,7 +64,7 @@ class IndexTricksController
 
         return new Response(
             $this->environment->render('figures/index.html.twig', [
-                'figures' => $items,
+                'tricks' => $items,
                 'nbItems' => $totalItems,
                 'nbPages' => $totalPages,
                 'page' => $page

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="app_tricks")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  * @UniqueEntity(
  *     fields={"name"},
  *     message="This Trick already exist"

@@ -2,7 +2,7 @@
 
 namespace App\Controller\Interfaces;
 
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -15,9 +15,9 @@ interface HomeControllerInterface
 
     /**
      * HomeControllerInterface constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      */
-    public function __construct(FigureRepository $repository, Environment $environment);
+    public function __construct(TrickRepository $repository, Environment $environment);
 
     /**
      * @return Response

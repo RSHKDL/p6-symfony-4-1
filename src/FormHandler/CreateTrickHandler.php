@@ -4,7 +4,7 @@ namespace App\FormHandler;
 
 use App\Builder\Interfaces\CreateTrickBuilderInterface;
 use App\Entity\Trick;
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use App\Service\Interfaces\FileUploaderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -19,7 +19,7 @@ final class CreateTrickHandler
 {
 
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
 
@@ -50,10 +50,10 @@ final class CreateTrickHandler
 
     /**
      * CreateTrickHandler constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      */
     public function __construct(
-        FigureRepository $repository,
+        TrickRepository $repository,
         CreateTrickBuilderInterface $builder,
         FileUploaderInterface $fileUploader,
         ValidatorInterface $validator,

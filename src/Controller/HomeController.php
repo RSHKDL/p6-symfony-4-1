@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\Interfaces\HomeControllerInterface;
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -14,7 +14,7 @@ use Twig_Error_Syntax;
 final class HomeController implements HomeControllerInterface
 {
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
     /**
@@ -24,11 +24,11 @@ final class HomeController implements HomeControllerInterface
 
     /**
      * HomeControllerInterface constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      * @param Environment $environment
      */
     public function __construct(
-        FigureRepository $repository,
+        TrickRepository $repository,
         Environment $environment
     ) {
 

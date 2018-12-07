@@ -11,32 +11,32 @@
     </a>
 </div>
 
-{% if figures %}
-    {% for row in figures | batch(5) %}
+{% if tricks %}
+    {% for row in tricks | batch(5) %}
         <div class="row card-deck mb-3">
-        {% for figure in row %}
+        {% for trick in row %}
             <div class="card">
-                {% if figure.imageFeatured %}
+                {% if trick.imageFeatured %}
                     <img
                             class="image-card-top w-100"
-                            src="{{ figure.imageFeatured.webPath }}"
-                            alt="{{ figure.imageFeatured.alt }}"
+                            src="{{ trick.imageFeatured.webPath }}"
+                            alt="{{ trick.imageFeatured.alt }}"
                     >
                 {% endif %}
                 <div class="card-body">
-                    <a href="{{ path('trick_view', {slug: figure.slug}) }}">{{ figure.name }}</a>
+                    <a href="{{ path('trick_view', {slug: trick.slug}) }}">{{ trick.name }}</a>
                 </div>
                 <div class="card-footer">
                     <p class="trick-tag text-muted mb-0">
                         <span class="fas fa-tag" aria-hidden="true"></span>
-                        {% for category in figure.categories %}
+                        {% for category in trick.categories %}
                             {{ category.name }}
                         {% endfor %}
                     </p>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: figure.id}) }}">
+                        <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: trick.id}) }}">
                             <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
-                        {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
+                        {{ include('figures/delete.html.twig', {trick: trick}, with_context = false) }}
                     {% endif %}
                 </div>
             </div>

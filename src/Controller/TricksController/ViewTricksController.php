@@ -3,7 +3,7 @@
 namespace App\Controller\TricksController;
 
 use App\Entity\Trick;
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -16,7 +16,7 @@ class ViewTricksController
 {
 
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
     /**
@@ -26,11 +26,11 @@ class ViewTricksController
 
     /**
      * TricksViewController constructor.
-     * @param FigureRepository $repository
+     * @param TrickRepository $repository
      * @param Environment $environment
      */
     public function __construct(
-        FigureRepository $repository,
+        TrickRepository $repository,
         Environment $environment
     ) {
         $this->repository = $repository;

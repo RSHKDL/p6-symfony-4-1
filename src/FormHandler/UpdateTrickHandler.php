@@ -4,7 +4,7 @@ namespace App\FormHandler;
 
 use App\Entity\Trick;
 use App\Entity\User;
-use App\Repository\FigureRepository;
+use App\Repository\TrickRepository;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -15,11 +15,11 @@ final class UpdateTrickHandler
 {
 
     /**
-     * @var FigureRepository
+     * @var TrickRepository
      */
     private $repository;
 
-    public function __construct(FigureRepository $repository)
+    public function __construct(TrickRepository $repository)
     {
         $this->repository = $repository;
     }
