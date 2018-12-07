@@ -62,8 +62,21 @@ class FigureRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update()
+    public function update(Figure $figure): void
     {
+        $this->_em->persist($figure);
+        $this->_em->flush();
+    }
+
+    /**
+     * Remove a trick
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function remove(Figure $figure): void
+    {
+        $this->_em->remove($figure);
         $this->_em->flush();
     }
 }

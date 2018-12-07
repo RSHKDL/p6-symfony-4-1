@@ -61,6 +61,7 @@ class User implements UserInterface, \Serializable
     private $isActive;
 
     /**
+     * @var Comment
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Comment",
      *     mappedBy="author",
@@ -69,6 +70,15 @@ class User implements UserInterface, \Serializable
      * )
      */
     private $comments;
+
+    /**
+     * @var Figure
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Figure",
+     *     mappedBy="author"
+     * )
+     */
+    private $figures;
 
     /**
      * @var string
@@ -83,8 +93,12 @@ class User implements UserInterface, \Serializable
     private $passwordRequestedAt;
 
     /**
-     * @var string|null
-     * @ORM\Column(name="avatar", type="string", nullable=true)
+     * @var Image|null
+     * @ORM\OneToOne(
+     *     targetEntity="App\Entity\Image",
+     *     cascade={"persist", "remove"}
+     * )
+     * @ORM\Column(name="avatar", nullable=true)
      */
     private $avatar;
 

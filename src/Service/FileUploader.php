@@ -2,26 +2,54 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Service\Interfaces\FileUploaderInterface;
 
-class FileUploader
+final class FileUploader implements FileUploaderInterface
 {
-    private $targetDirectory;
+    /**
+     * @var string
+     */
+    private $publicDirectory;
 
-    public function __construct($targetDirectory)
+    /**
+     * @var array
+     */
+    private $filesToUpload = [];
+
+    /**
+     * FileUploader constructor.
+     * @inheritdoc
+     */
+    public function __construct(string $publicDirectory)
     {
-        $this->targetDirectory = $targetDirectory;
+        $this->publicDirectory = $publicDirectory;
     }
 
-    public function upload(UploadedFile $file)
+    /**
+     * @inheritdoc
+     */
+    public function addFileToUpload(\SplFileInfo $fileInfo, string $filename, string $path):void
     {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move($this->getTargetDirectory(), $fileName);
-        return $fileName;
+        $this->filesToUpload[] = [
+            'file' => $fileInfo,
+            'filename' => $filename,
+            'path' => $path
+        ];
     }
 
-    public function getTargetDirectory()
+    /**
+     * @inheritdoc
+     */
+    public function uploadFiles():void
     {
-        return $this->targetDirectory;
+        foreach ($this->filesToUpload as $fileToUpload) {
+            $directory = $this->getTargetDirectory().$fileToUpload['path'];
+            $fileToUpload['file']->move($directory, $fileToUpload['filename']);
+        }
+    }
+
+    private function getTargetDirectory()
+    {
+        return $this->publicDirectory;
     }
 }

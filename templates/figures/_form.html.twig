@@ -28,15 +28,6 @@
 
 {{ form_start(form) }}
     {% form_theme form 'form/template.html.twig' %}
-    {#<div class="debug">
-    {% if trick %}
-        {% for video in trick.videos %}
-        <pre>{{ dump(video.id, video.videoId, video.type) }}</pre>
-        {% endfor %}
-    {% else %}
-        trick is null
-    {% endif %}
-    </div>#}
     <div class="form-group">
         {{ form_label(form.name) }}
         {{ form_errors(form.name) }}
@@ -54,6 +45,12 @@
         {{ form_errors(form.categories) }}
         {{ form_widget(form.categories, { 'attr': {'class': 'form-control'} }) }}
         {{ form_help(form.categories) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.imageFeatured) }}
+        {{ form_errors(form.imageFeatured) }}
+        {{ form_widget(form.imageFeatured) }}
+        {{ form_help(form.imageFeatured) }}
     </div>
     <div class="form-group">
         {{ form_label(form.images, 'Add images') }}

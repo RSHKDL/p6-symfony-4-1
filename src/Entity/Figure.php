@@ -23,35 +23,108 @@ class Figure
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=140)
      * @Assert\NotBlank()
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     * @var string
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=190, unique=true)
+     * @var string
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime", name="created_at")
+     * @var \DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at", nullable=true)
+     * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\User",
+     *     inversedBy="figures"
+     * )
+     * @ORM\JoinColumn(nullable=false)
+     * @var User
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="App\Entity\Category",
+     *     cascade={"persist"}
+     * )
+     * @ORM\JoinTable(name="app_figures_categories")
+     * @Assert\Count(
+     *      min = 1,
+     *      max = 3,
+     *      minMessage = "You must choose at least one category",
+     *      maxMessage = "You cannot choose more than {{ limit }} category"
+     * )
+     */
+    private $categories;
+
+    /**
+     * @ORM\OneToOne(
+     *     targetEntity="App\Entity\Image",
+     *     orphanRemoval=true,
+     *     cascade={"persist", "remove"}
+     * )
+     * @ORM\JoinColumn()
+     * @var Image
+     */
+    private $imageFeatured;
+
+    /**
+     * @var \ArrayAccess
+     *
+     * @ORM\ManyToMany(
+     *     targetEntity="App\Entity\Image",
+     *     fetch="EXTRA_LAZY",
+     *     orphanRemoval=true,
+     *     cascade={"persist", "remove"}
+     * )
+     * @ORM\JoinTable(
+     *     name="app_figures_images",
+     *     joinColumns={@ORM\JoinColumn(name="trick_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
+     * )
+     * @Assert\Valid()
+     */
+    private $images;
+
+    /**
+     * @var \ArrayAccess
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Video",
+     *     mappedBy="figure",
+     *     orphanRemoval=true,
+     *     cascade={"persist", "remove"}
+     * )
+     * @Assert\Valid()
+     */
+    private $videos;
 
     /**
      * @var Comment[]|ArrayCollection
@@ -67,47 +140,34 @@ class Figure
      */
     private $comments;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="app_figures_categories")
-     * @Assert\Count(
-     *      min = 1,
-     *      max = 3,
-     *      minMessage = "You must choose at least one category",
-     *      maxMessage = "You cannot choose more than {{ limit }} category"
-     * )
-     */
-    private $categories;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="App\Entity\Image",
-     *     mappedBy="figure",
-     *     orphanRemoval=true,
-     *     cascade={"persist", "remove"}
-     * )
-     * @Assert\Valid()
-     */
-    private $images;
-
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="App\Entity\Video",
-     *     mappedBy="figure",
-     *     orphanRemoval=true,
-     *     cascade={"persist", "remove"}
-     * )
-     * @Assert\Valid()
-     */
-    private $videos;
-
-    public function __construct()
-    {
+    public function __construct(
+        string $name,
+        string $description,
+        User $author,
+        Image $imageFeatured,
+        array $images = [],
+        array $videos = [],
+        ArrayCollection $categories
+    ) {
+        $this->name = $name;
+        $this->slug = $this->slugify($name);
+        $this->description = $description;
         $this->createdAt = new \DateTime();
-        $this->comments = new ArrayCollection();
+        $this->author = $author;
         $this->categories = new ArrayCollection();
-        $this->images = new ArrayCollection();
-        $this->videos = new ArrayCollection();
+        $this->imageFeatured = $imageFeatured;
+        $this->images = new ArrayCollection($images);
+        $this->videos = new ArrayCollection($videos);
+        $this->comments = new ArrayCollection();
+
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+
+        foreach ($videos as $video) {
+            $video->setFigure($this);
+        }
     }
 
 
@@ -121,24 +181,9 @@ class Figure
         return $this->name;
     }
 
-    public function setName($name): self
-    {
-        $this->name = $name;
-        $this->setSlug($this->name);
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     public function getSlug(): ?string
@@ -146,16 +191,13 @@ class Figure
         return $this->slug;
     }
 
-    public function setSlug($slug)
-    {
-        $this->slug = $this->slugify($slug);
-    }
-
     /**
-     * @param $text
-     * @return null|string|string[]
+     * Transform a string to an url friendly slug
+     *
+     * @param string $text
+     * @return string
      */
-    function slugify($text) {
+    function slugify(string $text) {
         // replace non letter or digits by -
         $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
         // trim
@@ -169,25 +211,12 @@ class Figure
         $text = strtolower($text);
         // remove unwanted characters
         $text = preg_replace('#[^-\w]+#', '', $text);
-
-        if (empty($text))
-        {
-            return 'n-a';
-        }
-
         return $text;
     }
 
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getUpdatedAt(): ?\DateTime
@@ -320,4 +349,11 @@ class Figure
         return $this;
     }
 
+    /**
+     * @return Image|null
+     */
+    public function getImageFeatured(): ?Image
+    {
+        return $this->imageFeatured;
+    }
 }

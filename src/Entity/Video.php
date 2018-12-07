@@ -44,6 +44,12 @@ class Video
      */
     private $url;
 
+    public function __construct(
+        string $url
+    ) {
+        $this->url = $url;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -112,7 +118,7 @@ class Video
 
     /**
      * Dailymotion urls look like this : https://www.dailymotion.com/video/x1nzpqv
-     * ???
+     * Use explode to cut the url in half at the "=" sign
      * and keep the second part as id.
      * Then set the videoId and the type.
      *

@@ -2,27 +2,25 @@
 
 namespace App\Controller\TricksController;
 
-use App\Entity\Figure;
-use App\Form\FigureType;
+use App\Form\CreateTrickType;
 use App\FormHandler\CreateTrickHandler;
+use App\Responder\Interfaces\TrickResponderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Twig\Environment;
 
+/**
+ * Class CreateTricksController
+ * @package App\Controller\TricksController
+ *
+ * @Route("/trick/create", name="trick_create", methods={"GET", "POST"})
+ * @Security("has_role('ROLE_USER')")
+ */
 final class CreateTricksController
 {
 
-    /**
-     * @var Environment
-     */
-    private $environment;
     /**
      * @var CreateTrickHandler
      */
@@ -31,40 +29,23 @@ final class CreateTricksController
      * @var FormFactoryInterface
      */
     private $formFactory;
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-    /**
-     * @var FlashBagInterface
-     */
-    private $flashBag;
 
     /**
-     * TricksCreateController constructor.
+     * CreateTricksController constructor.
      * @param CreateTrickHandler $handler
      * @param FormFactoryInterface $formFactory
-     * @param Environment $environment
      */
     public function __construct(
         CreateTrickHandler $handler,
-        FormFactoryInterface $formFactory,
-        Environment $environment,
-        UrlGeneratorInterface $urlGenerator,
-        FlashBagInterface $flashBag
+        FormFactoryInterface $formFactory
     ) {
-        $this->environment = $environment;
         $this->handler = $handler;
         $this->formFactory = $formFactory;
-        $this->urlGenerator = $urlGenerator;
-        $this->flashBag = $flashBag;
     }
 
     /**
-     * @Route("/trick/create", name="trick_create", methods={"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
-     *
      * @param Request $request
+     * @param TrickResponderInterface $responder
      *
      * @return Response
      * @throws \Doctrine\ORM\ORMException
@@ -73,26 +54,13 @@ final class CreateTricksController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function create(Request $request): Response
+    public function __invoke(Request $request, TrickResponderInterface $responder): Response
     {
-        $figure = new Figure();
-        $form = $this->formFactory->create(FigureType::class, $figure)->handleRequest($request);
+        $form = $this->formFactory->create(CreateTrickType::class)->handleRequest($request);
 
-        if ($this->handler->handle($form, $figure)) {
-
-            $this->flashBag->add('success', 'Trick created successfully');
-
-            return new RedirectResponse(
-                $this->urlGenerator->generate('trick_view', [
-                    'slug' => $figure->getSlug()
-                ])
-            );
+        if ($this->handler->handle($form)) {
+            return $responder('create', true);
         }
-        return new Response(
-            $this->environment->render('figures/add.html.twig', [
-                'form' => $form->createView(),
-                'trick' => null
-            ])
-        );
+        return $responder('create', false, $form);
     }
 }

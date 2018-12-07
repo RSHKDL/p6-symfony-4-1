@@ -10,7 +10,7 @@ use Twig\Environment;
  * Class TwigResponder
  * @package App\Responder
  */
-class TwigResponder implements TwigResponderInterface
+final class TwigResponder implements TwigResponderInterface
 {
 
     /**

@@ -1,0 +1,34 @@
+App\DTO\TrickDTO:
+    properties:
+        name:
+            - NotBlank:
+                message: A trick name cannot be ommited
+                groups:
+                    - trickDTO
+            - Length:
+                min: 3
+                minMessage: The trick name must have at least 3 characters
+                groups:
+        description:
+            - NotBlank:
+                message: A trick description cannot be ommited
+                groups:
+                    - trickDTO
+        imageFeatured:
+            - NotBlank:
+                message: You must at least provide one image
+                groups:
+                    - trickDTO
+            - Valid:
+                groups:
+                    - trickDTO
+        images:
+            - Valid:
+                traverse: true
+                groups:
+                    - trickDTO
+        videos:
+            - Valid:
+                traverse: true
+                groups:
+                    - trickDTO

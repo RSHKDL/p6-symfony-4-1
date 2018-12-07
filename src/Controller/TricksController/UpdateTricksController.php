@@ -3,7 +3,7 @@
 namespace App\Controller\TricksController;
 
 use App\Entity\Figure;
-use App\Form\FigureType;
+use App\Form\CreateTrickType;
 use App\FormHandler\UpdateTrickHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,7 +56,7 @@ class UpdateTricksController extends AbstractController
      */
     public function update(Request $request, Figure $trick)
     {
-        $form = $this->formFactory->create(FigureType::class, $trick)->handleRequest($request);
+        $form = $this->formFactory->create(CreateTrickType::class, $trick)->handleRequest($request);
 
         if ($this->handler->handle($form, $trick)) {
 

@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Table(name="app_images")
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class Image
 {
@@ -18,26 +17,28 @@ class Image
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(max="255")
+     * @var string
      */
     private $name;
 
     /**
-     * @var boolean $isFeatured
-     * @ORM\Column(type="boolean", name="is_featured")
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
-    private $isFeatured = false;
+    private $alt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
-    private $figure;
+    private $path;
 
     /**
      * @var UploadedFile|null $file
@@ -53,6 +54,19 @@ class Image
 
     private $oldFile;
 
+    public function __construct(
+        string $name,
+        string $path,
+        string $alt
+    ) {
+        $this->name = $name;
+        $this->path = $path;
+        $this->alt = $alt;
+    }
+
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
@@ -61,50 +75,25 @@ class Image
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @return string
      */
-    public function setName($name): void
+    public function getAlt(): string
     {
-        $this->name = $name;
+        return $this->alt;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isFeatured(): bool
+    public function getPath(): string
     {
-        return $this->isFeatured;
-    }
-
-    /**
-     * @param bool $isFeatured
-     */
-    public function setIsFeatured(bool $isFeatured): void
-    {
-        $this->isFeatured = $isFeatured;
-    }
-
-    /**
-     *
-     */
-    public function getFigure(): ?Figure
-    {
-        return $this->figure;
-    }
-
-    /*
-     *
-     */
-    public function setFigure(?Figure $figure): self
-    {
-        $this->figure = $figure;
-        return $this;
+        return $this->path;
     }
 
     /**
@@ -138,6 +127,6 @@ class Image
 
     public function getWebPath()
     {
-        return "uploads/images/".$this->name;
+        return $this->path.'/'.$this->name;
     }
 }
