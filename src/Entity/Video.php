@@ -30,10 +30,10 @@ class Video
     private $videoId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $figure;
+    private $trick;
 
     /**
      * @Assert\Regex(
@@ -77,14 +77,14 @@ class Video
         return $this;
     }
 
-    public function getFigure(): ?Figure
+    public function getTrick(): ?Trick
     {
-        return $this->figure;
+        return $this->trick;
     }
 
-    public function setFigure(?Figure $figure): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->figure = $figure;
+        $this->trick = $trick;
         return $this;
     }
 

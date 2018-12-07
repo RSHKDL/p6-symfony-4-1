@@ -41,12 +41,12 @@ class Comment
     private $updatedAt;
 
     /**
-     * @var Figure
+     * @var Trick
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Figure", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $figure;
+    private $trick;
 
     /**
      * @var User
@@ -102,14 +102,14 @@ class Comment
         return $this;
     }
 
-    public function getFigure(): Figure
+    public function getFigure(): Trick
     {
-        return $this->figure;
+        return $this->trick;
     }
 
-    public function setFigure(Figure $figure): void
+    public function setFigure(Trick $trick): void
     {
-        $this->figure = $figure;
+        $this->figure = $trick;
     }
 
     public function getAuthor(): User

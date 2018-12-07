@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Figure;
+use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Figure|null find($id, $lockMode = null, $lockVersion = null)
- * @method Figure|null findOneBy(array $criteria, array $orderBy = null)
- * @method Figure[]    findAll()
- * @method Figure[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Trick|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Trick|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Trick[]    findAll()
+ * @method Trick[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class FigureRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Figure::class);
+        parent::__construct($registry, Trick::class);
     }
 
     public function getPaginatedTricks($page, $nbPerPage)
@@ -46,11 +46,11 @@ class FigureRepository extends ServiceEntityRepository
     /**
      * Save the trick into the database
      *
-     * @param Figure $figure
+     * @param Trick $figure
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(Figure $figure)
+    public function save(Trick $figure)
     {
         $this->_em->persist($figure);
         $this->_em->flush();
@@ -62,7 +62,7 @@ class FigureRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update(Figure $figure): void
+    public function update(Trick $figure): void
     {
         $this->_em->persist($figure);
         $this->_em->flush();
@@ -74,7 +74,7 @@ class FigureRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function remove(Figure $figure): void
+    public function remove(Trick $figure): void
     {
         $this->_em->remove($figure);
         $this->_em->flush();

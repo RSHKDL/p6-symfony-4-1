@@ -72,13 +72,13 @@ class User implements UserInterface, \Serializable
     private $comments;
 
     /**
-     * @var Figure
+     * @var Trick
      * @ORM\OneToMany(
-     *     targetEntity="App\Entity\Figure",
+     *     targetEntity="App\Entity\Trick",
      *     mappedBy="author"
      * )
      */
-    private $figures;
+    private $tricks;
 
     /**
      * @var string

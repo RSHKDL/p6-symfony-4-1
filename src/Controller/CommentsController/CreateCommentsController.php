@@ -3,7 +3,7 @@
 namespace App\Controller\CommentsController;
 
 use App\Entity\Comment;
-use App\Entity\Figure;
+use App\Entity\Trick;
 use App\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -21,14 +21,14 @@ class CreateCommentsController extends AbstractController
      * @ParamConverter("figure", options={"mapping": {"figureSlug": "slug"}})
      *
      * @param Request $request
-     * @param Figure $figure
+     * @param Trick $figure
      * @return Response
      * 
      * The ParamConverter mapping is required because the route parameter
      * (figureSlug) doesn't match any of the Doctrine entity properties (slug).
      * See https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html#doctrine-converter
      */
-    public function createComments(Request $request, Figure $figure): Response
+    public function createComments(Request $request, Trick $figure): Response
     {
         $comment = new Comment();
         $comment->setAuthor($this->getUser());
@@ -59,7 +59,7 @@ class CreateCommentsController extends AbstractController
      * The "id" of the Trick is passed in and then turned into a Trick object
      * automatically by the ParamConverter.
      */
-    public function renderCommentsForm(Figure $figure): Response
+    public function renderCommentsForm(Trick $figure): Response
     {
         $form = $this->createForm(CommentType::class);
         return $this->render('figures/_comment_form.html.twig', [

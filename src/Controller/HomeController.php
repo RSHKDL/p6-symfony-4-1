@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Controller\Interfaces\HomeControllerInterface;
-use App\Entity\Figure;
 use App\Repository\FigureRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Twig\Environment;
 use Twig_Error_Loader;
 use Twig_Error_Runtime;

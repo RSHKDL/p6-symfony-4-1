@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="app_figures")
+ * @ORM\Table(name="app_tricks")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\FigureRepository")
  * @UniqueEntity(
@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="This Trick already exist"
  * )
  */
-class Figure
+class Trick
 {
     /**
      * @ORM\Id()
@@ -62,7 +62,7 @@ class Figure
     /**
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\User",
-     *     inversedBy="figures"
+     *     inversedBy="tricks"
      * )
      * @ORM\JoinColumn(nullable=false)
      * @var User
@@ -74,7 +74,7 @@ class Figure
      *     targetEntity="App\Entity\Category",
      *     cascade={"persist"}
      * )
-     * @ORM\JoinTable(name="app_figures_categories")
+     * @ORM\JoinTable(name="app_tricks_categories")
      * @Assert\Count(
      *      min = 1,
      *      max = 3,
@@ -105,7 +105,7 @@ class Figure
      *     cascade={"persist", "remove"}
      * )
      * @ORM\JoinTable(
-     *     name="app_figures_images",
+     *     name="app_tricks_images",
      *     joinColumns={@ORM\JoinColumn(name="trick_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
      * )
@@ -118,7 +118,7 @@ class Figure
      *
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Video",
-     *     mappedBy="figure",
+     *     mappedBy="trick",
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
@@ -131,7 +131,7 @@ class Figure
      *
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Comment",
-     *      mappedBy="figure",
+     *      mappedBy="trick",
      *      fetch="EXTRA_LAZY",
      *      orphanRemoval=true,
      *      cascade={"persist"}
@@ -295,29 +295,6 @@ class Figure
         return $this->images;
     }
 
-    public function addImage(Image $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setFigure($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getFigure() === $this) {
-                $image->setFigure(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Video[]
      */
@@ -330,7 +307,7 @@ class Figure
     {
         if (!$this->videos->contains($video)) {
             $this->videos[] = $video;
-            $video->setFigure($this);
+            $video->setTrick($this);
         }
 
         return $this;
@@ -341,8 +318,8 @@ class Figure
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getFigure() === $this) {
-                $video->setFigure(null);
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
             }
         }
 

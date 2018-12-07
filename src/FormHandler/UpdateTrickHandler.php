@@ -2,7 +2,7 @@
 
 namespace App\FormHandler;
 
-use App\Entity\Figure;
+use App\Entity\Trick;
 use App\Entity\User;
 use App\Repository\FigureRepository;
 use Symfony\Component\Form\FormInterface;
@@ -26,14 +26,14 @@ final class UpdateTrickHandler
 
     /**
      * @param FormInterface $form
-     * @param Figure $figure
+     * @param Trick $trick
      * @param User|null $user
      *
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form, Figure $figure, User $user = null)
+    public function handle(FormInterface $form, Trick $trick, User $user = null)
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repository->update();

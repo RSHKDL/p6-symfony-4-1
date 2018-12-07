@@ -2,7 +2,7 @@
 
 namespace App\Controller\CommentsController;
 
-use App\Entity\Figure;
+use App\Entity\Trick;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +27,7 @@ final class LoadMoreCommentsController extends AbstractController
     {
         if($request->isXmlHttpRequest()) {
             $offset = $request->request->get('offset');
-            $figure = $this->getDoctrine()->getRepository(Figure::class)->find($id);
+            $figure = $this->getDoctrine()->getRepository(Trick::class)->find($id);
             /** @var Collection $comments */
             $comments = $figure->getComments();
 

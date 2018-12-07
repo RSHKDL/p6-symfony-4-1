@@ -3,7 +3,7 @@
 namespace App\FormHandler;
 
 use App\Builder\Interfaces\CreateTrickBuilderInterface;
-use App\Entity\Figure;
+use App\Entity\Trick;
 use App\Repository\FigureRepository;
 use App\Service\Interfaces\FileUploaderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -71,7 +71,7 @@ final class CreateTrickHandler
 
     /**
      * @param FormInterface $form
-     * @param Figure $trick
+     * @param Trick $trick
      *
      * @return bool
      * @throws \Doctrine\ORM\ORMException

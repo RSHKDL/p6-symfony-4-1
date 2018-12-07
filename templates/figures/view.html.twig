@@ -9,23 +9,23 @@
             </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item mx-1">
-                    <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: figure.id}) }}">
+                    <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: trick.id}) }}">
                         <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
                 </li>
                 <li class="nav-item mx-1">
-                    {{ include('figures/delete.html.twig', {figure: figure}, with_context = false) }}
+                    {{ include('figures/delete.html.twig', {trick: trick}, with_context = false) }}
                 </li>
             {% endif %}
         </ul>
-        {% if figure.imageFeatured %}
+        {% if trick.imageFeatured %}
             <img
-                    src="{{ figure.imageFeatured.webPath }}"
-                    alt="{{ figure.name }}"
+                    src="{{ trick.imageFeatured.webPath }}"
+                    alt="{{ trick.name }}"
             >
         {% endif %}
-        <h2>{{ figure.name }}</h2>
-        {% if figure.images %}
-            {% for row in figure.images | batch(5) %}
+        <h2>{{ trick.name }}</h2>
+        {% if trick.images %}
+            {% for row in trick.images | batch(5) %}
             <div class="row card-deck mb-3">
                 {% for image in row %}
                     <div class="card">
@@ -42,8 +42,8 @@
                 <p class="mb-3">No images yet</p>
             {% endfor %}
         {% endif %}
-        {% if figure.videos %}
-            {% for row in figure.videos | batch(3) %}
+        {% if trick.videos %}
+            {% for row in trick.videos | batch(3) %}
                 <div class="row card-deck mb-3">
                     {% for video in row %}
                         <div class="card">
@@ -55,9 +55,9 @@
                 <p class="mb-3">No videos yet</p>
             {% endfor %}
         {% endif %}
-        <p>{{ figure.description }}</p>
+        <p>{{ trick.description }}</p>
         <ul class="list-inline list-unstyled">
-            {% for category in figure.categories %}
+            {% for category in trick.categories %}
                 <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
                     <span class="fas fa-tag" aria-hidden="true"></span>
                      {{ category.name }}
@@ -65,9 +65,9 @@
             {% endfor %}
             <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
                 <span class="fa fa-calendar-alt" aria-hidden="true"></span>
-                 Published the {{ figure.createdAt|date("d/m/Y H:i") }}
-                {%- if figure.updatedAt -%}
-                    , edited the {{ figure.updatedAt|date("d/m/Y H:i") }}
+                 Published the {{ trick.createdAt|date("d/m/Y H:i") }}
+                {%- if trick.updatedAt -%}
+                    , edited the {{ trick.updatedAt|date("d/m/Y H:i") }}
                 {%- endif -%}
             </li>
         </ul>
@@ -75,7 +75,7 @@
     <section class="mb-3">
         <div class="mb-4">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% set id = figure.id %}
+                {% set id = trick.id %}
                 {{ render(controller(
                     'App\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
                     {id: id}))
@@ -101,11 +101,11 @@
             <p class="mb-3">No comments yet</p>
         {% endfor %}
         </div>
-        {% if figure.comments is not empty %}
+        {% if trick.comments is not empty %}
         <button
                 id="button"
                 class="btn btn-primary js-load-more"
-                data-url="{{ path('comments_load_more', {id: figure.id}) }}"
+                data-url="{{ path('comments_load_more', {id: trick.id}) }}"
                 data-offset="3"
                 data-total="{{ total_comments }}">
             Load more comments

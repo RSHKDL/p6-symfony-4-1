@@ -2,7 +2,7 @@
 
 namespace App\Controller\TricksController;
 
-use App\Entity\Figure;
+use App\Entity\Trick;
 use App\Form\CreateTrickType;
 use App\FormHandler\UpdateTrickHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -45,7 +45,7 @@ class UpdateTricksController extends AbstractController
      * @Security("has_role('ROLE_USER')")
      *
      * @param Request $request
-     * @param Figure $trick
+     * @param Trick $trick
      *
      * @return RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
@@ -54,7 +54,7 @@ class UpdateTricksController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function update(Request $request, Figure $trick)
+    public function update(Request $request, Trick $trick)
     {
         $form = $this->formFactory->create(CreateTrickType::class, $trick)->handleRequest($request);
 

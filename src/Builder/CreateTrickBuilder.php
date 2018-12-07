@@ -6,7 +6,7 @@ use App\Builder\Interfaces\CreateTrickBuilderInterface;
 use App\Builder\Interfaces\ImageBuilderInterface;
 use App\Builder\Interfaces\VideoBuilderInterface;
 use App\DTO\Interfaces\TrickDTOInterface;
-use App\Entity\Figure;
+use App\Entity\Trick;
 use App\Entity\User;
 use App\Service\Interfaces\ImageProcessorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -57,7 +57,7 @@ final class CreateTrickBuilder implements CreateTrickBuilderInterface
     {
         $this->imageProcessor->initialize('trick', $trickDTO->name);
 
-        return new Figure(
+        return new Trick(
             $trickDTO->name,
             $trickDTO->description,
             $this->user,

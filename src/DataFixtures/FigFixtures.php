@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Category;
-use App\Entity\Figure;
+use App\Entity\Trick;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
@@ -22,7 +22,7 @@ class FigFixtures extends Fixture
         $faker = Faker\Factory::create('en_US');
 
         for ($i = 0; $i < 20; $i++) {
-            $figure = new Figure();
+            $figure = new Trick();
             $figure->setName($faker->catchPhrase());
             $figure->setDescription($faker->realText(360));
             $figure->addCategory($this->getReference('category'));
