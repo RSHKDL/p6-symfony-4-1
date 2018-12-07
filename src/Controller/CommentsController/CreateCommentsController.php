@@ -16,23 +16,23 @@ class CreateCommentsController extends AbstractController
 {
 
     /**
-     * @Route("/comment/{figureSlug}/new", methods={"POST"}, name="comments_create")
+     * @Route("/comment/{trickSlug}/new", methods={"POST"}, name="comments_create")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @ParamConverter("figure", options={"mapping": {"figureSlug": "slug"}})
+     * @ParamConverter("trick", options={"mapping": {"trickSlug": "slug"}})
      *
      * @param Request $request
-     * @param Trick $figure
+     * @param Trick $trick
      * @return Response
      * 
      * The ParamConverter mapping is required because the route parameter
-     * (figureSlug) doesn't match any of the Doctrine entity properties (slug).
+     * (trickSlug) doesn't match any of the Doctrine entity properties (slug).
      * See https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html#doctrine-converter
      */
-    public function createComments(Request $request, Trick $figure): Response
+    public function createComments(Request $request, Trick $trick): Response
     {
         $comment = new Comment();
         $comment->setAuthor($this->getUser());
-        $figure->addComment($comment);
+        $trick->addComment($comment);
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -43,10 +43,10 @@ class CreateCommentsController extends AbstractController
 
             $this->addFlash('success', 'Comment added successfully');
 
-            return $this->redirectToRoute('trick_view', ['slug' => $figure->getSlug()]);
+            return $this->redirectToRoute('trick_view', ['slug' => $trick->getSlug()]);
         }
         return $this->render('figures/_comment_form_errors.html.twig', [
-            'figure' => $figure,
+            'trick' => $trick,
             'form' => $form->createView(),
         ]);
     }
@@ -59,11 +59,11 @@ class CreateCommentsController extends AbstractController
      * The "id" of the Trick is passed in and then turned into a Trick object
      * automatically by the ParamConverter.
      */
-    public function renderCommentsForm(Trick $figure): Response
+    public function renderCommentsForm(Trick $trick): Response
     {
         $form = $this->createForm(CommentType::class);
         return $this->render('figures/_comment_form.html.twig', [
-            'figure' => $figure,
+            'trick' => $trick,
             'form' => $form->createView()
         ]);
     }

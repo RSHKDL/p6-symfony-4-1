@@ -249,7 +249,7 @@ class Trick
 
     public function addComment(?Comment $comment): void
     {
-        $comment->setFigure($this);
+        $comment->setTrick($this);
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
         }
@@ -257,7 +257,7 @@ class Trick
 
     public function removeComment(Comment $comment): void
     {
-        $comment->setFigure(null);
+        $comment->setTrick(null);
         $this->comments->removeElement($comment);
     }
 

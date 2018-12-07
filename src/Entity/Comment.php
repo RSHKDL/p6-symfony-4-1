@@ -102,14 +102,14 @@ class Comment
         return $this;
     }
 
-    public function getFigure(): Trick
+    public function getTrick(): Trick
     {
         return $this->trick;
     }
 
-    public function setFigure(Trick $trick): void
+    public function setTrick(Trick $trick): void
     {
-        $this->figure = $trick;
+        $this->trick = $trick;
     }
 
     public function getAuthor(): User
