@@ -166,7 +166,7 @@ class Trick
         }
 
         foreach ($videos as $video) {
-            $video->setFigure($this);
+            $video->setTrick($this);
         }
     }
 

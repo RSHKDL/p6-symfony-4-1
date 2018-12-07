@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f36e164a-8317-455d-8d66-0f0afca81391" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php" afterPath="$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/IndexTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/IndexTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/UpdateTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/UpdateTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/ViewTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/ViewTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Responder/TrickResponder.php" afterPath="$PROJECT_DIR$/src/Responder/TrickResponder.php" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/_comment_form.html.twig" afterPath="$PROJECT_DIR$/templates/trick/_comment_form.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/_comment_form_errors.html.twig" afterPath="$PROJECT_DIR$/templates/trick/_comment_form_errors.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/_form.html.twig" afterPath="$PROJECT_DIR$/templates/trick/_form.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/create.html.twig" afterPath="$PROJECT_DIR$/templates/trick/create.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/delete.html.twig" afterPath="$PROJECT_DIR$/templates/trick/delete.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/edit.html.twig" afterPath="$PROJECT_DIR$/templates/trick/edit.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/index.html.twig" afterPath="$PROJECT_DIR$/templates/trick/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/figures/view.html.twig" afterPath="$PROJECT_DIR$/templates/trick/view.html.twig" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Trick.php" afterPath="$PROJECT_DIR$/src/Entity/Trick.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,7 +33,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CreateCommentsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreateCommentsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="222">
@@ -55,6 +42,26 @@
                 <element signature="e#1816#1854#0#PHP" expanded="true" />
                 <element signature="e#2428#2459#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Video.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Video.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="81" column="28" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Trick.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Trick.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="173" column="27" lean-forward="false" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,7 +128,6 @@
         <option value="$PROJECT_DIR$/templates/figures/delete.html.twig" />
         <option value="$PROJECT_DIR$/templates/figures/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Comment.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Trick.php" />
         <option value="$PROJECT_DIR$/templates/figures/_comment_form.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/templates/user/view.html.twig" />
@@ -131,6 +137,7 @@
         <option value="$PROJECT_DIR$/src/Controller/TricksController/UpdateTricksController.php" />
         <option value="$PROJECT_DIR$/src/Controller/TricksController/ViewTricksController.php" />
         <option value="$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Trick.php" />
       </list>
     </option>
   </component>
@@ -306,6 +313,12 @@
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -428,12 +441,12 @@
       <workItem from="1543577350630" duration="14691000" />
       <workItem from="1543931579840" duration="21000" />
       <workItem from="1544083565357" duration="29187000" />
-      <workItem from="1544170722276" duration="22075000" />
+      <workItem from="1544170722276" duration="22571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="577403000" />
+    <option name="totallyTimeSpent" value="577899000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -445,7 +458,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17398244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24581006" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.050808314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6993464" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -646,14 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Video.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1206">
-          <caret line="81" column="28" lean-forward="true" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Image.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1494">
@@ -775,14 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1251">
           <caret line="107" column="5" lean-forward="false" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Trick.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3636">
-          <caret line="253" column="43" lean-forward="false" selection-start-line="253" selection-start-column="43" selection-end-line="253" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -963,6 +960,22 @@
             <element signature="e#1816#1854#0#PHP" expanded="true" />
             <element signature="e#2428#2459#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Video.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="81" column="28" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Trick.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="173" column="27" lean-forward="false" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
