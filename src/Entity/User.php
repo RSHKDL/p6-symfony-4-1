@@ -107,6 +107,7 @@ class User implements UserInterface, \Serializable
         $this->roles = array('ROLE_USER');
         $this->isActive = false;
         $this->comments = new ArrayCollection();
+        $this->tricks = new ArrayCollection();
     }
 
     public function getId()
@@ -316,5 +317,13 @@ class User implements UserInterface, \Serializable
     public function setAvatar(string $avatar): void
     {
         $this->avatar = $avatar;
+    }
+
+    /**
+     * @return Collection|Trick[]
+     */
+    public function getTricks(): Collection
+    {
+        return $this->tricks;
     }
 }

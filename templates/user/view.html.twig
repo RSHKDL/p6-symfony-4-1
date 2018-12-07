@@ -6,7 +6,7 @@
 <section>
     <div class="float-right avatar">
         {% if user.avatar is null %}
-            <img src="{{ asset('uploads/default/default_avatar.png') }}"
+            <img src="{{ asset('uploads/avatars/default_avatar.png') }}"
                  alt="default_avatar"
                  class="img-thumbnail"
             >
@@ -18,7 +18,7 @@
         <h2>Hello {{ user.username }} !</h2>
         <ul class="list-unstyled">
             <li>Your Email: {{ user.email }}</li>
-            <li>Tricks posted: 0</li>
+            <li>Tricks posted: {{ user.tricks.count }}</li>
             <li>Comments posted: {{ user.comments.count }}</li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
         <tr>
             <th scope="row">{{ user.id }}</th>
             <td>{{ user.username }}</td>
-            <td>0</td>
+            <td>{{ user.tricks.count }}</td>
             <td>{{ user.comments.count }}</td>
         </tr>
         {% endfor %}
