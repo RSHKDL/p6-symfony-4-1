@@ -45,7 +45,7 @@ class CreateCommentsController extends AbstractController
 
             return $this->redirectToRoute('trick_view', ['slug' => $trick->getSlug()]);
         }
-        return $this->render('figures/_comment_form_errors.html.twig', [
+        return $this->render('trick/_comment_form_errors.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
         ]);
@@ -62,7 +62,7 @@ class CreateCommentsController extends AbstractController
     public function renderCommentsForm(Trick $trick): Response
     {
         $form = $this->createForm(CommentType::class);
-        return $this->render('figures/_comment_form.html.twig', [
+        return $this->render('trick/_comment_form.html.twig', [
             'trick' => $trick,
             'form' => $form->createView()
         ]);

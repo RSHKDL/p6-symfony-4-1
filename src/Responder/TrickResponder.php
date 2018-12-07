@@ -49,7 +49,7 @@ final class TrickResponder implements TrickResponderInterface
             );
         } else {
             $response = new Response(
-                $this->twig->render('figures/'.$view.'.html.twig', [
+                $this->twig->render('trick/'.$view.'.html.twig', [
                     'form' => $form->createView(),
                     'slug' => $slug
                 ]));

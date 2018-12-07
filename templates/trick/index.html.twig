@@ -36,7 +36,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: trick.id}) }}">
                             <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
-                        {{ include('figures/delete.html.twig', {trick: trick}, with_context = false) }}
+                        {{ include('trick/delete.html.twig', {trick: trick}, with_context = false) }}
                     {% endif %}
                 </div>
             </div>

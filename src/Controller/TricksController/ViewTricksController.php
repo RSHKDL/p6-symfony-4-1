@@ -55,7 +55,7 @@ class ViewTricksController
         $totalComments = $trick->getComments()->count();
 
         return new Response(
-            $this->environment->render('figures/view.html.twig', [
+            $this->environment->render('trick/view.html.twig', [
                 'trick' => $trick,
                 'comments' => $comments,
                 'total_comments' => $totalComments

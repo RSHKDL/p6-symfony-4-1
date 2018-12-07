@@ -63,7 +63,7 @@ class IndexTricksController
         }
 
         return new Response(
-            $this->environment->render('figures/index.html.twig', [
+            $this->environment->render('trick/index.html.twig', [
                 'tricks' => $items,
                 'nbItems' => $totalItems,
                 'nbPages' => $totalPages,

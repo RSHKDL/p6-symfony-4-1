@@ -67,7 +67,7 @@ class UpdateTricksController extends AbstractController
             ]);
         }
         return new Response(
-            $this->environment->render('figures/edit.html.twig', [
+            $this->environment->render('trick/edit.html.twig', [
                 'form' => $form->createView(),
                 'trick' => $trick
             ])
