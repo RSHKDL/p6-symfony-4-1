@@ -8,7 +8,10 @@ App\DTO\TrickDTO:
             - Length:
                 min: 3
                 minMessage: The trick name must have at least 3 characters
+                max: 140
+                maxMessage: The trick name can't have more than 140 characters
                 groups:
+                    - trickDTO
         description:
             - NotBlank:
                 message: A trick description cannot be ommited

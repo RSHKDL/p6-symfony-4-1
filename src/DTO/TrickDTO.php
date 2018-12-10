@@ -9,17 +9,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 final class TrickDTO implements TrickDTOInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $description;
 
     /**
-     * @var ImageDTOInterface
+     * @var ImageDTOInterface|null
      */
     public $imageFeatured;
 
@@ -34,26 +34,26 @@ final class TrickDTO implements TrickDTOInterface
     public $videos;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|null
      */
     public $categories;
 
     /**
      * TrickDTO constructor.
-     * @param string $name
-     * @param string $description
-     * @param ImageDTOInterface $imageFeatured
+     * @param string|null $name
+     * @param string|null $description
+     * @param ImageDTOInterface|null $imageFeatured
      * @param array|null $images
      * @param array|null $videos
-     * @param ArrayCollection $categories
+     * @param ArrayCollection|null $categories
      */
     public function __construct(
-        string $name,
-        string $description,
-        ImageDTOInterface $imageFeatured,
-        array $images = null,
-        array $videos = null,
-        ArrayCollection $categories
+        ?string $name,
+        ?string $description,
+        ?ImageDTOInterface $imageFeatured,
+        ?array $images = null,
+        ?array $videos = null,
+        ?ArrayCollection $categories
     ) {
         $this->name = $name;
         $this->description = $description;

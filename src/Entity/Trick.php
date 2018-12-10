@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -240,9 +239,9 @@ class Trick
     }
 
     /**
-     * @return Collection
+     * @return \ArrayAccess
      */
-    public function getComments(): Collection
+    public function getComments(): \ArrayAccess
     {
         return $this->comments;
     }
@@ -262,9 +261,9 @@ class Trick
     }
 
     /**
-     * @return Collection|Category[]
+     * @return \ArrayAccess|Category[]
      */
-    public function getCategories(): Collection
+    public function getCategories(): \ArrayAccess
     {
         return $this->categories;
     }
@@ -288,17 +287,17 @@ class Trick
     }
 
     /**
-     * @return Collection|Image[]
+     * @return \ArrayAccess|Image[]
      */
-    public function getImages(): Collection
+    public function getImages(): \ArrayAccess
     {
         return $this->images;
     }
 
     /**
-     * @return Collection|Video[]
+     * @return \ArrayAccess|Video[]
      */
-    public function getVideos(): Collection
+    public function getVideos(): \ArrayAccess
     {
         return $this->videos;
     }

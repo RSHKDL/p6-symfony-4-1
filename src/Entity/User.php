@@ -320,9 +320,9 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return Collection|Trick[]
+     * @return \ArrayAccess
      */
-    public function getTricks(): Collection
+    public function getTricks(): \ArrayAccess
     {
         return $this->tricks;
     }

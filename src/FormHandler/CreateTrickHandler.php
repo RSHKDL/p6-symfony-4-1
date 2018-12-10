@@ -9,7 +9,6 @@ use App\Service\Interfaces\FileUploaderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class CreateTrickHandler
@@ -34,11 +33,6 @@ final class CreateTrickHandler
     private $fileUploader;
 
     /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
      * @var FlashBagInterface
      */
     private $flashBag;
@@ -56,7 +50,6 @@ final class CreateTrickHandler
         TrickRepository $repository,
         CreateTrickBuilderInterface $builder,
         FileUploaderInterface $fileUploader,
-        ValidatorInterface $validator,
         FlashBagInterface $flashBag,
         SessionInterface $session
 
@@ -64,7 +57,6 @@ final class CreateTrickHandler
         $this->repository = $repository;
         $this->builder = $builder;
         $this->fileUploader = $fileUploader;
-        $this->validator = $validator;
         $this->flashBag = $flashBag;
         $this->session = $session;
     }
@@ -81,7 +73,6 @@ final class CreateTrickHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $this->builder->build($form->getData());
-            $errors = $this->validator->validate($trick, null, ['trick']);
             $this->repository->save($trick);
             $this->fileUploader->uploadFiles();
             $this->session->set('slug', $trick->getSlug());
