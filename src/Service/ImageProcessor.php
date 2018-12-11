@@ -84,10 +84,14 @@ final class ImageProcessor implements ImageProcessorInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getUpdateImageInfo(): array
     {
         return [
-
+            'path'  => $this->path,
+            'alt'   => $this->alt
         ];
     }
 

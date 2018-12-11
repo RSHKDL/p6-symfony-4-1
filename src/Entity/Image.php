@@ -96,6 +96,11 @@ class Image
         return $this->path;
     }
 
+    public function setPath(string $path)
+    {
+        $this->path = $path;
+    }
+
     /**
      * @return File
      */

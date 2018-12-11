@@ -2,75 +2,89 @@
 
 namespace App\Controller\TricksController;
 
-use App\Entity\Trick;
+use App\Factory\Interfaces\TrickDTOFactoryInterface;
 use App\Form\CreateTrickType;
+use App\Form\UpdateTrickType;
 use App\FormHandler\UpdateTrickHandler;
+use App\Repository\TrickRepository;
+use App\Responder\Interfaces\TrickResponderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
 
-class UpdateTricksController extends AbstractController
+/**
+ * @Route("/trick/edit/{id}", name="trick_edit", requirements={"id"="\d+"}, methods={"GET", "POST"})
+ * @Security("has_role('ROLE_USER')")
+ *
+ * Class UpdateTricksController
+ * @package App\Controller\TricksController
+ */
+class UpdateTricksController
 {
 
+    /**
+     * @var TrickRepository
+     */
+    private $repository;
     /**
      * @var UpdateTrickHandler
      */
     private $handler;
     /**
-     * @var Environment
-     */
-    private $environment;
-    /**
      * @var FormFactoryInterface
      */
     private $formFactory;
+    /**
+     * @var TrickDTOFactoryInterface
+     */
+    private $trickDTOFactory;
+    /**
+     * @var SessionInterface
+     */
+    private $session;
 
     public function __construct(
+        TrickRepository $repository,
         UpdateTrickHandler $handler,
-        Environment $environment,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        TrickDTOFactoryInterface $trickDTOFactory,
+        SessionInterface $session
     ) {
+        $this->repository = $repository;
         $this->handler = $handler;
-        $this->environment = $environment;
         $this->formFactory = $formFactory;
+        $this->trickDTOFactory = $trickDTOFactory;
+        $this->session = $session;
     }
 
     /**
-     * @Route("/trick/edit/{id}", name="trick_edit", requirements={"id"="\d+"}, methods={"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
-     *
      * @param Request $request
-     * @param Trick $trick
+     * @param TrickResponderInterface $responder
      *
-     * @return RedirectResponse|Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function update(Request $request, Trick $trick)
+    public function __invoke(Request $request, TrickResponderInterface $responder)
     {
-        $form = $this->formFactory->create(CreateTrickType::class, $trick)->handleRequest($request);
+        $trick = $this->repository->findOneBy(['id' => $request->attributes->get('id')]);
+        $trickDTO = $this->trickDTOFactory->create($trick);
+        $form = $this->formFactory->create(UpdateTrickType::class, $trickDTO)->handleRequest($request);
 
         if ($this->handler->handle($form, $trick)) {
-
-            $this->addFlash('success', 'Trick updated successfully');
-
-            return $this->redirectToRoute('trick_view', [
-                'slug' => $trick->getSlug()
-            ]);
+            return $responder('update', true);
         }
-        return new Response(
-            $this->environment->render('trick/edit.html.twig', [
-                'form' => $form->createView(),
-                'trick' => $trick
-            ])
+        return $responder(
+            'update',
+            false,
+            $form,
+            $trick->getSlug() ?? $this->session->get('slug')
         );
     }
 }

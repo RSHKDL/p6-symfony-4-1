@@ -3,14 +3,13 @@
 namespace App\Form;
 
 use App\DTO\VideoDTO;
-use App\Form\Interfaces\TypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class VideoType extends AbstractType implements TypeInterface
+final class VideoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

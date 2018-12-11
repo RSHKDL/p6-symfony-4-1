@@ -169,8 +169,25 @@ class Trick
         }
     }
 
+    public function update(
+        string $name,
+        string $description,
+        Image $imageFeatured,
+        array $images = null,
+        array $videos = null,
+        $categories
+    ): void {
+        $this->name = $name;
+        $this->slug = $this->slugify($name);
+        $this->description = $description;
+        $this->updateDate();
+        $this->updateCategories($categories);
+        $this->imageFeatured = $imageFeatured;
+        $this->updateImages($images);
+        $this->updateVideos($videos);
+    }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -230,12 +247,36 @@ class Trick
         return $this;
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
-    public function updateDate()
+    private function updateDate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    private function updateImages(array $images) {
+        $this->getImages()->clear();
+        foreach ($images as $image) {
+            $this->images->add($image);
+        }
+    }
+
+    private function updateVideos(array $videos) {
+        foreach ($this->videos->getIterator() as $key => $video) {
+            if (!array_key_exists($key, $videos)) {
+                $video->unsetTrick($this);
+                $this->videos->remove($key);
+            }
+        }
+        foreach ($videos as $key => $video){
+            $this->videos->set($key, $video);
+            $video->setTrick($this);
+        }
+    }
+
+    private function updateCategories($categories) {
+        $this->categories->clear();
+        foreach ($categories as $category){
+            $this->categories->add($category);
+        }
     }
 
     /**
@@ -287,7 +328,7 @@ class Trick
     }
 
     /**
-     * @return \ArrayAccess|Image[]
+     * @return \ArrayAccess
      */
     public function getImages(): \ArrayAccess
     {
@@ -295,7 +336,7 @@ class Trick
     }
 
     /**
-     * @return \ArrayAccess|Video[]
+     * @return \ArrayAccess
      */
     public function getVideos(): \ArrayAccess
     {

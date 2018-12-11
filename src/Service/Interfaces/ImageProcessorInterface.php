@@ -34,5 +34,8 @@ interface ImageProcessorInterface
      */
     public function generateImageInfo(\splFileInfo $fileInfo): array;
 
+    /**
+     * @return array
+     */
     public function getUpdateImageInfo(): array;
 }

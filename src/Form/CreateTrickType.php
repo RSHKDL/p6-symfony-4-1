@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\DTO\TrickDTO;
 use App\Entity\Category;
-use App\Form\Interfaces\TypeInterface;
 use App\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CreateTrickType extends AbstractType implements TypeInterface
+final class CreateTrickType extends AbstractType
 {
     /**
      * @inheritdoc

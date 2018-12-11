@@ -13,7 +13,7 @@ interface TrickDTOInterface
      * @param ImageDTOInterface|null $imageFeatured
      * @param array|null $images
      * @param array|null $videos
-     * @param ArrayCollection|null $categories
+     * @param $categories
      */
     public function __construct(
         ?string $name,
@@ -21,6 +21,6 @@ interface TrickDTOInterface
         ?ImageDTOInterface $imageFeatured,
         ?array $images = null,
         ?array $videos = null,
-        ?ArrayCollection $categories
+        $categories
     );
 }

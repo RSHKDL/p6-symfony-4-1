@@ -34,18 +34,13 @@ final class TrickDTO implements TrickDTOInterface
     public $videos;
 
     /**
-     * @var ArrayCollection|null
+     * @var array|ArrayCollection|null
      */
     public $categories;
 
     /**
      * TrickDTO constructor.
-     * @param string|null $name
-     * @param string|null $description
-     * @param ImageDTOInterface|null $imageFeatured
-     * @param array|null $images
-     * @param array|null $videos
-     * @param ArrayCollection|null $categories
+     * @inheritdoc
      */
     public function __construct(
         ?string $name,
@@ -53,7 +48,7 @@ final class TrickDTO implements TrickDTOInterface
         ?ImageDTOInterface $imageFeatured,
         ?array $images = null,
         ?array $videos = null,
-        ?ArrayCollection $categories
+        $categories
     ) {
         $this->name = $name;
         $this->description = $description;
