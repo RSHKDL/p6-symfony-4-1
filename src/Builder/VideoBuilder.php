@@ -29,6 +29,6 @@ final class VideoBuilder implements VideoBuilderInterface
      */
     public function createEntity(VideoDTOInterface $videoDTO): Video
     {
-        return new Video($videoDTO->url);
+        return new Video($videoDTO->rawUrl);
     }
 }

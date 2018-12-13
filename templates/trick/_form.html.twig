@@ -70,7 +70,7 @@
         {{ form_label(form.videos, 'Add videos') }}
         {{ form_help(form.videos) }}
         <div class="js-vid-collection-fields-holder"
-             data-prototype="{{ formMacros.printCollectionVideosWidget(form.videos.vars.prototype.url)|e }}"
+             data-prototype="{{ formMacros.printCollectionVideosWidget(form.videos.vars.prototype.rawUrl)|e }}"
              data-index="{{ form.videos|length }}">
             {% for videoField in form.videos %}
                 {{ formMacros.printCollectionVideosWidget(videoField) }}

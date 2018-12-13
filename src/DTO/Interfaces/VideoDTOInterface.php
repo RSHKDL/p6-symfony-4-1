@@ -6,7 +6,7 @@ interface VideoDTOInterface
 {
     /**
      * VideoDTOInterface constructor.
-     * @param string|null $url
+     * @param string $rawUrl
      */
-    public function __construct(?string $url);
+    public function __construct(string $rawUrl);
 }

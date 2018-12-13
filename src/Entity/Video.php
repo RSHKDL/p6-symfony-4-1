@@ -7,8 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_videos")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Video
 {
@@ -25,7 +25,7 @@ class Video
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, name="video_id")
      */
     private $videoId;
 
@@ -36,18 +36,22 @@ class Video
     private $trick;
 
     /**
+     * @ORM\Column(type="string", length=255, name="raw_url")
      * @Assert\Regex(
      *     pattern="#^(http|https)://(www.youtube.com|www.dailymotion.com|vimeo.com)/#",
      *     match=true,
      *     message="The url must match a valid Youtube, DailyMotion or Vimeo video raw url"
      * )
      */
-    private $url;
+    private $rawUrl;
 
-    public function __construct(
-        string $url
-    ) {
-        $this->url = $url;
+    /**
+     * Video constructor.
+     * @param string $rawUrl
+     */
+    public function __construct(string $rawUrl)
+    {
+        $this->rawUrl = $rawUrl;
     }
 
     public function getId()
@@ -88,15 +92,17 @@ class Video
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function unsetTrick()
     {
-        return $this->url;
+        $this->trick = null;
     }
 
-    public function setUrl(string $url): self
+    /**
+     * @return string|null
+     */
+    public function getRawUrl(): ?string
     {
-        $this->url = $url;
-        return $this;
+        return $this->rawUrl;
     }
 
     /**
@@ -158,7 +164,7 @@ class Video
      */
     public function extractVideoId()
     {
-        $url = $this->getUrl();
+        $url = $this->getRawUrl();
 
         if (preg_match("#^(http|https)://www.youtube.com/#", $url))
         {
@@ -175,7 +181,10 @@ class Video
 
     }
 
-    private function generateUrl(): string
+    /**
+     * @return string
+     */
+    private function generateUrlForIframe(): string
     {
         $type = $this->getType();
         $videoId = strip_tags($this->getVideoId());
@@ -197,11 +206,14 @@ class Video
         }
     }
 
+    /**
+     * @return string
+     */
     public function generateVideo(): string
     {
         $video = "<iframe width='100%' 
                           height='100%' 
-                          src='".$this->generateUrl()."' 
+                          src='".$this->generateUrlForIframe()."' 
                           frameborder='0' 
                           allowfullscreen></iframe>";
         return $video;

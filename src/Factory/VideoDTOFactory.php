@@ -15,6 +15,6 @@ final class VideoDTOFactory implements VideoDTOFactoryInterface
      */
     public function create(Video $video): VideoDTOInterface
     {
-        return new VideoDTO(null);
+        return new VideoDTO($video->getRawUrl());
     }
 }

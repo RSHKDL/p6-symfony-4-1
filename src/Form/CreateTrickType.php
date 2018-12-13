@@ -39,7 +39,7 @@ final class CreateTrickType extends AbstractType
                 'required'  => false,
                 'label'     => 'Add a featured image'
             ])
-            ->add('images', CollectionType::class, array(
+            ->add('images', CollectionType::class, [
                 'entry_type'    => ImageType::class,
                 'prototype'		=> true,
                 'allow_add'		=> true,
@@ -47,16 +47,17 @@ final class CreateTrickType extends AbstractType
                 'by_reference' 	=> false,
                 'required'		=> false,
                 'label'         => false
-            ))
-            ->add('videos', CollectionType::class, array(
+            ])
+            ->add('videos', CollectionType::class, [
                 'entry_type'    => VideoType::class,
                 'prototype'		=> true,
                 'allow_add'		=> true,
                 'allow_delete'	=> true,
+                'delete_empty'  => true,
                 'by_reference' 	=> false,
                 'required'		=> false,
                 'label'         => false
-            ));
+            ]);
     }
 
     /**

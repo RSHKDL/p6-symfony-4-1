@@ -14,7 +14,7 @@ final class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', TextType::class, [
+            ->add('rawUrl', TextType::class, [
                 'label' => false,
                 'help' => 'Must be the raw url of the video (youtube, dailymotion or vimeo)'
             ]);
@@ -28,7 +28,7 @@ final class VideoType extends AbstractType
             'error_bubbling' => true,
             'empty_data' => function (FormInterface $form) {
                 return new VideoDTO(
-                    $form->get('url')->getData()
+                    $form->get('rawUrl')->getData()
                 );
             }
         ]);

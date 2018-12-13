@@ -25,7 +25,7 @@ final class CollectionComparator implements CollectionComparatorInterface
      */
     public function compare(array $collection, array $collectionDTO, string $className): void
     {
-        $isDifferent = 'isDifferent'.$className;
+        $isDifferent = 'is'.$className.'Different';
 
         foreach ($collectionDTO as $key => $value) {
             if (array_key_exists($key, $collection)) {
@@ -35,6 +35,12 @@ final class CollectionComparator implements CollectionComparatorInterface
                 }
             } else {
                 $this->newObjects[$key] = $value;
+            }
+        }
+
+        foreach ($collection as $key => $value) {
+            if (!array_key_exists($key, $collectionDTO)) {
+                $this->oldObjects[$key] = $value;
             }
         }
     }
@@ -66,7 +72,7 @@ final class CollectionComparator implements CollectionComparatorInterface
      * @param ImageDTOInterface $imageDTO
      * @return bool
      */
-    private function isDifferentImage(Image $image, ImageDTOInterface $imageDTO): bool
+    private function isImageDifferent(Image $image, ImageDTOInterface $imageDTO): bool
     {
         $imageDTO->file->getFilename() !== $image->getName() ? $result = true : $result = false;
         return $result;
@@ -77,9 +83,9 @@ final class CollectionComparator implements CollectionComparatorInterface
      * @param VideoDTOInterface $videoDTO
      * @return bool
      */
-    private function isDifferentVideo(Video $video, VideoDTOInterface $videoDTO): bool
+    private function isVideoDifferent(Video $video, VideoDTOInterface $videoDTO): bool
     {
-        $videoDTO->url !== $video->getUrl() ? $result = true : $result = false;
+        $videoDTO->rawUrl !== $video->getRawUrl() ? $result = true : $result = false;
         return $result;
     }
 }

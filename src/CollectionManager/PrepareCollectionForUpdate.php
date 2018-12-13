@@ -89,10 +89,8 @@ final class PrepareCollectionForUpdate implements PrepareCollectionForUpdateInte
         $class = reset($collection);
         if ($class instanceof Image || $class instanceof ImageDTOInterface) {
             return 'Image';
-        } elseif ($class instanceof Video || $class instanceof VideoDTOInterface) {
-            return 'Video';
         } else {
-            return '';
+            return 'Video';
         }
     }
 }

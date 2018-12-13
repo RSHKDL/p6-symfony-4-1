@@ -252,14 +252,22 @@ class Trick
         $this->setUpdatedAt(new \DateTime());
     }
 
-    private function updateImages(array $images) {
+    /**
+     * @param array $images
+     */
+    private function updateImages(array $images)
+    {
         $this->getImages()->clear();
         foreach ($images as $image) {
             $this->images->add($image);
         }
     }
 
-    private function updateVideos(array $videos) {
+    /**
+     * @param array $videos
+     */
+    private function updateVideos(array $videos)
+    {
         foreach ($this->videos->getIterator() as $key => $video) {
             if (!array_key_exists($key, $videos)) {
                 $video->unsetTrick($this);
@@ -272,7 +280,8 @@ class Trick
         }
     }
 
-    private function updateCategories($categories) {
+    private function updateCategories($categories)
+    {
         $this->categories->clear();
         foreach ($categories as $category){
             $this->categories->add($category);
@@ -341,29 +350,6 @@ class Trick
     public function getVideos(): \ArrayAccess
     {
         return $this->videos;
-    }
-
-    public function addVideo(Video $video): self
-    {
-        if (!$this->videos->contains($video)) {
-            $this->videos[] = $video;
-            $video->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideo(Video $video): self
-    {
-        if ($this->videos->contains($video)) {
-            $this->videos->removeElement($video);
-            // set the owning side to null (unless already changed)
-            if ($video->getTrick() === $this) {
-                $video->setTrick(null);
-            }
-        }
-
-        return $this;
     }
 
     /**

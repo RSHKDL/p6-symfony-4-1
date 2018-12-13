@@ -7,18 +7,15 @@ use App\DTO\Interfaces\VideoDTOInterface;
 final class VideoDTO implements VideoDTOInterface
 {
     /**
-     * @var string|null
+     * @var string $rawUrl
      */
-    public $url;
+    public $rawUrl;
 
     /**
      * @inheritdoc
      */
-    public function __construct(?string $url)
+    public function __construct(string $rawUrl)
     {
-        if ($url) {
-            $this->url = $url;
-        }
+        $this->rawUrl = $rawUrl;
     }
-
 }
