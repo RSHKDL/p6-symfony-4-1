@@ -2,6 +2,7 @@
 
 namespace App\Responder;
 
+use App\Entity\Trick;
 use App\Responder\Interfaces\TrickResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,8 +42,13 @@ final class TrickResponder implements TrickResponderInterface
     /**
      * @inheritdoc
      */
-    public function __invoke(string $view, bool $redirect = false, FormInterface $form = null, string $slug = null)
-    {
+    public function __invoke(
+        string $view,
+        bool $redirect = false,
+        Trick $trick,
+        FormInterface $form = null,
+        string $slug = null
+    ) {
         if ($redirect) {
             $response = new RedirectResponse(
                 $this->urlGenerator->generate('trick_view', ['slug' => $this->session->get('slug')])
@@ -50,8 +56,9 @@ final class TrickResponder implements TrickResponderInterface
         } else {
             $response = new Response(
                 $this->twig->render('trick/'.$view.'.html.twig', [
-                    'form' => $form->createView(),
-                    'slug' => $slug
+                    'form'  => $form->createView(),
+                    'trick' => $trick,
+                    'slug'  => $slug
                 ]));
         }
         return $response;

@@ -3,6 +3,7 @@
 namespace App\Responder\Interfaces;
 
 
+use App\Entity\Trick;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ interface TrickResponderInterface
      * @param string $view
      * @param bool $redirect
      * @param FormInterface|null $form
+     * @param Trick $trick
      * @param string|null $slug
      *
      * @return RedirectResponse|Response
@@ -31,5 +33,11 @@ interface TrickResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke(string $view, bool $redirect = false, FormInterface $form = null, string $slug = null);
+    public function __invoke(
+        string $view,
+        bool $redirect = false,
+        Trick $trick,
+        FormInterface $form = null,
+        string $slug = null
+    );
 }
