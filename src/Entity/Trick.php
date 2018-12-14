@@ -140,14 +140,24 @@ class Trick
     private $comments;
 
 
+    /**
+     * Trick constructor.
+     * @param string $name
+     * @param string $description
+     * @param User|null $author
+     * @param Image|null $imageFeatured
+     * @param array $images
+     * @param array $videos
+     * @param ArrayCollection|null $categories
+     */
     public function __construct(
         string $name,
         string $description,
-        User $author,
-        Image $imageFeatured,
+        ?User $author,
+        ?Image $imageFeatured,
         array $images = [],
         array $videos = [],
-        ArrayCollection $categories
+        ?ArrayCollection $categories
     ) {
         $this->name = $name;
         $this->slug = $this->slugify($name);
@@ -160,8 +170,10 @@ class Trick
         $this->videos = new ArrayCollection($videos);
         $this->comments = new ArrayCollection();
 
-        foreach ($categories as $category) {
-            $this->addCategory($category);
+        if ($categories) {
+            foreach ($categories as $category) {
+                $this->addCategory($category);
+            }
         }
 
         foreach ($videos as $video) {
@@ -230,20 +242,39 @@ class Trick
         return $text;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTime $createdAt
+     * @return Trick
+     */
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @param \DateTime $updatedAt
+     * @return Trick
+     */
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
@@ -358,5 +389,21 @@ class Trick
     public function getImageFeatured(): ?Image
     {
         return $this->imageFeatured;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor(User $author): void
+    {
+        $this->author = $author;
     }
 }
