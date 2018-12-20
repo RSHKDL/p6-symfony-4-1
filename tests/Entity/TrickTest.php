@@ -23,5 +23,4 @@ class TrickTest extends TestCase
             new ArrayCollection(['Fake category'])
         );
     }
-
 }

@@ -3,6 +3,7 @@
 namespace App\DTO\Interfaces;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 
 interface TrickDTOInterface
 {
@@ -13,7 +14,7 @@ interface TrickDTOInterface
      * @param ImageDTOInterface|null $imageFeatured
      * @param array|null $images
      * @param array|null $videos
-     * @param $categories
+     * @param ArrayCollection|PersistentCollection|null $categories
      */
     public function __construct(
         ?string $name,

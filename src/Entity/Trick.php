@@ -181,13 +181,21 @@ class Trick
         }
     }
 
+    /**
+     * @param string $name
+     * @param string $description
+     * @param Image|null $imageFeatured
+     * @param array|null $images
+     * @param array|null $videos
+     * @param array $categories
+     */
     public function update(
         string $name,
         string $description,
         ?Image $imageFeatured,
         array $images = null,
         array $videos = null,
-        $categories
+        array $categories
     ): void {
         $this->name = $name;
         $this->slug = $this->slugify($name);

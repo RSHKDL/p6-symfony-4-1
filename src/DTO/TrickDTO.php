@@ -5,6 +5,7 @@ namespace App\DTO;
 use App\DTO\Interfaces\ImageDTOInterface;
 use App\DTO\Interfaces\TrickDTOInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 
 final class TrickDTO implements TrickDTOInterface
 {
@@ -34,7 +35,7 @@ final class TrickDTO implements TrickDTOInterface
     public $videos;
 
     /**
-     * @var array|ArrayCollection|null
+     * @var ArrayCollection|null
      */
     public $categories;
 

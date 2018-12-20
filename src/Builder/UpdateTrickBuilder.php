@@ -84,15 +84,15 @@ final class UpdateTrickBuilder implements UpdateTrickBuilderInterface
             $this->fileRemover->addFileToRemove($trick->getImageFeatured());
         }
 
-        //dump($trick->getVideos()->toArray(), $trickDTO->videos);die;
-        //dump($trick->getImages()->toArray(), $trickDTO->images);die;
+        //dump($trickDTO->categories->toArray());die;
+
         $trick->update(
             $trickDTO->name,
             $trickDTO->description,
             $imageFeatured ?? $trick->getImageFeatured(),
             $this->prepareCollectionForUpdate->prepare($trick->getImages()->toArray(), $trickDTO->images),
             $this->prepareCollectionForUpdate->prepare($trick->getVideos()->toArray(), $trickDTO->videos),
-            $trickDTO->categories
+            $trickDTO->categories->toArray()
         );
 
         return $trick;
