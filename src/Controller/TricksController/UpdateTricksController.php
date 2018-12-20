@@ -78,14 +78,14 @@ class UpdateTricksController
         $form = $this->formFactory->create(UpdateTrickType::class, $trickDTO)->handleRequest($request);
 
         if ($this->handler->handle($form, $trick)) {
-            return $responder('update', true, $trick);
+            return $responder('update', true, null, null, $trick);
         }
         return $responder(
             'update',
             false,
-            $trick,
             $form,
-            $trick->getSlug() ?? $this->session->get('slug')
+            $trick->getSlug() ?? $this->session->get('slug'),
+            $trick
         );
     }
 }

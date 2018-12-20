@@ -45,9 +45,9 @@ final class TrickResponder implements TrickResponderInterface
     public function __invoke(
         string $view,
         bool $redirect = false,
-        Trick $trick,
         FormInterface $form = null,
-        string $slug = null
+        string $slug = null,
+        Trick $trick = null
     ) {
         if ($redirect) {
             $response = new RedirectResponse(

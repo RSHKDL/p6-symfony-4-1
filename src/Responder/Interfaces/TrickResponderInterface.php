@@ -25,8 +25,8 @@ interface TrickResponderInterface
      * @param string $view
      * @param bool $redirect
      * @param FormInterface|null $form
-     * @param Trick $trick
      * @param string|null $slug
+     * @param Trick|null $trick
      *
      * @return RedirectResponse|Response
      * @throws \Twig_Error_Loader
@@ -36,8 +36,8 @@ interface TrickResponderInterface
     public function __invoke(
         string $view,
         bool $redirect = false,
-        Trick $trick,
         FormInterface $form = null,
-        string $slug = null
+        string $slug = null,
+        Trick $trick = null
     );
 }

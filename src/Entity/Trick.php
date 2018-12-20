@@ -184,7 +184,7 @@ class Trick
     public function update(
         string $name,
         string $description,
-        Image $imageFeatured,
+        ?Image $imageFeatured,
         array $images = null,
         array $videos = null,
         $categories

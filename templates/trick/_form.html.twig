@@ -58,11 +58,11 @@
     </div>
     <div class="form-group">
         {{ form_label(form.imageFeatured) }}
-
+        {% if trick.imageFeatured is defined %}
         <div style="height: 60px;" class="mb-4">
             <img class="mh-100" src="{{ trick.imageFeatured.getWebPath }}" alt="{{ trick.imageFeatured.alt }}">
         </div>
-
+        {% endif %}
         {{ form_errors(form.imageFeatured) }}
         {{ form_widget(form.imageFeatured) }}
         {{ form_help(form.imageFeatured) }}
