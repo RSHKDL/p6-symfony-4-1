@@ -18,16 +18,23 @@ jQuery(function($) {
             },
             success: function (data) {
                 if (data) {
-                    console.log(data);
-                    $('.comments-container').append(data);
+                    data.batch.forEach(function(value) {
+                        $('.comments-container').append("<div class='row mb-3'>"+
+                            "<div class='col-sm-4'>"+
+                            "<small class='text-muted'>#"+value.id+"</small> "+
+                            value.author+
+                            "<small class='text-muted'><i> "+value.date+"</i></small>"+
+                            "</div>"+
+                            "<div class='col-sm-8'>"+value.content+"</div>"+
+                            "</div>"
+                        );
+                    });
                     button.text( 'Load more comments' ).prev().before(data).show();
-                    button.data('offset', offset+3);
-                    console.log(button.data('offset'));
+                    button.data('offset', offset+5);
 
-                    if ( offset === total ) {
+                    if ( offset >= total ) {
                         button.remove(); // if offset reach total, remove the button
                     }
-
                 } else {
                     button.remove(); // if no data, remove the button
                 }

@@ -51,7 +51,7 @@ class ViewTricksController
      */
     public function view(Trick $trick): Response
     {
-        $comments = $trick->getComments()->slice(0,3);
+        $comments = $trick->getComments()->slice(0,5);
         $totalComments = $trick->getComments()->count();
 
         return new Response(

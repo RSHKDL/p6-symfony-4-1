@@ -11,7 +11,7 @@ interface MailerInterface
 
     /**
      * @param string $subject
-     * @param array $from
+     * @param string|array $from
      * @param string $to
      * @param string $body
      * @return mixed

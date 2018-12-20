@@ -32,16 +32,18 @@ final class LoadMoreCommentsController extends AbstractController
             $comments = $figure->getComments();
 
             $batch = [];
-            foreach($comments->slice($offset,3) as $comment) {
+            foreach($comments->slice($offset,5) as $comment) {
                 $batch[] = [
-                    'id' => $comment->getId(),
-                    'content' => $comment->getContent(),
+                    'id'        => $comment->getId(),
+                    'content'   => $comment->getContent(),
+                    'date'      => $comment->getCreatedAt()->format("m/d/Y H:i:s"),
+                    'author'    => $comment->getAuthor()->getUsername()
                 ];
             }
 
             $data = [
                 'batch' => $batch,
-                'offset' => $offset+3
+                'offset' => $offset+5
             ];
             return new JsonResponse($data);
         }

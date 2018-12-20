@@ -27,7 +27,7 @@ final class Mailer implements MailerInterface
 
     /**
      * @param string $subject
-     * @param array $from
+     * @param string|array $from
      * @param string $to
      * @param string $body
      */
@@ -36,7 +36,7 @@ final class Mailer implements MailerInterface
         $message = (new \Swift_Message($subject))
             ->setFrom($from)
             ->setTo($to)
-            ->setBody($body);
+            ->setBody($body,'text/html');
 
         $this->mailer->send($message);
     }
