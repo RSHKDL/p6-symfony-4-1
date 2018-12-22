@@ -18,9 +18,15 @@
             <div class="card">
                 {% if trick.imageFeatured %}
                     <img
-                            class="image-card-top w-100"
                             src="{{ trick.imageFeatured.webPath }}"
                             alt="{{ trick.imageFeatured.alt }}"
+                            class="image-card-top w-100"
+                    >
+                {% else %}
+                    <img
+                            src="{{ asset('uploads/default/default-image-featured.png') }}"
+                            alt="default-image-featured"
+                            class="image-card-top w-100"
                     >
                 {% endif %}
                 <div class="card-body">

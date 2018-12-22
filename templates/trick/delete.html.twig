@@ -1,6 +1,6 @@
 <form action="{{ url('trick_delete', {id: trick.id}) }}" method="post" data-confirmation="true" id="delete-form">
     <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
-    <button type="submit" class="btn btn-sm btn-danger">
-        <span class="far fa-trash-alt" aria-hidden="true"></span> Delete
+    <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+        <span class="far fa-trash-alt" aria-hidden="true"></span>
     </button>
 </form>

@@ -5,10 +5,159 @@
     padding: .75em 0;
 }
 
-.avatar {
+.user-profile .avatar {
     width: 140px;
 }
 
 #delete-form {
     display: inline;
+}
+
+/**
+ ** BUTTON
+ */
+
+.btn-primary {
+    background-color: #1e4daf;
+    color: #f6f6f6;
+    border-color: #1e4daf;
+}
+
+.btn-secondary {
+    background-color: #6dc6d6;
+    color: #1e4daf;
+    border-color: #6dc6d6;
+}
+
+.btn-secondary:hover {
+    background-color: #7cdbeb;
+    color: #1e4daf;
+    border-color: #7cdbeb;
+}
+
+.btn-warning {
+    background-color: #6a4cf4;
+    color: #f6f6f6;
+    border-color: #6a4cf4;
+}
+
+.btn-warning:hover {
+    background-color: #8175fa;
+    color: #f6f6f6;
+    border-color: #8175fa;
+}
+
+.btn-danger {
+    background-color: #f53e59;
+    color: #f6f6f6;
+    border-color: #f53e59;
+}
+
+.btn-danger:hover {
+    background-color: #f9635c;
+    color: #f6f6f6;
+    border-color: #f9635c;
+}
+
+/**
+ ** TRICK VIEW **
+ */
+
+.trick-header {
+    width:100%;
+    height:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.trick-header-content {
+    padding: 10em 2em;
+}
+
+.trick-header-content h2 {
+    color: #f6f6f6;
+    margin: unset;
+    font-weight: bolder;
+}
+
+.trick-navigation {
+    float: right;
+    position: relative;
+    top: .5em;
+    right: .5em;
+}
+
+.trick-metadata > ul {
+    background-color: #1e4daf;
+    color: #f6f6f6;
+}
+
+.trick-metadata p,
+.trick-footer {
+    font-size: 12px;
+}
+
+.trick-medias button,
+.trick-comments button {
+    display: block;
+    margin: 0 auto 1em;
+}
+
+.trick-comments .card {
+    color: #f6f6f6;
+    background-color: #1e4daf;
+}
+
+.trick-comments form textarea {
+    color: #f6f6f6;
+    background-color: #306bba;
+    border-color: #1e4daf;
+}
+
+.trick-comments form textarea:focus {
+    color: #f6f6f6;
+    background-color: #3378cb;
+}
+
+.trick-comments form .text-muted {
+    color: #f6f6f6 !important;
+}
+
+.trick-comments .avatar-thumbnail {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.trick-comments .avatar-thumbnail img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+}
+
+.comments-content p {
+    background-color: #cccccc;
+    color: #5e5b5a;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+}
+
+.comments-content::after {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: 20%;
+    left: 3px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 14px solid #cccccc;
 }

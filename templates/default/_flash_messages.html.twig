@@ -1,7 +1,5 @@
-{#
-   https://symfony.com/doc/current/book/templating.html#including-other-templates
-#}
-
+{# https://symfony.com/doc/current/book/templating.html#including-other-templates #}
+{% if app.flashes %}
 <div class="messages">
     {% for type, messages in app.flashes %}
         {% for message in messages %}
@@ -14,3 +12,4 @@
         {% endfor %}
     {% endfor %}
 </div>
+{% endif %}

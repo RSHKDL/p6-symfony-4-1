@@ -3,7 +3,7 @@
 {% block title %}Hello {{ user.username }}{% endblock %}
 
 {% block body %}
-<section>
+<section class="user-profile">
     <div class="float-right avatar">
         {% if user.avatar is null %}
             <img src="{{ asset('uploads/avatars/default_avatar.png') }}"

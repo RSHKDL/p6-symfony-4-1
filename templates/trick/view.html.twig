@@ -1,124 +1,166 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <section class="mb-3">
-        <ul class="nav">
-            <li class="nav-item mx-1">
-                <a class="btn btn-primary btn-sm" href="{{ path('trick_index') }}">
-                    <span class="fas fa-arrow-left" aria-hidden="true"></span> Back to tricks list</a>
+{% block article %}
+<article>
+    <header class="trick-header" style="background-image:
+        {% if trick.imageFeatured %}url('{{ trick.imageFeatured.webPath }}');
+        {% else %}url('{{ asset('uploads/default/default-image-featured.png') }}');
+        {% endif %}
+    ">
+        <ul class="nav trick-navigation">
+            <li class="nav-item">
+                <a class="btn btn-secondary btn-sm" href="{{ path('trick_index') }}" title="Back to tricks list">
+                    <span class="fas fa-arrow-left" aria-hidden="true"></span>
+                </a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item mx-1">
-                    <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: trick.id}) }}">
-                        <span class="far fa-edit" aria-hidden="true"></span> Edit</a>
+                    <a class="btn btn-warning btn-sm" href="{{ path('trick_edit', {id: trick.id}) }}" title="Edit">
+                        <span class="far fa-edit" aria-hidden="true"></span>
+                    </a>
                 </li>
-                <li class="nav-item mx-1">
+                <li class="nav-item">
                     {{ include('trick/delete.html.twig', {trick: trick}, with_context = false) }}
                 </li>
             {% endif %}
         </ul>
-        {% if trick.imageFeatured %}
-            <img
-                    src="{{ trick.imageFeatured.webPath }}"
-                    alt="{{ trick.name }}"
-            >
+        <div class="trick-header-content">
+            <h2 class="text-center">{{ trick.name }}</h2>
+        </div>
+    </header>
+    <div class="trick-metadata ">
+        <ul class="list-inline list-unstyled text-center py-2 m-0">
+            {% for category in trick.categories %}
+                <li class="list-inline-item">
+                    {{ category.name }}
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="text-center text-muted font-italic py-2 m-0">
+        {% if trick.updatedAt %}
+            Trick edited the {{ trick.updatedAt|date("m/d/Y \\a\\t H:i") }}
+        {% else %}
+            Trick published the {{ trick.createdAt|date("m/d/Y \\a\\t H:i") }}
         {% endif %}
-        <h2>{{ trick.name }}</h2>
-        {% if trick.images %}
-            {% for row in trick.images | batch(5) %}
-            <div class="row card-deck mb-3">
-                {% for image in row %}
-                    <div class="card">
-                        <img
-                                class="w-100"
-                                src="{{ asset(image.getWebPath()) }}"
-                                alt="{{ image.name }}"
-                        >
-                        <span>{{ image.name }}</span>
+         by {{ trick.author.username }}
+        </p>
+    </div>
+    <p class="px-4">{{ trick.description }}</p>
+    <footer class="trick-footer">
+        <ul class="list-inline list-unstyled text-muted px-4">
+            {% if trick.updatedAt %}
+                <li class="list-inline-item">
+                    <span class="far fa-clock" aria-hidden="true"></span>
+                     Trick originally published the {{ trick.createdAt|date("m/d/Y \\a\\t H:i") }}
+                </li>
+            {% endif %}
+            <li class="list-inline-item">
+                <span class="far fa-comment" aria-hidden="true"></span>
+                 {{ trick.comments.count }} comments
+            </li>
+            <li class="list-inline-item">
+                <span class="far fa-file-image" aria-hidden="true"></span>
+                {{ trick.images.count }} images
+            </li>
+            <li class="list-inline-item">
+                <span class="far fa-file-video" aria-hidden="true"></span>
+                {{ trick.videos.count }} videos
+            </li>
+        </ul>
+    </footer>
+    <section class="trick-medias px-4">
+        {% if trick.images or trick.videos %}
+            <button
+                    class="btn btn-primary"
+                    data-toggle="collapse"
+                    data-target="#collapse-media"
+            >Show medias</button>
+            <div id="collapse-media" class="collapse">
+                {% for row in trick.images | batch(5) %}
+                    <div class="card-columns">
+                        {% for image in row %}
+                            <div class="card">
+                                <img
+                                        class="w-100"
+                                        src="{{ asset(image.getWebPath()) }}"
+                                        alt="{{ image.alt }}"
+                                >
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                {% for row in trick.videos | batch(5) %}
+                    <div class="card-columns">
+                        {% for video in row %}
+                            <div class="card">
+                                {{ video.generateVideo|raw }}
+                            </div>
+                        {% endfor %}
                     </div>
                 {% endfor %}
             </div>
-            {% else %}
-                <p class="mb-3">No images yet</p>
-            {% endfor %}
         {% endif %}
-        {% if trick.videos %}
-            {% for row in trick.videos | batch(3) %}
-                <div class="row card-deck mb-3">
-                    {% for video in row %}
-                        <div class="card">
-                            {{ video.generateVideo|raw }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p class="mb-3">No videos yet</p>
-            {% endfor %}
-        {% endif %}
-        <p>{{ trick.description }}</p>
-        <ul class="list-inline list-unstyled">
-            {% for category in trick.categories %}
-                <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
-                    <span class="fas fa-tag" aria-hidden="true"></span>
-                     {{ category.name }}
-                </li>
-            {% endfor %}
-            <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
-                <span class="fa fa-calendar-alt" aria-hidden="true"></span>
-                 Published the {{ trick.createdAt|date("d/m/Y H:i") }}
-                {%- if trick.updatedAt -%}
-                    , edited the {{ trick.updatedAt|date("d/m/Y H:i") }}
-                {%- endif -%}
-            </li>
-            <li class="list-inline-item bg-secondary text-white rounded px-3 py-2">
-                <span class="fa fa-user" aria-hidden="true"></span> By {{ trick.author.username }}
-            </li>
-        </ul>
     </section>
-    <section class="mb-3">
-        <div class="mb-4">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% set id = trick.id %}
-                {{ render(controller(
-                    'App\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
-                    {id: id}))
-                }}
-            {% else %}
-                <p>You must be logged in to post a comment</p>
-            {% endif %}
-        </div>
-        <div class="w-75 mx-auto comments-container">
-        {% for comment in comments %}
-            <div class="row mb-3">
-                <div class="col-sm-4">
-                    <small class="text-muted">#{{ comment.id }}</small>
-                    {{ comment.author.username }}
-                    <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y H:i:s") }}</i></small>
-
-                </div>
-                <div class="col-sm-8">
-                    {{ comment.content }}
-                </div>
+    <section class="trick-comments px-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Comments</h5>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% set id = trick.id %}
+                    {{ render(controller(
+                        'App\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
+                        {id: id}))
+                    }}
+                {% else %}
+                    <p class="text-center">You must be logged in to post a comment</p>
+                {% endif %}
             </div>
-        {% else %}
-            <p class="mb-3">No comments yet</p>
-        {% endfor %}
+        </div>
+        <div class="mx-auto mt-3 comments-container container">
+            {% for comment in comments %}
+                <div class="row mb-3">
+                    <div class="comments-avatar col-sm-1 d-none d-md-block">
+                        <div class="avatar-thumbnail">
+                            {% if comment.author.avatar is null %}
+                                <img src="{{ asset('uploads/avatars/default_avatar.png') }}"
+                                     alt="default_avatar"
+                                >
+                            {% else %}
+                                <img src="{{ asset(comment.author.avatar) }}"
+                                     alt="{{ comment.author.username }}-avatar"
+                                >
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="comments-metadata col-sm-2">
+                        <small class="text-muted">#{{ loop.index0+1 }}</small>
+                        {{ comment.author.username }}
+                        <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y H:i:s") }}</i></small>
+                    </div>
+                    <div class="comments-content col-sm-9">
+                        <p class="m-0">
+                            {{ comment.content }}
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center">No comments yet :(</p>
+            {% endfor %}
         </div>
         {% if trick.comments is not empty %}
-        <button
-                id="button"
-                class="btn btn-primary js-load-more"
-                data-url="{{ path('comments_load_more', {id: trick.id}) }}"
-                data-offset="5"
-                data-total="{{ total_comments }}">
-            Load more comments
-        </button>
+            <button
+                    class="btn btn-primary js-load-more"
+                    data-url="{{ path('comments_load_more', {id: trick.id}) }}"
+                    data-offset="5"
+                    data-total="{{ total_comments }}">
+                Load more comments
+            </button>
         {% endif %}
     </section>
+</article>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/load-more.js') }}"></script>
 {% endblock %}
-

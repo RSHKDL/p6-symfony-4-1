@@ -20,16 +20,21 @@ jQuery(function($) {
                 if (data) {
                     data.batch.forEach(function(value) {
                         $('.comments-container').append("<div class='row mb-3'>"+
-                            "<div class='col-sm-4'>"+
-                            "<small class='text-muted'>#"+value.id+"</small> "+
+                            "<div class='comments-avatar col-sm-1 d-none d-md-block'>"+
+                            "<div class='avatar-thumbnail'>"+
+                            "<img src='"+value.avatar+"' alt='"+value.author+"'>"+
+                            "</div>"+
+                            "</div>"+
+                            "<div class='comments-metadata col-sm-2'>"+
+                            "<small class='text-muted'>#</small> "+
                             value.author+
                             "<small class='text-muted'><i> "+value.date+"</i></small>"+
                             "</div>"+
-                            "<div class='col-sm-8'>"+value.content+"</div>"+
+                            "<div class='comments-content col-sm-9'><p class='m-0'>"+value.content+"</p></div>"+
                             "</div>"
                         );
                     });
-                    button.text( 'Load more comments' ).prev().before(data).show();
+                    button.text('Load more comments').prev().before(data).show();
                     button.data('offset', offset+5);
 
                     if ( offset >= total ) {
