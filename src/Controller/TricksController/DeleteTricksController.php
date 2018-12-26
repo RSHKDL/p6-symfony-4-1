@@ -81,7 +81,9 @@ class DeleteTricksController
         $id = $request->attributes->get('id');
         $trick = $this->repository->findOneBy(['id' => $id]);
 
-        $this->remover->removeDirectory($trick->getImageFeatured()->getPath());
+        if ($trick->getImageFeatured()) {
+            $this->remover->removeDirectory($trick->getImageFeatured()->getPath());
+        }
         $this->repository->remove($trick);
 
         $this->flashBag->set('success', 'Trick deleted successfully');

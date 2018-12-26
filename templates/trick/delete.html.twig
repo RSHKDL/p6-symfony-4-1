@@ -1,6 +1,37 @@
-<form action="{{ url('trick_delete', {id: trick.id}) }}" method="post" data-confirmation="true" id="delete-form">
+{#<form action="{{ url('trick_delete', {id: trick.id}) }}" method="post" data-confirmation="true" id="delete-form">
     <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
     <button type="submit" class="btn btn-sm btn-danger" title="Delete">
         <span class="far fa-trash-alt" aria-hidden="true"></span>
     </button>
-</form>
+</form>#}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-sm btn-danger" title="Delete" data-toggle="modal" data-target="#deleteModal">
+    <span class="far fa-trash-alt" aria-hidden="true"></span>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure ? You can't undo that action.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form action="{{ url('trick_delete', {id: trick.id}) }}" method="post" data-confirmation="true" id="delete-form">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+                    <button type="submit" class="btn btn-danger" title="Delete">
+                        <span class="far fa-trash-alt" aria-hidden="true"></span> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
