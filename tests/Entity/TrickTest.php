@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\User;
@@ -12,6 +13,7 @@ class TrickTest extends TestCase
 {
     public function testGetName() {
         $author = new User();
+        $category = new Category('Fake category');
         $imageFeatured = new Image('fake image', '/fake/path', 'fake-image');
         $trick = new Trick(
             'Fake Trick',
@@ -20,7 +22,9 @@ class TrickTest extends TestCase
             $imageFeatured,
             [],
             [],
-            new ArrayCollection(['Fake category'])
+            new ArrayCollection([$category])
         );
+
+        static::assertSame('Fake Trick', $trick->getName());
     }
 }
