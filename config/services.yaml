@@ -35,7 +35,7 @@ services:
 
     App\EventListener\BetaListener:
         arguments:
-            $endDate: "2018-12-31"
+            $endDate: "2019-01-31"
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: processBeta }
 

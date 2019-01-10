@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f36e164a-8317-455d-8d66-0f0afca81391" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Builder/UserBuilder.php" afterPath="$PROJECT_DIR$/src/Builder/UserBuilder.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php" afterPath="$PROJECT_DIR$/src/Controller/CommentsController/CreateCommentsController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/CreateTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/CreateTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/DeleteTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/DeleteTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/IndexTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/IndexTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/UpdateTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/UpdateTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TricksController/ViewTricksController.php" afterPath="$PROJECT_DIR$/src/Controller/TricksController/ViewTricksController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ChangeAvatarController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ChangeAvatarController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ChangePasswordController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ChangePasswordController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ForgotPasswordController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ForgotPasswordController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/LogInUserController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/LogInUserController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/RegisterUserController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/RegisterUserController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ResetPasswordController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ResetPasswordController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ValidateUserController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ValidateUserController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController/ViewProfileController.php" afterPath="$PROJECT_DIR$/src/Controller/UsersController/ViewProfileController.php" />
-      <change beforePath="$PROJECT_DIR$/src/FormHandler/CreateTrickHandler.php" afterPath="$PROJECT_DIR$/src/FormHandler/CreateTrickHandler.php" />
-      <change beforePath="$PROJECT_DIR$/src/FormHandler/ForgotPasswordHandler.php" afterPath="$PROJECT_DIR$/src/FormHandler/ForgotPasswordHandler.php" />
-      <change beforePath="$PROJECT_DIR$/src/FormHandler/RegisterUserHandler.php" afterPath="$PROJECT_DIR$/src/FormHandler/RegisterUserHandler.php" />
-      <change beforePath="$PROJECT_DIR$/src/FormHandler/ResetPasswordHandler.php" afterPath="$PROJECT_DIR$/src/FormHandler/ResetPasswordHandler.php" />
-      <change beforePath="$PROJECT_DIR$/src/Service/AddBetaHtml.php" afterPath="$PROJECT_DIR$/src/Service/AddBetaHtml.php" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" afterPath="$PROJECT_DIR$/config/services.yaml" />
+      <change beforePath="$PROJECT_DIR$/src/EventListener/BetaListener.php" afterPath="$PROJECT_DIR$/src/EventListener/BetaListener.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,7 +33,40 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="AddBetaHtml.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Service/AddBetaHtml.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+              <folding>
+                <marker date="1547120798334" expanded="true" signature="464:603" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/services.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BetaListener.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EventListener/BetaListener.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -73,8 +88,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/Controller/HomeControllerTest.php" />
-        <option value="$PROJECT_DIR$/tests/Entity/TrickTest.php" />
         <option value="$PROJECT_DIR$/src/DTO/TrickDTO.php" />
         <option value="$PROJECT_DIR$/src/FormHandler/Interfaces/UpdateTrickHandlerInterface.php" />
         <option value="$PROJECT_DIR$/src/FormHandler/UpdateTrickHandler.php" />
@@ -124,6 +137,8 @@
         <option value="$PROJECT_DIR$/src/Controller/CommentsController/Interfaces/LoadMoreCommentsControllerInterface.php" />
         <option value="$PROJECT_DIR$/src/Service/Interfaces/AddBetaHtmlInterface.php" />
         <option value="$PROJECT_DIR$/src/Service/AddBetaHtml.php" />
+        <option value="$PROJECT_DIR$/src/EventListener/BetaListener.php" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
       </list>
     </option>
   </component>
@@ -273,7 +288,24 @@
             <path>
               <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="EventListener" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="p6-sandbox-4-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p6-sandbox-4-1" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -403,17 +435,18 @@
       <workItem from="1546514838350" duration="599000" />
       <workItem from="1546969718975" duration="599000" />
       <workItem from="1547050876530" duration="648000" />
-      <workItem from="1547110222926" duration="9097000" />
+      <workItem from="1547110222926" duration="10451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="725571000" />
+    <option name="totallyTimeSpent" value="726925000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29608938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2585794" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -468,24 +501,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Image.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormHandler/Interfaces/CreateTrickHandlerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="e#46#101#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FormHandler/CreateTrickHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-378">
@@ -904,14 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventListener/BetaListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EventSubscriber/UpdateTrickSubscriber.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -930,14 +937,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date_c.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3477">
+          <caret line="437" column="20" lean-forward="false" selection-start-line="437" selection-start-column="20" selection-end-line="437" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/AddBetaHtml.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
+        <state relative-caret-position="81">
           <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
           <folding>
-            <element signature="e#31#79#0#PHP" expanded="false" />
             <marker date="1547120798334" expanded="true" signature="464:603" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventListener/BetaListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

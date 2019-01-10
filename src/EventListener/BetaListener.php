@@ -7,6 +7,9 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class BetaListener
 {
+    /**
+     * @var AddBetaHtml
+     */
     protected $betaHtml;
 
     protected $endDate;
@@ -23,12 +26,13 @@ class BetaListener
             return;
         }
 
-        $remainingDays = $this->endDate->diff(new \DateTime())->days;
-        if ($remainingDays <= 0) {
-            return;
+        $remainingDays = $this->endDate->diff(new \DateTime('now'))->days;
+        if (new \DateTime('now') > $this->endDate) {
+            $response = $this->betaHtml->addBeta($event->getResponse(), 0);
+        } else {
+            $response = $this->betaHtml->addBeta($event->getResponse(), $remainingDays);
         }
 
-        $response = $this->betaHtml->addBeta($event->getResponse(), $remainingDays);
         $event->setResponse($response);
     }
 }
