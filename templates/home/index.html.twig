@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<section class="jumbotron">
+<section class="jumbotron mt-3">
     <h2>Welcome to Snowtricks</h2>
     <p class="lead">We already have {{ nb_items }} trick{% if nb_items > 1 %}s{% endif %}.
         If you think a trick is missing, feel free to add it.</p>
@@ -12,19 +12,46 @@
         <span class="fas fa-plus-circle" aria-hidden="true"></span> Add a trick
     </a>
 </section>
-<section>
+<section class="home">
     <h2>Most recent tricks</h2>
     {% if items %}
-        <ul>
-            {% for item in items %}
-            <li>
-                <a href="{{ path('trick_view', {slug: item.slug}) }}">{{ item.name }}</a>
-                 at {{ item.createdAt|date("m/d/Y h:i") }}
-            </li>
+        <div class="card-deck">
+            {% for trick in items %}
+            <div class="card">
+                {% if trick.imageFeatured %}
+                    <img
+                        src="{{ trick.imageFeatured.webPath }}"
+                        alt="{{ trick.imageFeatured.alt }}"
+                        class="card-img"
+                    >
+                {% else %}
+                    <img
+                        src="{{ asset('uploads/default/default-image-featured.png') }}"
+                        alt="default-image-featured"
+                        class="card-img"
+                    >
+                {% endif %}
+                <div class="card-img-overlay">
+                    <h5 class="card-title">{{ trick.name }}</h5>
+                    <p class="card-text mb-1">
+                        <span class="fas fa-tag" aria-hidden="true"></span>
+                        {% for category in trick.categories %}
+                            {{ category.name }}
+                        {% endfor %}
+                    </p>
+                    <p class="card-text">
+                        <span class="fas fa-clock" aria-hidden="true"></span>
+                        {{ trick.createdAt|date("m/d/Y \\a\\t H:i") }}
+                    </p>
+                    <a class="btn btn-primary btn-sm" href="{{ path('trick_view', {slug: trick.slug}) }}">
+                        Go to trick
+                    </a>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
-        <p>No tricks at all...</p>
+        <p class="text-center">No tricks at all :(</p>
     {% endif %}
 </section>
 {% endblock %}
