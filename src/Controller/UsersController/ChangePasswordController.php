@@ -2,22 +2,26 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\ChangePasswordControllerInterface;
 use App\Entity\User;
 use App\Form\ChangePasswordType;
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-final class ChangePasswordController extends AbstractController
+final class ChangePasswordController extends AbstractController implements ChangePasswordControllerInterface
 {
     /**
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
+    /**
+     * ChangePasswordController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder
     ) {
@@ -25,10 +29,12 @@ final class ChangePasswordController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{id}/change-password", methods={"POST"}, name="user_profile_change_password")
+     * @Route("/profile/{id}/change-password", 
+     *     methods={"POST"}, 
+     *     name="user_profile_change_password"
+     * )
      *
-     * @param Request $request
-     * @param User $user
+     * @inheritdoc
      */
     public function changePassword(Request $request, User $user)
     {
@@ -52,6 +58,9 @@ final class ChangePasswordController extends AbstractController
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderForm(User $user): Response
     {
         $form = $this->createForm(ChangePasswordType::class);

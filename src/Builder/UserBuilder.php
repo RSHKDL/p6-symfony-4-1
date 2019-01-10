@@ -2,22 +2,12 @@
 
 namespace App\Builder;
 
-use App\DTO\UserDTO;
-use App\DTO\Interfaces\UserDTOInterface;
-use App\Entity\ContactMessage;
+use App\Builder\Interfaces\UserBuilderInterface;
 
-class UserBuilder
+final class UserBuilder implements UserBuilderInterface
 {
-
-    public function create(UserDTO $contactDTO): ContactMessage
+    public function build()
     {
-        $contactMessage = new ContactMessage(
-            $contactDTO->name,
-            $contactDTO->email,
-            $contactDTO->subject,
-            $contactDTO->message
-        );
-
-        return $contactMessage;
+        
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\RegisterUserControllerInterface;
 use App\Form\UserRegisterType;
 use App\FormHandler\RegisterUserHandler;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,7 +17,7 @@ use Twig\Environment;
  * Class RegisterUserController
  * @package App\Controller\UserController
  */
-final class RegisterUserController
+final class RegisterUserController implements RegisterUserControllerInterface
 {
 
     /**
@@ -36,12 +37,16 @@ final class RegisterUserController
      */
     private $urlGenerator;
 
+    /**
+     * RegisterUserController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         FormFactoryInterface $formFactory,
         RegisterUserHandler $handler,
         Environment $environment,
         UrlGeneratorInterface $urlGenerator
-    ){
+    ) {
         $this->formFactory = $formFactory;
         $this->handler = $handler;
         $this->environment = $environment;
@@ -49,16 +54,11 @@ final class RegisterUserController
     }
 
     /**
-     * @Route("/user/register", name="user_register", methods={"GET", "POST"})
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse|Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
+     * @Route("/user/register", 
+     *     name="user_register", 
+     *     methods={"GET", "POST"}
+     * )
      */
     public function registerUser(Request $request)
     {

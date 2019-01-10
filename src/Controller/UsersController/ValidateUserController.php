@@ -2,6 +2,7 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\ValidateUserControllerInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-final class ValidateUserController
+final class ValidateUserController implements ValidateUserControllerInterface
 {
 
     /**
@@ -33,10 +34,7 @@ final class ValidateUserController
 
     /**
      * ValidateUserController constructor.
-     * @param UserRepository $repository
-     * @param Environment $environment
-     * @param FlashBagInterface $flashBag
-     * @param UrlGeneratorInterface $urlGenerator
+     * @inheritdoc
      */
     public function __construct(
         UserRepository $repository,
@@ -51,17 +49,8 @@ final class ValidateUserController
     }
 
     /**
+     * @inheritdoc
      * @Route("/user/validation/{token}", name="user_validate", methods={"GET"})
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse|Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function validateUser(Request $request)
     {

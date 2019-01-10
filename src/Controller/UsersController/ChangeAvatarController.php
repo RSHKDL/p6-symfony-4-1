@@ -2,14 +2,19 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\ChangeAvatarControllerInterface;
 use App\Entity\User;
 use App\Form\ChangeAvatarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ChangeAvatarController extends AbstractController
+final class ChangeAvatarController extends AbstractController implements ChangeAvatarControllerInterface
 {
+
+    /**
+     * @inheritdoc
+     */
     public function changeAvatar(Request $request, User $user)
     {
         $form = $this->createForm(ChangeAvatarType::class, $user)->handleRequest($request);
@@ -33,6 +38,9 @@ final class ChangeAvatarController extends AbstractController
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderForm(User $user): Response
     {
         $form = $this->createForm(ChangeAvatarType::class);

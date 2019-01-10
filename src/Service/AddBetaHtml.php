@@ -2,15 +2,19 @@
 
 namespace App\Service;
 
+use App\Service\Interfaces\AddBetaHtmlInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /*
  * Add a "Beta" tag for x remaining days at the end of the <body>
  */
-class AddBetaHtml
+final class AddBetaHtml implements AddBetaHtmlInterface
 {
 
-    public function addBeta(Response $response, int $remainingDays)
+    /**
+     * @inheritdoc
+     */
+    public function addBeta(Response $response, int $remainingDays): Response
     {
         $content = $response->getContent();
         $html = '<div class="beta-banner">

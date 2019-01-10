@@ -2,6 +2,7 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\ForgotPasswordControllerInterface;
 use App\Form\ForgotPasswordType;
 use App\FormHandler\ForgotPasswordHandler;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,7 +17,7 @@ use Twig\Environment;
  * Class ForgotPasswordController
  * @package App\Controller\UsersController
  */
-final class ForgotPasswordController
+final class ForgotPasswordController implements ForgotPasswordControllerInterface
 {
     /**
      * @var ForgotPasswordHandler
@@ -35,6 +36,10 @@ final class ForgotPasswordController
      */
     private $urlGenerator;
 
+    /**
+     * ForgotPasswordController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         FormFactoryInterface $formFactory,
         Environment $environment,
@@ -48,15 +53,8 @@ final class ForgotPasswordController
     }
 
     /**
+     * @inheritdoc
      * @Route("/user/forgot-password", name="user_forgot_password", methods={"GET", "POST"})
-     *
-     * @param Request $request
-     * @return RedirectResponse|Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function forgotPassword(Request $request)
     {

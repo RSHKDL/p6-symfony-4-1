@@ -2,8 +2,9 @@
 
 namespace App\Controller\TricksController;
 
+use App\Controller\TricksController\Interfaces\CreateTricksControllerInterface;
 use App\Form\CreateTrickType;
-use App\FormHandler\CreateTrickHandler;
+use App\FormHandler\Interfaces\CreateTrickHandlerInterface;
 use App\Responder\Interfaces\TrickResponderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -18,11 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/trick/create", name="trick_create", methods={"GET", "POST"})
  * @Security("has_role('ROLE_USER')")
  */
-final class CreateTricksController
+final class CreateTricksController implements CreateTricksControllerInterface
 {
 
     /**
-     * @var CreateTrickHandler
+     * @var CreateTrickHandlerInterface
      */
     private $handler;
     /**
@@ -32,11 +33,10 @@ final class CreateTricksController
 
     /**
      * CreateTricksController constructor.
-     * @param CreateTrickHandler $handler
-     * @param FormFactoryInterface $formFactory
+     * @inheritdoc
      */
     public function __construct(
-        CreateTrickHandler $handler,
+        CreateTrickHandlerInterface $handler,
         FormFactoryInterface $formFactory
     ) {
         $this->handler = $handler;
@@ -44,15 +44,7 @@ final class CreateTricksController
     }
 
     /**
-     * @param Request $request
-     * @param TrickResponderInterface $responder
-     *
-     * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
     public function __invoke(Request $request, TrickResponderInterface $responder): Response
     {

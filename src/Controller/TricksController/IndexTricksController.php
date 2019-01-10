@@ -2,6 +2,7 @@
 
 namespace App\Controller\TricksController;
 
+use App\Controller\TricksController\Interfaces\IndexTricksControllerInterface;
 use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -12,7 +13,7 @@ use Twig\Environment;
  * Class TricksIndexController
  * @package App\Controller\TricksController
  */
-class IndexTricksController
+final class IndexTricksController implements IndexTricksControllerInterface
 {
     /**
      * @var TrickRepository
@@ -25,8 +26,7 @@ class IndexTricksController
 
     /**
      * TricksIndexController constructor.
-     * @param TrickRepository $repository
-     * @param Environment $environment
+     * @inheritdoc
      */
     public function __construct(
         TrickRepository $repository,
@@ -40,13 +40,7 @@ class IndexTricksController
      * The paginated Tricks list
      *
      * @Route("/tricks/{page}", name="trick_index", requirements={"page"="\d+"}, methods={"GET"})
-     *
-     * @param int $page
-     *
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
     public function index(int $page = 1): Response
     {

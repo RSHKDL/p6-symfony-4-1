@@ -2,13 +2,14 @@
 
 namespace App\FormHandler;
 
+use App\FormHandler\Interfaces\ForgotPasswordHandlerInterface;
 use App\Helper\Interfaces\ForgotPasswordMailInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
-final class ForgotPasswordHandler
+final class ForgotPasswordHandler implements ForgotPasswordHandlerInterface
 {
 
     /**
@@ -53,7 +54,7 @@ final class ForgotPasswordHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form)
+    public function handle(FormInterface $form): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();

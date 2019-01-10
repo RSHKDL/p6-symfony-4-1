@@ -2,6 +2,7 @@
 
 namespace App\Controller\TricksController;
 
+use App\Controller\TricksController\Interfaces\ViewTricksControllerInterface;
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Twig\Environment;
  * Class TricksViewController
  * @package App\Controller\TricksController
  */
-class ViewTricksController
+final class ViewTricksController implements ViewTricksControllerInterface
 {
 
     /**
@@ -26,8 +27,7 @@ class ViewTricksController
 
     /**
      * TricksViewController constructor.
-     * @param TrickRepository $repository
-     * @param Environment $environment
+     * @inheritdoc
      */
     public function __construct(
         TrickRepository $repository,
@@ -41,13 +41,7 @@ class ViewTricksController
      * Display a Trick
      *
      * @Route("/trick/{slug}", methods={"GET"}, name="trick_view")
-     *
-     * @param Trick $trick
-     *
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
     public function view(Trick $trick): Response
     {

@@ -2,6 +2,7 @@
 
 namespace App\Controller\UsersController;
 
+use App\Controller\UsersController\Interfaces\ResetPasswordControllerInterface;
 use App\Form\ChangePasswordType;
 use App\FormHandler\ResetPasswordHandler;
 use App\Repository\UserRepository;
@@ -17,7 +18,7 @@ use Twig\Environment;
  * Class ResetPasswordController
  * @package App\Controller\UsersController
  */
-final class ResetPasswordController
+final class ResetPasswordController implements ResetPasswordControllerInterface
 {
 
     /**
@@ -41,6 +42,10 @@ final class ResetPasswordController
      */
     private $handler;
 
+    /**
+     * ResetPasswordController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         UserRepository $repository,
         FormFactoryInterface $formFactory,
@@ -56,15 +61,11 @@ final class ResetPasswordController
     }
 
     /**
-     * @Route("/user/reset-password/{token}", name="user_reset_password", methods={"GET", "POST"})
-     *
-     * @param Request $request
-     * @return RedirectResponse|Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
+     * @Route("/user/reset-password/{token}",
+     *     name="user_reset_password",
+     *     methods={"GET", "POST"}
+     * )
      */
     public function resetPassword(Request $request)
     {

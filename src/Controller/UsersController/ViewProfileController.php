@@ -2,14 +2,13 @@
 
 namespace App\Controller\UsersController;
 
-use App\Entity\User;
+use App\Controller\UsersController\Interfaces\ViewProfileControllerInterface;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ViewProfileController extends AbstractController
+final class ViewProfileController extends AbstractController implements ViewProfileControllerInterface
 {
 
     /**
@@ -17,6 +16,10 @@ class ViewProfileController extends AbstractController
      */
     private $repository;
 
+    /**
+     * ViewProfileController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         UserRepository $repository
     ) {
@@ -24,9 +27,14 @@ class ViewProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{id}", name="user_profile", requirements={"id"="\d+"}, methods={"GET", "POST"})
+     * @inheritdoc
+     * @Route("/profile/{id}", 
+     *     name="user_profile", 
+     *     requirements={"id"="\d+"}, 
+     *     methods={"GET", "POST"}
+     * )
      */
-    public function view($id)
+    public function view(int $id)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $currentUser = $this->getUser();

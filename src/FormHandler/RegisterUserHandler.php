@@ -3,6 +3,7 @@
 namespace App\FormHandler;
 
 use App\Entity\User;
+use App\FormHandler\Interfaces\RegisterUserHandlerInterface;
 use App\Helper\Interfaces\RegisterUserMailInterface;
 use App\Helper\RegisterUserMail;
 use App\Repository\UserRepository;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Twig\Environment;
 
-final class RegisterUserHandler
+final class RegisterUserHandler implements RegisterUserHandlerInterface
 {
 
     /**
@@ -36,6 +37,10 @@ final class RegisterUserHandler
      */
     private $registerUserMail;
 
+    /**
+     * RegisterUserHandler constructor.
+     * @inheritdoc
+     */
     public function __construct(
         UserRepository $repository,
         UserPasswordEncoderInterface $passwordEncoder,
@@ -52,13 +57,7 @@ final class RegisterUserHandler
     }
 
     /**
-     * @param FormInterface $form
-     * @return bool
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
     public function handle(FormInterface $form): bool
     {

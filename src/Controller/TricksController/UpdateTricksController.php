@@ -2,16 +2,15 @@
 
 namespace App\Controller\TricksController;
 
+use App\Controller\TricksController\Interfaces\UpdateTricksControllerInterface;
 use App\Factory\Interfaces\TrickDTOFactoryInterface;
-use App\Form\CreateTrickType;
 use App\Form\UpdateTrickType;
-use App\FormHandler\UpdateTrickHandler;
+use App\FormHandler\Interfaces\UpdateTrickHandlerInterface;
 use App\Repository\TrickRepository;
 use App\Responder\Interfaces\TrickResponderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class UpdateTricksController
  * @package App\Controller\TricksController
  */
-class UpdateTricksController
+final class UpdateTricksController implements UpdateTricksControllerInterface
 {
 
     /**
@@ -30,7 +29,7 @@ class UpdateTricksController
      */
     private $repository;
     /**
-     * @var UpdateTrickHandler
+     * @var UpdateTrickHandlerInterface
      */
     private $handler;
     /**
@@ -46,9 +45,13 @@ class UpdateTricksController
      */
     private $session;
 
+    /**
+     * UpdateTricksController constructor.
+     * @inheritdoc
+     */
     public function __construct(
         TrickRepository $repository,
-        UpdateTrickHandler $handler,
+        UpdateTrickHandlerInterface $handler,
         FormFactoryInterface $formFactory,
         TrickDTOFactoryInterface $trickDTOFactory,
         SessionInterface $session
@@ -61,15 +64,7 @@ class UpdateTricksController
     }
 
     /**
-     * @param Request $request
-     * @param TrickResponderInterface $responder
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @inheritdoc
      */
     public function __invoke(Request $request, TrickResponderInterface $responder)
     {

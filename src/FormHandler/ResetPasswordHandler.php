@@ -3,12 +3,13 @@
 namespace App\FormHandler;
 
 use App\Entity\User;
+use App\FormHandler\Interfaces\RegisterPasswordHandlerInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-final class ResetPasswordHandler
+final class ResetPasswordHandler implements RegisterPasswordHandlerInterface
 {
     /**
      * @var UserRepository
@@ -25,9 +26,7 @@ final class ResetPasswordHandler
 
     /**
      * ResetPasswordHandler constructor.
-     * @param UserRepository $repository
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param FlashBagInterface $flashBag
+     * @inheritdoc
      */
     public function __construct(
         UserRepository $repository,
@@ -40,11 +39,7 @@ final class ResetPasswordHandler
     }
 
     /**
-     * @param FormInterface $form
-     * @param User $user
-     * @return bool
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @inheritdoc
      */
     public function handle(FormInterface $form, User $user): bool
     {

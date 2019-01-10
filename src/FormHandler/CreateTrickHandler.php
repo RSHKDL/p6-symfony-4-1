@@ -4,6 +4,7 @@ namespace App\FormHandler;
 
 use App\Builder\Interfaces\CreateTrickBuilderInterface;
 use App\Entity\Trick;
+use App\FormHandler\Interfaces\CreateTrickHandlerInterface;
 use App\Repository\TrickRepository;
 use App\Service\Interfaces\FileUploaderInterface;
 use App\Service\Interfaces\SlugMakerInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * Class CreateTrickHandler
  * @package App\FormHandler
  */
-final class CreateTrickHandler
+final class CreateTrickHandler implements CreateTrickHandlerInterface
 {
 
     /**
