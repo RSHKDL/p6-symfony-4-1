@@ -3,7 +3,7 @@
 {% block title %}Hello {{ user.username }}{% endblock %}
 
 {% block body %}
-<section class="user-profile">
+<section class="user-profile mt-3">
     <div class="float-right avatar">
         {% if user.avatar is null %}
             <img src="{{ asset('uploads/avatars/default_avatar.png') }}"
@@ -36,28 +36,5 @@
         'App\\Controller\\UsersController\\ChangeAvatarController::renderForm',
         {id: id}))
     }}
-</section>
-<section>
-    <h4>Other snowtricks contributors</h4>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Tricks written</th>
-            <th scope="col">Comments posted</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-        <tr>
-            <th scope="row">{{ user.id }}</th>
-            <td>{{ user.username }}</td>
-            <td>{{ user.tricks.count }}</td>
-            <td>{{ user.comments.count }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 </section>
 {% endblock body %}
