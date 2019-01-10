@@ -4,38 +4,39 @@ namespace App\DTO;
 
 use App\DTO\Interfaces\ImageDTOInterface;
 use App\DTO\Interfaces\TrickDTOInterface;
+use App\Service\SlugMaker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 
 final class TrickDTO implements TrickDTOInterface
 {
     /**
-     * @var string|null
+     * @var null|string
      */
     public $name;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     public $description;
 
     /**
-     * @var ImageDTOInterface|null
+     * @var null|ImageDTOInterface
      */
     public $imageFeatured;
 
     /**
-     * @var array|null
+     * @var null|array
      */
     public $images;
 
     /**
-     * @var array|null
+     * @var null|array
      */
     public $videos;
 
     /**
-     * @var ArrayCollection|null
+     * @var null|ArrayCollection
      */
     public $categories;
 

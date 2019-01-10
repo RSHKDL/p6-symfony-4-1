@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_tricks")
- * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  * @UniqueEntity(
  *     fields={"name"},
@@ -139,7 +138,6 @@ class Trick
      */
     private $comments;
 
-
     /**
      * Trick constructor.
      * @param string $name
@@ -160,7 +158,6 @@ class Trick
         ?ArrayCollection $categories
     ) {
         $this->name = $name;
-        $this->slug = $this->slugify($name);
         $this->description = $description;
         $this->createdAt = new \DateTime();
         $this->author = $author;
@@ -198,7 +195,6 @@ class Trick
         array $categories
     ): void {
         $this->name = $name;
-        $this->slug = $this->slugify($name);
         $this->description = $description;
         $this->updateDate();
         $this->updateCategories($categories);
@@ -207,47 +203,68 @@ class Trick
         $this->updateVideos($videos);
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @return null|string
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * Transform a string to an url friendly slug
-     *
-     * @param string $text
-     * @return string
+     * @return null|Image
      */
-    function slugify(string $text) {
-        // replace non letter or digits by -
-        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
-        // trim
-        $text = trim($text, '-');
-        // transliterate
-        if (function_exists('iconv'))
-        {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-        // lowercase
-        $text = strtolower($text);
-        // remove unwanted characters
-        $text = preg_replace('#[^-\w]+#', '', $text);
-        return $text;
+    public function getImageFeatured(): ?Image
+    {
+        return $this->imageFeatured;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getImages(): \ArrayAccess
+    {
+        return $this->images;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getVideos(): \ArrayAccess
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
     }
 
     /**
@@ -286,6 +303,9 @@ class Trick
         return $this;
     }
 
+    /**
+     *
+     */
     private function updateDate()
     {
         $this->setUpdatedAt(new \DateTime());
@@ -319,6 +339,9 @@ class Trick
         }
     }
 
+    /**
+     * @param $categories
+     */
     private function updateCategories($categories)
     {
         $this->categories->clear();
@@ -335,6 +358,9 @@ class Trick
         return $this->comments;
     }
 
+    /**
+     * @param Comment|null $comment
+     */
     public function addComment(?Comment $comment): void
     {
         $comment->setTrick($this);
@@ -343,6 +369,9 @@ class Trick
         }
     }
 
+    /**
+     * @param Comment $comment
+     */
     public function removeComment(Comment $comment): void
     {
         $comment->setTrick(null);
@@ -357,6 +386,10 @@ class Trick
         return $this->categories;
     }
 
+    /**
+     * @param Category $category
+     * @return Trick
+     */
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {
@@ -366,6 +399,10 @@ class Trick
         return $this;
     }
 
+    /**
+     * @param Category $category
+     * @return Trick
+     */
     public function removeCategory(Category $category): self
     {
         if ($this->categories->contains($category)) {
@@ -376,42 +413,18 @@ class Trick
     }
 
     /**
-     * @return \ArrayAccess
-     */
-    public function getImages(): \ArrayAccess
-    {
-        return $this->images;
-    }
-
-    /**
-     * @return \ArrayAccess
-     */
-    public function getVideos(): \ArrayAccess
-    {
-        return $this->videos;
-    }
-
-    /**
-     * @return Image|null
-     */
-    public function getImageFeatured(): ?Image
-    {
-        return $this->imageFeatured;
-    }
-
-    /**
-     * @return User
-     */
-    public function getAuthor(): User
-    {
-        return $this->author;
-    }
-
-    /**
      * @param User $author
      */
     public function setAuthor(User $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

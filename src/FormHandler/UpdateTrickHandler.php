@@ -9,6 +9,7 @@ use App\Repository\TrickRepository;
 use App\Service\Interfaces\DirectoryModifierInterface;
 use App\Service\Interfaces\FileRemoverInterface;
 use App\Service\Interfaces\FileUploaderInterface;
+use App\Service\Interfaces\SlugMakerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -47,6 +48,10 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
      * @var FlashBagInterface
      */
     private $flashBag;
+    /**
+     * @var SlugMakerInterface
+     */
+    private $slugMaker;
 
     /**
      * UpdateTrickHandler constructor.
@@ -59,7 +64,8 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
         FileUploaderInterface $fileUploader,
         DirectoryModifierInterface $directoryModifier,
         SessionInterface $session,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        SlugMakerInterface $slugMaker
     ) {
         $this->repository = $repository;
         $this->updateTrickBuilder = $updateTrickBuilder;
@@ -68,6 +74,7 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
         $this->directoryModifier = $directoryModifier;
         $this->session = $session;
         $this->flashBag = $flashBag;
+        $this->slugMaker = $slugMaker;
     }
 
     /**
@@ -77,6 +84,7 @@ final class UpdateTrickHandler implements UpdateTrickHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $this->updateTrickBuilder->update($trick, $form->getData());
+            $trick->setSlug($this->slugMaker->slugify($trick->getName(), true));
             $this->repository->save($trick);
             $this->fileUploader->uploadFiles();
             $this->fileRemover->removeFiles();

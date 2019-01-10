@@ -67,15 +67,16 @@ final class UpdateTrickBuilder implements UpdateTrickBuilderInterface
             $this->fileRemover->getDirectory($explodedPath[3]);
 
             $updateImageInfo = $this->imageProcessor->getUpdateImageInfo();
-            $this->directoryModifier
-                ->getDirectoryToModify(
-                    $trick->getImageFeatured()->getPath(),
-                    $updateImageInfo['path']
-                );
+            $this->directoryModifier->getDirectoryToModify(
+                $trick->getImageFeatured()->getPath(),
+                $updateImageInfo['path']
+            );
 
             $trick->getImageFeatured()->setPath($updateImageInfo['path']);
+            $trick->getImageFeatured()->setAlt($updateImageInfo['alt']);
             foreach ($trick->getImages() as $image) {
                 $image->setPath($updateImageInfo['path']);
+                $image->setAlt($updateImageInfo['alt']);
             }
         }
 
@@ -83,8 +84,6 @@ final class UpdateTrickBuilder implements UpdateTrickBuilderInterface
             $imageFeatured = $this->imageBuilder->build($trickDTO->imageFeatured, false);
             $this->fileRemover->addFileToRemove($trick->getImageFeatured());
         }
-
-        //dump($trickDTO->categories->toArray());die;
 
         $trick->update(
             $trickDTO->name,

@@ -3,10 +3,15 @@
 namespace App\Service;
 
 use App\Service\Interfaces\ImageProcessorInterface;
+use App\Service\Interfaces\SlugMakerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 final class ImageProcessor implements ImageProcessorInterface
 {
+    /**
+     * @var SlugMakerInterface
+     */
+    private $slugMaker;
     /**
      * @var Filesystem
      */
@@ -41,12 +46,13 @@ final class ImageProcessor implements ImageProcessorInterface
      * @inheritdoc
      */
     public function __construct(
+        SlugMakerInterface $slugMaker,
         Filesystem $filesystem,
         string $publicDirectory,
         string $tricksDirectory,
         string $usersDirectory
     ) {
-
+        $this->slugMaker = $slugMaker;
         $this->filesystem = $filesystem;
         $this->publicDirectory = $publicDirectory;
         $this->tricksDirectory = $tricksDirectory;
@@ -54,6 +60,10 @@ final class ImageProcessor implements ImageProcessorInterface
     }
 
     /**
+     * Initialize the "processor" depending on context (trick or user entity).
+     * Define the attributes used later by an Image entity (path and alt),
+     * then create the directory where the images will be stored.
+     *
      * @inheritdoc
      */
     public function initialize(string $context, string $name)
@@ -67,12 +77,14 @@ final class ImageProcessor implements ImageProcessorInterface
                 break;
         }
         $this->name = $name;
-        $this->path = $directory . '/' . strtolower(str_replace(' ', '_', $name));
-        $this->alt = 'image-' . strtolower(str_replace(' ', '-', $name));
+        $this->path = $directory . '/' . $this->slugMaker->slugify($name, false);
+        $this->alt = 'image-' . $this->slugMaker->slugify($name, true);
         $this->filesystem->mkdir($this->publicDirectory.$this->path);
     }
 
     /**
+     * Generate Image entity attributes
+     *
      * @inheritdoc
      */
     public function generateImageInfo(\splFileInfo $fileInfo): array
@@ -94,5 +106,4 @@ final class ImageProcessor implements ImageProcessorInterface
             'alt'   => $this->alt
         ];
     }
-
 }

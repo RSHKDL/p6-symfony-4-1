@@ -8,6 +8,7 @@ use App\Repository\TrickRepository;
 use App\Service\Interfaces\DirectoryModifierInterface;
 use App\Service\Interfaces\FileRemoverInterface;
 use App\Service\Interfaces\FileUploaderInterface;
+use App\Service\Interfaces\SlugMakerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,6 +24,7 @@ interface UpdateTrickHandlerInterface
      * @param DirectoryModifierInterface $directoryModifier
      * @param SessionInterface $session
      * @param FlashBagInterface $flashBag
+     * @param SlugMakerInterface $slugMaker
      */
     public function __construct(
         TrickRepository $repository,
@@ -31,7 +33,8 @@ interface UpdateTrickHandlerInterface
         FileUploaderInterface $fileUploader,
         DirectoryModifierInterface $directoryModifier,
         SessionInterface $session,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        SlugMakerInterface $slugMaker
     );
 
     /**

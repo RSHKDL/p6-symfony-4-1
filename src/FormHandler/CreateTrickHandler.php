@@ -6,6 +6,7 @@ use App\Builder\Interfaces\CreateTrickBuilderInterface;
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use App\Service\Interfaces\FileUploaderInterface;
+use App\Service\Interfaces\SlugMakerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -43,15 +44,21 @@ final class CreateTrickHandler
     private $session;
 
     /**
+     * @var SlugMakerInterface
+     */
+    private $slugMaker;
+
+    /**
      * CreateTrickHandler constructor.
-     * @param TrickRepository $repository
+     * @inheritdoc
      */
     public function __construct(
         TrickRepository $repository,
         CreateTrickBuilderInterface $builder,
         FileUploaderInterface $fileUploader,
         FlashBagInterface $flashBag,
-        SessionInterface $session
+        SessionInterface $session,
+        SlugMakerInterface $slugMaker
 
     ) {
         $this->repository = $repository;
@@ -59,6 +66,7 @@ final class CreateTrickHandler
         $this->fileUploader = $fileUploader;
         $this->flashBag = $flashBag;
         $this->session = $session;
+        $this->slugMaker = $slugMaker;
     }
 
     /**
@@ -73,6 +81,7 @@ final class CreateTrickHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $trick = $this->builder->build($form->getData());
+            $trick->setSlug($this->slugMaker->slugify($trick->getName(), true));
             $this->repository->save($trick);
             $this->fileUploader->uploadFiles();
             $this->session->set('slug', $trick->getSlug());

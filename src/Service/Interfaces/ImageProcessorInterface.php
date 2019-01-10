@@ -9,12 +9,14 @@ interface ImageProcessorInterface
 
     /**
      * ImageProcessorInterface constructor.
+     * @param SlugMakerInterface $slugMaker
      * @param Filesystem $filesystem
      * @param string $publicDirectory
      * @param string $tricksDirectory
      * @param string $usersDirectory
      */
     public function __construct(
+        SlugMakerInterface $slugMaker,
         Filesystem $filesystem,
         string $publicDirectory,
         string $tricksDirectory,

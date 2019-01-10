@@ -89,6 +89,14 @@ class Image
     }
 
     /**
+     * @param string $alt
+     */
+    public function setAlt(string $alt)
+    {
+        $this->alt = $alt;
+    }
+
+    /**
      * @return string
      */
     public function getPath(): string
@@ -96,6 +104,9 @@ class Image
         return $this->path;
     }
 
+    /**
+     * @param string $path
+     */
     public function setPath(string $path)
     {
         $this->path = $path;
