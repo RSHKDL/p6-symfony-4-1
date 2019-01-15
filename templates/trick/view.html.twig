@@ -69,7 +69,7 @@
         </ul>
     </footer>
     <section class="trick-medias px-4">
-        {% if trick.images or trick.videos %}
+        {% if trick.images.count > 0 or trick.videos.count > 0 %}
             <button
                     class="btn btn-primary"
                     data-toggle="collapse"
@@ -116,45 +116,19 @@
                 {% endif %}
             </div>
         </div>
-        <div class="mx-auto mt-3 comments-container container">
-            {% for comment in comments %}
-                <div class="row mb-3">
-                    <div class="comments-avatar col-sm-1 d-none d-md-block">
-                        <div class="avatar-thumbnail">
-                            {% if comment.author.avatar is null %}
-                                <img src="{{ asset('uploads/avatars/default_avatar.png') }}"
-                                     alt="default_avatar"
-                                >
-                            {% else %}
-                                <img src="{{ asset(comment.author.avatar) }}"
-                                     alt="{{ comment.author.username }}-avatar"
-                                >
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="comments-metadata col-sm-2">
-                        <small class="text-muted">#{{ loop.index0+1 }}</small>
-                        {{ comment.author.username }}
-                        <small class="text-muted"><i>{{ comment.createdAt | date("m/d/Y H:i:s") }}</i></small>
-                    </div>
-                    <div class="comments-content col-sm-9">
-                        <p class="m-0">
-                            {{ comment.content }}
-                        </p>
-                    </div>
-                </div>
-            {% else %}
-                <p class="text-center">No comments yet :(</p>
-            {% endfor %}
-        </div>
         {% if trick.comments is not empty %}
-            <button
-                    class="btn btn-primary js-load-more"
+        <div class="mx-auto mt-3 comments-container container">
+            {% include "trick/_comment_view.html.twig" %}
+        </div>
+            {% if total_comments > 5 %}
+            <button class="btn btn-primary js-load-more"
                     data-url="{{ path('comments_load_more', {id: trick.id}) }}"
                     data-offset="5"
-                    data-total="{{ total_comments }}">
-                Load more comments
+                    data-total="{{ total_comments }}">Load more comments
             </button>
+            {% endif %}
+        {% else %}
+            <p class="text-center mt-3">No comments yet :(</p>
         {% endif %}
     </section>
 </article>

@@ -30,22 +30,15 @@ final class LoadMoreCommentsController extends AbstractController
             $figure = $this->getDoctrine()->getRepository(Trick::class)->find($id);
             /** @var Collection $comments */
             $comments = $figure->getComments();
+            $batch = $comments->slice($offset,5);
 
-            $batch = [];
-            foreach($comments->slice($offset,5) as $comment) {
-                $batch[] = [
-                    'id'        => $comment->getId(),
-                    'content'   => $comment->getContent(),
-                    'date'      => $comment->getCreatedAt()->format("m/d/Y H:i:s"),
-                    'author'    => $comment->getAuthor()->getUsername()
-                ];
-            }
-
-            $data = [
-                'batch' => $batch,
-                'offset' => $offset+5
-            ];
-            return new JsonResponse($data);
+            $template = $this
+                ->render('trick/_comment_view.html.twig', [
+                    'comments' => $batch,
+                    'offset' => $offset+5
+                ])
+                ->getContent();
+            return new JsonResponse($template);
         }
         return new JsonResponse('No results');
     }

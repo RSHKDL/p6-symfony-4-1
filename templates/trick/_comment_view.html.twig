@@ -1,0 +1,31 @@
+{% for comment in comments %}
+    <div class="row mb-3">
+        <div class="comments-avatar col-sm-1 d-none d-md-block">
+            <div class="avatar-thumbnail">
+                {% if comment.author.avatar is null %}
+                    <img src="{{ asset('uploads/avatars/default_avatar.png') }}"
+                         alt="default_avatar"
+                    >
+                {% else %}
+                    <img src="{{ asset(comment.author.avatar) }}"
+                         alt="{{ comment.author.username }}-avatar"
+                    >
+                {% endif %}
+            </div>
+        </div>
+        <div class="comments-metadata col-sm-2">
+            {% if offset is not defined %}
+                <small class="text-muted">#{{ loop.index0+1 }}</small>
+            {% else %}
+                <small class="text-muted">#{{ loop.index0+offset-4 }}</small>
+            {% endif %}
+            {{ comment.author.username }}
+            <small class="text-muted d-block"><i>{{ comment.createdAt | date("m/d/Y H:i:s") }}</i></small>
+        </div>
+        <div class="comments-content col-sm-9">
+            <p class="m-0">
+                {{ comment.content }}
+            </p>
+        </div>
+    </div>
+{% endfor %}
