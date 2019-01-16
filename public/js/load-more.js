@@ -18,10 +18,10 @@ jQuery(function($) {
             },
             success: function (data) {
                 if (data) {
+                    console.log(data);
                     $('.comments-container').append(data);
                     button.text('Load more comments');
                     button.data('offset', offset+5);
-                    console.log(offset+5, total);
                     if ( offset+5 >= total ) {
                         button.remove(); // if offset reach total, remove the button
                     }

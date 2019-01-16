@@ -27,9 +27,9 @@ final class LoadMoreCommentsController extends AbstractController
     {
         if($request->isXmlHttpRequest()) {
             $offset = $request->request->get('offset');
-            $figure = $this->getDoctrine()->getRepository(Trick::class)->find($id);
+            $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
             /** @var Collection $comments */
-            $comments = $figure->getComments();
+            $comments = $trick->getComments();
             $batch = $comments->slice($offset,5);
 
             $template = $this
