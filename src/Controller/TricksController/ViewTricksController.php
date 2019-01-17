@@ -5,6 +5,7 @@ namespace App\Controller\TricksController;
 use App\Controller\TricksController\Interfaces\ViewTricksControllerInterface;
 use App\Entity\Trick;
 use App\Repository\TrickRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -45,14 +46,16 @@ final class ViewTricksController implements ViewTricksControllerInterface
      */
     public function view(Trick $trick): Response
     {
-        $comments = $trick->getComments()->slice(0,5);
-        $totalComments = $trick->getComments()->count();
+        $length = 5;
+        /** @var Collection $comments */
+        $comments = $trick->getComments();
 
         return new Response(
             $this->environment->render('trick/view.html.twig', [
-                'trick' => $trick,
-                'comments' => $comments,
-                'total_comments' => $totalComments
+                'trick'             => $trick,
+                'comments'          => $comments->slice(0,$length),
+                'total_comments'    => $comments->count(),
+                'length'            => $length
             ])
         );
     }

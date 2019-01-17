@@ -1,28 +1,27 @@
 jQuery(function($) {
-    $('.js-load-more').click(function () {
-        const button = $(this);
-        let total = $(this).data('total');
-        let offset = $(this).data('offset');
+    const button = $('.js-load-more');
+    button.click(function () {
+        let offset = button.data('offset');
+        let length = button.data('length');
+        let total = button.data('total');
         let data = {
             "offset":offset,
-            "total":total
+            "length":length
         };
-
         $.ajax({
-            url: $(this).data('url'), // Symfony controller use this route
+            url: button.data('url'), // Symfony controller use this route
             type: 'POST',
             dataType: 'json',
             data: data,
-            beforeSend : function (xhr) {
+            beforeSend : function () {
                 button.html('<span class="fas fa-spinner fa-spin" aria-hidden="true"></span> Loading...');
             },
-            success: function (data) {
-                if (data) {
-                    console.log(data);
-                    $('.comments-container').append(data);
+            success: function (result) {
+                if (result) {
+                    $('.comments-container').append(result);
                     button.text('Load more comments');
-                    button.data('offset', offset+5);
-                    if ( offset+5 >= total ) {
+                    button.data("offset", offset+length);
+                    if ( offset+length >= total ) {
                         button.remove(); // if offset reach total, remove the button
                     }
                 } else {

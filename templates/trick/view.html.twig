@@ -116,16 +116,17 @@
                 {% endif %}
             </div>
         </div>
-        {% if trick.comments is not empty %}
-        <div class="mx-auto mt-3 comments-container container">
-            {% include "trick/_comment_view.html.twig" %}
-        </div>
-            {% if total_comments > 5 %}
-            <button class="btn btn-primary js-load-more"
-                    data-url="{{ path('comments_load_more', {id: trick.id}) }}"
-                    data-offset="5"
-                    data-total="{{ total_comments }}">Load more comments
-            </button>
+        {% if comments is not empty %}
+            <div class="mx-auto mt-3 comments-container container">
+                {% include "trick/_comment_view.html.twig" %}
+            </div>
+            {% if total_comments > length %}
+                <button class="btn btn-primary js-load-more"
+                        data-url="{{ path('comments_load_more', {id: trick.id}) }}"
+                        data-offset="{{ length }}"
+                        data-length="{{ length }}"
+                        data-total="{{ total_comments }}">Load more comments
+                </button>
             {% endif %}
         {% else %}
             <p class="text-center mt-3">No comments yet :(</p>

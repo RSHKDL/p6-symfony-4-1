@@ -25,21 +25,19 @@ final class LoadMoreCommentsController extends AbstractController
      */
     public function loadMoreComments(Request $request, int $id): JsonResponse
     {
-        if($request->isXmlHttpRequest()) {
-            $offset = $request->request->get('offset');
-            $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
-            /** @var Collection $comments */
-            $comments = $trick->getComments();
-            $batch = $comments->slice($offset,5);
+        $offset = $request->request->get('offset');
+        $length = $request->request->get('length');
+        $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
+        /** @var Collection $comments */
+        $comments = $trick->getComments();
 
-            $template = $this
-                ->render('trick/_comment_view.html.twig', [
-                    'comments' => $batch,
-                    'offset' => $offset+5
-                ])
-                ->getContent();
-            return new JsonResponse($template);
-        }
-        return new JsonResponse('No results');
+        $template = $this
+            ->render('trick/_comment_view.html.twig', [
+                'comments'  => $comments->slice($offset, $length),
+                'offset'    => $offset+$length,
+                'length'    => $length
+            ])
+            ->getContent();
+        return new JsonResponse($template);
     }
 }
