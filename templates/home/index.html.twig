@@ -1,19 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block welcome %}
+    <section class="welcome">
+        <div>
+            <h2 class="mb-3">Welcome to Snowtricks</h2>
+            <hr>
+            <p>
+                If you are new to freestyle snowboarding, chances are you're a bit confused
+                as to what you call certain tricks. For example, what is Frontside and Backside?
+                Is it a Tucked Knee Indy or a Japan? Learning the freestyle lingo is like learning
+                a whole new language. Don't worry, this site is your Rosetta Stone to snowboard jargon.
+            </p>
+            <a class="btn btn-secondary" href="#fresh">
+                <span class="fas fa-arrow-down" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+{% endblock welcome %}
 {% block body %}
-<section class="jumbotron mt-3">
-    <h2>Welcome to Snowtricks</h2>
-    <p class="lead">We already have {{ nb_items }} trick{% if nb_items > 1 %}s{% endif %}.
-        If you think a trick is missing, feel free to add it.</p>
-    <a class="btn btn-primary" href="{{ path('trick_index') }}">
-        <span class="fas fa-arrow-alt-circle-right"></span> All our tricks
-    </a>
-    <a class="btn btn-success" href="{{ path('trick_create') }}">
-        <span class="fas fa-plus-circle" aria-hidden="true"></span> Add a trick
-    </a>
-</section>
-<section class="home">
-    <h2>Most recent tricks</h2>
+<section class="home" id="fresh">
+    <h2 class="text-center my-4">Certified fresh tricks</h2>
     {% if items %}
         <div class="card-deck">
             {% for trick in items %}
@@ -31,21 +37,40 @@
                         class="card-img"
                     >
                 {% endif %}
-                <div class="card-img-overlay">
-                    <h5 class="card-title">{{ trick.name }}</h5>
-                    <p class="card-text mb-1">
-                        <span class="fas fa-tag" aria-hidden="true"></span>
-                        {% for category in trick.categories %}
-                            {{ category.name }}
-                        {% endfor %}
-                    </p>
-                    <p class="card-text">
-                        <span class="fas fa-clock" aria-hidden="true"></span>
-                        {{ trick.createdAt|date("m/d/Y \\a\\t H:i") }}
-                    </p>
-                    <a class="btn btn-primary btn-sm" href="{{ path('trick_view', {slug: trick.slug}) }}">
-                        Go to trick
-                    </a>
+                <div class="card-img-overlay text-center">
+                    <div class="content-main">
+                        <h3>{{ trick.name }}</h3>
+                        <hr>
+                        <p class="card-text mb-0">
+                            {% for category in trick.categories %}
+                                {{ category.name }}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="content-overlay">
+                        {% if trick.description|length > 140 %}
+                            <p>{{ trick.description|slice(0,140) ~ '...' }}</p>
+                        {% else %}
+                            <p>{{ trick.description }}</p>
+                        {% endif %}
+                        <a class="btn btn-secondary" href="{{ path('trick_view', {slug: trick.slug}) }}">
+                            Go to trick
+                        </a>
+                    </div>
+                    <div class="utility">
+                        <ul class="list-unstyled list-inline ml-3">
+                            <li class="list-inline-item">
+                                <span class="far fa-comment" aria-hidden="true"></span>
+                                {{ trick.comments.count }}
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="fas fa-calendar-alt" aria-hidden="true"></span>
+                                {{ trick.createdAt|date("m.d.Y") }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="gradient-overlay"></div>
+                    <div class="color-overlay"></div>
                 </div>
             </div>
             {% endfor %}
@@ -53,5 +78,46 @@
     {% else %}
         <p class="text-center">No tricks at all :(</p>
     {% endif %}
+</section>
+<section class="social">
+    <h2 class="text-center mt-5 mb-4">Meet us</h2>
+    <div class="card-deck text-center">
+        <div class="card">
+            <div class="card-body">
+                <span class="fab fa-twitter fa-3x"></span>
+                <h3 class="card-title">Twitter</h3>
+                <hr>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, id quo eruditi eloquentiam.
+                    Assum decore te sed. Elitr scripta ocurreret qui ad.
+                </p>
+                <a class="btn btn-secondary" href="#">Learn more</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <span class="fab fa-instagram fa-3x"></span>
+                <h3 class="card-title">Instagram</h3>
+                <hr>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, id quo eruditi eloquentiam.
+                    Assum decore te sed. Elitr scripta ocurreret qui ad.
+                </p>
+                <a class="btn btn-secondary" href="#">Learn more</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <span class="fab fa-vimeo fa-3x"></span>
+                <h3 class="card-title">Vimeo</h3>
+                <hr>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, id quo eruditi eloquentiam.
+                    Assum decore te sed. Elitr scripta ocurreret qui ad.
+                </p>
+                <a class="btn btn-secondary" href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

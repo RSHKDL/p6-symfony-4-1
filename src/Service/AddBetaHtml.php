@@ -21,8 +21,8 @@ final class AddBetaHtml implements AddBetaHtmlInterface
             <span class="fas fa-flask" aria-hidden="true"></span>
              <i>Project in Beta, '.$remainingDays.' days left.</i></div>';
         $content = str_replace(
-            '<body>',
-            '<body> '.$html,
+            '<body id="top">',
+            '<body id="top"> '.$html,
             $content
         );
 

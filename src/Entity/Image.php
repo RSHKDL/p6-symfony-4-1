@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -23,7 +22,6 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="255")
      * @var string
      */
     private $name;
@@ -42,13 +40,6 @@ class Image
 
     /**
      * @var UploadedFile|null $file
-     * @Assert\Image(
-     *     maxSize = "500k",
-     *     allowPortrait = false,
-     *     allowPortraitMessage = "Landscape orientation only",
-     *     allowSquare = false,
-     *     allowSquareMessage = "Landscape orientation only",
-     * )
      */
     private $file;
 
@@ -134,13 +125,8 @@ class Image
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getOldFile()
-    {
-        return $this->oldFile;
-    }
-
     public function getWebPath()
     {
         return $this->path.'/'.$this->name;

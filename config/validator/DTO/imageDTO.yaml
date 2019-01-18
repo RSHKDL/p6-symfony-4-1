@@ -1,0 +1,12 @@
+App\DTO\ImageDTO:
+    properties:
+        file:
+            - Image:
+                maxSize: 2000k
+                maxSizeMessage: "Image too big"
+                allowLandscape: false
+                allowLandscapeMessage: "Portrait orientation only"
+                allowSquare: false
+                allowSquareMessage: "Portrait orientation only"
+                groups:
+                    - trickDTO

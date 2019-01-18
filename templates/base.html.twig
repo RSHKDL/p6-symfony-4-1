@@ -10,7 +10,7 @@
         {% endblock %}
     </head>
     <body id="top">
-        <div class="site-body pb-3">
+        <div class="site-body pb-5">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="mr-auto" href="{{ path('home') }}">SnowTricks</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +47,7 @@
                     </ul>
                 </div>
             </nav>
+            {% block welcome %}{% endblock %}
             <div class="container">
                 {{ include('default/_flash_messages.html.twig') }}
                 {% block body %}{% endblock %}
@@ -56,7 +57,7 @@
             </div>
         </div>
         <footer class="site-footer p-3 text-center">
-            <a class="btn btn-primary btn-sm float-right" href="#top" title="Return to top" aria-label="return to top">
+            <a class="btn btn-secondary btn-sm float-right" href="#top" title="Return to top" aria-label="return to top">
                 <span class="fas fa-arrow-up" aria-hidden="true"></span>
             </a>
             <span>Ereshkidal &copy; 2018 - Symfony 4.1 School project</span>

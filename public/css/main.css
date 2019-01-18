@@ -1,6 +1,6 @@
 .beta-banner {
-    background-color: #f53e59;
-    color: #f6f6f6;
+    background-color: #f0f535;
+    color: #343a40;
     text-align: center;
     padding: .75em 0;
 }
@@ -35,33 +35,39 @@ body {
  */
 
 .btn-primary {
-    background-color: #1e4daf;
-    color: #f6f6f6;
-    border-color: #1e4daf;
-}
-
-.btn-secondary {
     background-color: #6dc6d6;
     color: #1e4daf;
     border-color: #6dc6d6;
 }
 
-.btn-secondary:hover {
+.btn-primary:hover {
     background-color: #7cdbeb;
     color: #1e4daf;
     border-color: #7cdbeb;
 }
 
-.btn-warning {
+.btn-secondary {
     background-color: #6a4cf4;
     color: #f6f6f6;
     border-color: #6a4cf4;
 }
 
-.btn-warning:hover {
+.btn-secondary:hover {
     background-color: #8175fa;
     color: #f6f6f6;
     border-color: #8175fa;
+}
+
+.btn-warning {
+    background-color: #f0f535;
+    color: #343a40;
+    border-color: #f0f535;
+}
+
+.btn-warning:hover {
+    background-color: #f4f463;
+    color: #343a40;
+    border-color: #f4f463;
 }
 
 .btn-danger {
@@ -75,6 +81,12 @@ body {
     color: #f6f6f6;
     border-color: #f9635c;
 }
+
+/**
+ ** CUSTOM BUTTON **
+ */
+
+
 
 /**
  ** TRICK VIEW **
@@ -183,15 +195,159 @@ body {
  ** HOME **
  */
 
+.home .card-deck,
+.social .card-deck {
+    justify-content: center;
+}
+
+.home .card,
+.social .card {
+    border: none;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+}
+
 .home .card {
-    max-height: 200px;
+    height: 480px;
     overflow: hidden;
 }
 
 .home .card-img-overlay {
-    background-color: rgba(255,255,255,.5);
 }
 
-.home .card-text {
+.welcome hr,
+.home hr,
+.social hr {
+    width: 50px;
+    height: 3px;
+    margin: 20px auto;
+    border: 0;
+}
+
+.welcome hr { background-color: #f0f535; }
+.home hr { background-color: #f0f535; }
+.social hr { background-color: #6a4cf4; }
+
+.home h3,
+.social h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+}
+
+.home h3, .home .card-text { color: #f6f6f6; }
+
+.home .card-text,
+.social .card-text {
     font-size: 0.8em;
+    font-family: 'Droid Serif', serif;
+    font-style: italic;
+    line-height: 18px;
+}
+
+.home .content-main {
+    z-index: 30;
+}
+
+.home .utility {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.home .utility li {
+    color: #f6f6f6;
+    font-family: 'Roboto', sans-serif;
+}
+
+.home .utility li span {
+    color: #f0f535;
+    /*color: #f53e59;*/
+}
+
+.social .card-body > span {
+    color: #6a4cf4;
+}
+
+.content-overlay {
+    width: 100%;
+    height: 480px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 320px 50px 0;
+    font-family: 'Droid Serif', serif;
+    line-height: 24px;
+    z-index: 20;
+    opacity: 0;
+    transition: padding-top .3s, opacity .3s cubic-bezier(.33,.66,.66,1);
+}
+
+.color-overlay {
+    /* Rectangle 11: */
+    background: rgba(84,104,110,0.3);
+    width: 100%;
+    height: 480px;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    transition: background .3s cubic-bezier(.33,.66,.66,1);
+}
+
+.gradient-overlay {
+    /* bg-gradient: */
+    background-image: -webkit-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);
+    background-image: -moz-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);
+    background-image: -o-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);
+    background-image: linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);
+    width: 100%;
+    height: 480px;
+    position: absolute;
+    top: 350px;
+    left: 0;
+    z-index: 15;
+}
+
+.content-overlay:hover {
+    opacity: 1;
+    padding: 200px 50px 0;
+}
+
+.color-overlay:hover {
+    background: rgba(84,104,110,0.8);
+}
+
+.welcome {
+    width: 100%;
+    height: 440px;
+    text-align: center;
+    background-image: url("images/home-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+.welcome div {
+    width: 70%;
+    margin: 0 auto;
+    padding: 10% 0 0;
+}
+
+.welcome h2,
+.home h2,
+.social h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6em;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.welcome p {
+    font-family: 'Droid Serif', serif;
+    line-height: 24px;
 }

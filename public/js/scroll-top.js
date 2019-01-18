@@ -9,3 +9,12 @@ jQuery(function($) {
         return false;
     });
 });
+
+jQuery(function($) {
+    let button = $("a[href='#fresh']");
+    let anchor = $("#fresh");
+    button.click(function (e) {
+        e.preventDefault();
+        $("html, body").animate({scrollTop: anchor.offset().top}, "slow");
+    });
+});

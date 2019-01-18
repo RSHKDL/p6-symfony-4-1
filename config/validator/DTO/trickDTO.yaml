@@ -19,7 +19,7 @@ App\DTO\TrickDTO:
                     - trickDTO
         imageFeatured:
             - NotBlank:
-                message: You must at least provide one image
+                message: You must provide one featured image for the trick
                 groups:
                     - trickDTO
             - Valid:

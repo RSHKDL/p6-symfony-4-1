@@ -1,7 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    <section class="jumbotron mt-3">
+        <h2>All our tricks</h2>
+        <p class="lead">We already have {{ nbItems }} trick{% if nbItems > 1 %}s{% endif %} on {{ nbPages }}
+            page{% if nbPages > 1 %}s{% endif %}.
+            If you think a trick is missing, feel free to add it.</p>
+        <a class="btn btn-secondary" href="{{ path('contact') }}">
+            <span class="fas fa-paper-plane"></span> Contact us
+        </a>
+        <a class="btn btn-secondary" href="{{ path('trick_create') }}">
+            <span class="fas fa-plus-circle" aria-hidden="true"></span> Add a trick
+        </a>
+    </section>
 {% if tricks %}
     {% for row in tricks | batch(5) %}
         <div class="row card-deck mb-3 mt-3">
@@ -25,7 +36,6 @@
                 </div>
                 <div class="card-footer">
                     <p class="trick-tag text-muted mb-0">
-                        <span class="fas fa-tag" aria-hidden="true"></span>
                         {% for category in trick.categories %}
                             {{ category.name }}
                         {% endfor %}
