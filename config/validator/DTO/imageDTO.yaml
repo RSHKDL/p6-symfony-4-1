@@ -2,11 +2,15 @@ App\DTO\ImageDTO:
     properties:
         file:
             - Image:
-                maxSize: 2000k
-                maxSizeMessage: "Image too big"
-                allowLandscape: false
-                allowLandscapeMessage: "Portrait orientation only"
+                maxSize: 500k
+                maxSizeMessage: Image too big (500ko max)
+                uploadIniSizeErrorMessage: Image too big (500ko max)
                 allowSquare: false
-                allowSquareMessage: "Portrait orientation only"
+                allowSquareMessage: Please don't use square images
+                mimeTypes:
+                    - 'image/jpg'
+                    - 'image/jpeg'
+                    - 'image/png'
+                mimeTypesMessage: Only jpg, jpeg and png allowed
                 groups:
                     - trickDTO

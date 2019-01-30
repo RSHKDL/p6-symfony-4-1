@@ -35,3 +35,11 @@ App\DTO\TrickDTO:
                 traverse: true
                 groups:
                     - trickDTO
+        categories:
+            - Count:
+                min: 1
+                max: 3
+                minMessage: You must choose at least one category
+                maxMessage: You cannot choose more than {{ limit }} category
+                groups:
+                    - trickDTO

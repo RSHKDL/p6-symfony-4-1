@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_videos")
@@ -37,11 +36,7 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255, name="raw_url")
-     * @Assert\Regex(
-     *     pattern="#^(http|https)://(www.youtube.com|www.dailymotion.com|vimeo.com)/#",
-     *     match=true,
-     *     message="The url must match a valid Youtube, DailyMotion or Vimeo video raw url"
-     * )
+     * @var string
      */
     private $rawUrl;
 

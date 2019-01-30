@@ -10,8 +10,8 @@
                 <img class="mh-100" src="{{ image.getWebPath }}" alt="{{ image.alt }}">
             </div>
         {% endif %}
-        {{ form_errors(imageField) }}
         {{ form_widget(imageField, {'attr': {'class': 'd-inline-block ml-3'}}) }}
+        {{ form_errors(imageField) }}
         {{ form_help(imageField) }}
     </div>
 {% endmacro %}
@@ -26,8 +26,8 @@
                 {{ video.generateVideo|raw }}
             </div>
         {% endif %}
-        {{ form_errors(videoField) }}
         {{ form_widget(videoField, {'attr': {'class': 'd-inline-block ml-3'}}) }}
+        {{ form_errors(videoField) }}
         {{ form_help(videoField) }}
     </div>
 {% endmacro %}
@@ -74,7 +74,11 @@
              data-prototype="{{ formMacros.printCollectionImagesWidget(form.images.vars.prototype.file)|e }}"
              data-index="{{ form.images|length }}">
             {% for imageField in form.images %}
-                {{ formMacros.printCollectionImagesWidget(imageField, trick.images[loop.index0]) }}
+                {% if trick.images[loop.index0] is defined %}
+                    {{ formMacros.printCollectionImagesWidget(imageField, trick.images[loop.index0]) }}
+                {% else %}
+                    {{ formMacros.printCollectionImagesWidget(imageField, null) }}
+                {% endif %}
             {% endfor %}
             <button type="button" class="js-add-another-collection-field btn btn-primary mt-2">
                 Add another image
@@ -88,7 +92,11 @@
              data-prototype="{{ formMacros.printCollectionVideosWidget(form.videos.vars.prototype.rawUrl)|e }}"
              data-index="{{ form.videos|length }}">
             {% for videoField in form.videos %}
-                {{ formMacros.printCollectionVideosWidget(videoField, trick.videos[loop.index0]) }}
+                {% if trick.videos[loop.index0] is defined %}
+                    {{ formMacros.printCollectionVideosWidget(videoField, trick.videos[loop.index0]) }}
+                {% else %}
+                    {{ formMacros.printCollectionVideosWidget(videoField, null) }}
+                {% endif %}
             {% endfor %}
             <button type="button" class="js-add-another-collection-field btn btn-primary mt-2">
                 Add another video
