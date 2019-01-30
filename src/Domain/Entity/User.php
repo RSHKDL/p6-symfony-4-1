@@ -104,7 +104,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->roles = array('ROLE_USER');
+        $this->roles = [];
         $this->isActive = false;
         $this->comments = new ArrayCollection();
         $this->tricks = new ArrayCollection();

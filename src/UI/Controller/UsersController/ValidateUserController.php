@@ -56,6 +56,7 @@ final class ValidateUserController implements ValidateUserControllerInterface
     {
         $user = $this->repository->checkRegistrationToken($request->attributes->get('token'));
         if ($user) {
+            $user->setRoles(['ROLE_USER']);
             $user->setIsActive(true);
             $user->setConfirmationToken(null);
             $this->repository->save($user);

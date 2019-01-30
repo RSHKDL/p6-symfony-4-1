@@ -73,6 +73,9 @@ final class ForgotPasswordHandler implements ForgotPasswordHandlerInterface
                     $this->flashBag->set('info', 'You will receive an email with further instructions.');
 
                     return true;
+                } elseif($user->getRoles() == []) {
+                    $this->flashBag->set('danger', 'You have to validate your account first.');
+                    return false;
                 } else {
                     $this->flashBag->set('danger', 'You have already requested a token.');
                     return false;
