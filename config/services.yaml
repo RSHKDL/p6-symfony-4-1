@@ -18,27 +18,27 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Domain/Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    App\UI\Controller\:
+        resource: '../src/UI/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\ImageProcessor:
+    App\App\Service\ImageProcessor:
             arguments:
                 $tricksDirectory: '/uploads/images'
                 $usersDirectory: '/uploads/avatars'
 
-    App\EventListener\BetaListener:
+    App\App\EventListener\BetaListener:
         arguments:
             $endDate: "2019-01-31"
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: processBeta }
 
-    App\Form\Extension\ImageTypeExtension:
+    App\UI\Form\Extension\ImageTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }

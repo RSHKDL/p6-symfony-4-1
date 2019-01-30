@@ -1,4 +1,4 @@
-App\DTO\ImageDTO:
+App\Domain\DTO\ImageDTO:
     properties:
         file:
             - Image:

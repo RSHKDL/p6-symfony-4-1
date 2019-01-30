@@ -1,4 +1,4 @@
-App\DTO\VideoDTO:
+App\Domain\DTO\VideoDTO:
     properties:
         rawUrl:
             - Regex:

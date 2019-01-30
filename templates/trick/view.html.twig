@@ -108,7 +108,7 @@
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% set id = trick.id %}
                     {{ render(controller(
-                        'App\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
+                        'App\\UI\\Controller\\CommentsController\\CreateCommentsController::renderCommentsForm',
                         {id: id}))
                     }}
                 {% else %}

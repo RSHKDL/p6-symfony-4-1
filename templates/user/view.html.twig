@@ -28,12 +28,12 @@
     <h4>Actions</h4>
     <h5>Change your password</h5>
     {{ render(controller(
-        'App\\Controller\\UsersController\\ChangePasswordController::renderForm',
+        'App\\UI\\Controller\\UsersController\\ChangePasswordController::renderForm',
         {id: id}))
     }}
     <h5>Change your avatar</h5>
     {{ render(controller(
-        'App\\Controller\\UsersController\\ChangeAvatarController::renderForm',
+        'App\\UI\\Controller\\UsersController\\ChangeAvatarController::renderForm',
         {id: id}))
     }}
 </section>
