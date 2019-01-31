@@ -2,7 +2,7 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Category;
+use App\Domain\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CategoryTest extends KernelTestCase

@@ -2,11 +2,11 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Category;
-use App\Entity\Image;
-use App\Entity\Trick;
-use App\Entity\User;
-use App\Service\SlugMaker;
+use App\Domain\Entity\Category;
+use App\Domain\Entity\Image;
+use App\Domain\Entity\Trick;
+use App\Domain\Entity\User;
+use App\App\Service\SlugMaker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 

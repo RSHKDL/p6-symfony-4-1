@@ -2,9 +2,9 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\HomeController;
-use App\Controller\Interfaces\HomeControllerInterface;
-use App\Repository\TrickRepository;
+use App\UI\Controller\HomeController;
+use App\UI\Controller\Interfaces\HomeControllerInterface;
+use App\Domain\Repository\TrickRepository;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 
