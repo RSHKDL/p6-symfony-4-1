@@ -1,18 +1,13 @@
 {# https://symfony.com/doc/current/book/templating.html#including-other-templates #}
-<div class="my-1 text-center">
-    test flash message
-</div>
-{% if app.flashes %}
-<div class="messages">
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-dismissible alert-{{ type }}" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ message }}
-            </div>
-        {% endfor %}
+{% for label, messages in app.flashes %}
+    b
+    {% for message in messages %}
+        c
+        <div class="alert alert-dismissible alert-{{ label }}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+        </div>
     {% endfor %}
-</div>
-{% endif %}
+{% endfor %}
