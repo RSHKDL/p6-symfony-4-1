@@ -1,8 +1,6 @@
 {# https://symfony.com/doc/current/book/templating.html#including-other-templates #}
 {% for label, messages in app.flashes %}
-    b
     {% for message in messages %}
-        c
         <div class="alert alert-dismissible alert-{{ label }}" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
