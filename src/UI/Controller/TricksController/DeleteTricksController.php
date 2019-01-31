@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * Class DeleteTricksController
+ * @package App\UI\Controller\TricksController
+ *
  * @Route("/trick/delete/{id}", name="trick_delete", requirements={"id"="\d+"}, methods={"POST"})
  * @Security("has_role('ROLE_USER')")
- *
- * Class DeleteTricksController
- * @package App\Controller\TricksController
  */
 final class DeleteTricksController implements DeleteTricksControllerInterface
 {
@@ -59,25 +59,15 @@ final class DeleteTricksController implements DeleteTricksControllerInterface
         TwigRedirectResponderInterface $redirectResponder,
         TwigResponderInterface $responder
     ) {
-        /*$token = $this->token->getValue();
-        if ($token !== $request->request->get('token')) {
-            return $redirectResponder('trick_view');
-        }
-
-        if(!$this->token->isCsrfTokenValid('delete', $request->request->get('token'))) {
-            return $this->redirectToRoute('trick_index');
-        }*/
-
-        $token = $request->request->get('token');
         $id = $request->attributes->get('id');
         $trick = $this->repository->findOneBy(['id' => $id]);
 
+        /* All tricks except the fixtures have an ImageFeatured */
         if ($trick->getImageFeatured()) {
             $this->remover->removeDirectory($trick->getImageFeatured()->getPath());
         }
         $this->repository->remove($trick);
-
-        $this->flashBag->set('success', 'Trick deleted successfully');
+        $this->flashBag->add('success', 'Trick deleted successfully');
 
         return $redirectResponder('home');
     }

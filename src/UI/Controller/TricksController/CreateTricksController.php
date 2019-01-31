@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class CreateTricksController
- * @package App\Controller\TricksController
+ * @package App\UI\Controller\TricksController
  *
  * @Route("/trick/create", name="trick_create", methods={"GET", "POST"})
  * @Security("has_role('ROLE_USER')")

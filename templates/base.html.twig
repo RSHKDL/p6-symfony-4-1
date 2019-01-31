@@ -47,9 +47,9 @@
                     </ul>
                 </div>
             </nav>
+            {{ include('default/_flash_messages.html.twig') }}
             {% block welcome %}{% endblock %}
             <div class="container">
-                {{ include('default/_flash_messages.html.twig') }}
                 {% block body %}{% endblock %}
             </div>
             <div>

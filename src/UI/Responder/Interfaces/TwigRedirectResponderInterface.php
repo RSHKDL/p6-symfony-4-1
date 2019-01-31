@@ -6,12 +6,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * Interface TwigRedirectResponderInterface
+ * @package App\UI\Responder\Interfaces
+ */
 interface TwigRedirectResponderInterface
 {
 
     /**
      * TwigResponderInterface constructor.
-     *
      * @param Environment $twig
      */
     public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator);
@@ -19,7 +22,6 @@ interface TwigRedirectResponderInterface
     /**
      * @param string $view
      * @param array $data
-     *
      * @return RedirectResponse
      */
     public function __invoke(string $view, array $data = []): RedirectResponse;

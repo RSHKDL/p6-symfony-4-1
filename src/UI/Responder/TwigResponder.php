@@ -19,6 +19,7 @@ final class TwigResponder implements TwigResponderInterface
     private $twig;
 
     /**
+     * TwigResponder constructor.
      * @inheritdoc
      */
     public function __construct(Environment $twig)

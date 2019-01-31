@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * Class TwigRedirectResponder
+ * @package App\UI\Responder
+ */
 final class TwigRedirectResponder implements TwigRedirectResponderInterface
 {
     /**
@@ -20,8 +24,7 @@ final class TwigRedirectResponder implements TwigRedirectResponderInterface
 
     /**
      * TwigRedirectResponder constructor.
-     * @param Environment $twig
-     * @param UrlGeneratorInterface $urlGenerator
+     * @inheritdoc
      */
     public function __construct(
         Environment $twig,
@@ -32,9 +35,7 @@ final class TwigRedirectResponder implements TwigRedirectResponderInterface
     }
 
     /**
-     * @param string $view
-     * @param array $data
-     * @return RedirectResponse
+     * @inheritdoc
      */
     public function __invoke(string $view, array $data = []): RedirectResponse
     {

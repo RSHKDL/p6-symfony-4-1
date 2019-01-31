@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class CreateTrickHandler
- * @package App\FormHandler
+ * @package App\UI\FormHandler
  */
 final class CreateTrickHandler implements CreateTrickHandlerInterface
 {

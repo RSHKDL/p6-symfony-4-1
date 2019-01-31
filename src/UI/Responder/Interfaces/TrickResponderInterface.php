@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * Interface TrickResponderInterface
+ * @package App\UI\Responder\Interfaces
+ */
 interface TrickResponderInterface
 {
     /**

@@ -1,4 +1,7 @@
 {# https://symfony.com/doc/current/book/templating.html#including-other-templates #}
+<div class="my-1 text-center">
+    test flash message
+</div>
 {% if app.flashes %}
 <div class="messages">
     {% for type, messages in app.flashes %}
