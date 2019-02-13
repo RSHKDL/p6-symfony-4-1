@@ -69,6 +69,6 @@ final class DeleteTricksController implements DeleteTricksControllerInterface
         $this->repository->remove($trick);
         $this->flashBag->add('success', 'Trick deleted successfully');
 
-        return $redirectResponder('home');
+        return $redirectResponder('trick_index');
     }
 }
