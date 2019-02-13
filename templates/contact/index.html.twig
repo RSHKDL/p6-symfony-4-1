@@ -3,6 +3,8 @@
 {% block title %}Contact Us{% endblock %}
 
 {% block body %}
+<section class="snowtrick-form">
+    <h2 class="mt-3">Send us a message!</h2>
     {% form_theme contact_form 'bootstrap_4_layout.html.twig' %}
     {{ form_start(contact_form) }}
     {{ form_widget(contact_form) }}
@@ -11,4 +13,5 @@
         Send message
     </button>
     {{ form_end(contact_form) }}
+</section>
 {% endblock %}

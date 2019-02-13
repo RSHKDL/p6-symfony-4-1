@@ -83,10 +83,13 @@ body {
 }
 
 /**
- ** CUSTOM BUTTON **
+ ** FORMS **
  */
 
-
+.snowtrick-form h2 {
+    letter-spacing: 2px;
+    font-family: 'Roboto', sans-serif;
+}
 
 /**
  ** TRICK VIEW **

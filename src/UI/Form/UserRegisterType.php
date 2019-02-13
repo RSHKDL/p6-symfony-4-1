@@ -22,16 +22,18 @@ final class UserRegisterType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Your username *'
             ])
             ->add('email', EmailType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Your email *'
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
-                'first_options' => ['label' => 'Your password*'],
-                'second_options' => ['label' => 'Confirm your password*'],
+                'first_options' => ['label' => 'Your password *'],
+                'second_options' => ['label' => 'Confirm your password *'],
             ]);
     }
     

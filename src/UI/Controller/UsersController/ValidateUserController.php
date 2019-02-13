@@ -60,7 +60,7 @@ final class ValidateUserController implements ValidateUserControllerInterface
             $user->setIsActive(true);
             $user->setConfirmationToken(null);
             $this->repository->save($user);
-            $this->flashBag->set('success', 'Your account was successfully validated, log in now');
+            $this->flashBag->add('success', 'Your account was successfully validated, log in now');
 
             return new RedirectResponse(
                 $this->urlGenerator->generate('user_login')
