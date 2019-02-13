@@ -48,7 +48,7 @@ final class RegisterUserMail implements RegisterUserMailInterface
             'Validate your Snowtricks Account',
             $this->adminMail,
             $email,
-            $this->environment->render('emails/validate_registration.html.twig', [
+            $this->environment->render('emails/_email_validate_registration.html.twig', [
                 'username' => $username,
                 'token' => $token
             ])

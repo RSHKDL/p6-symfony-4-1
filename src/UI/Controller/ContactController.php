@@ -51,7 +51,7 @@ final class ContactController implements ContactControllerInterface
         $form = $this->formFactory->create(ContactType::class)->handleRequest($request);
 
         if ($this->handler->handle($form)) {
-            return $redirectResponder('contact');
+            return $redirectResponder('home');
         }
         return $responder('contact/index.html.twig', [
             'contact_form' => $form->createView()

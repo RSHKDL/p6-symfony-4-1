@@ -49,7 +49,7 @@ final class ForgotPasswordMail implements ForgotPasswordMailInterface
             'You forgot your Snowtricks password!',
             $this->adminMail,
             $email,
-            $this->environment->render('emails/forgotten_password.html.twig', [
+            $this->environment->render('emails/_email_forgotten_password.html.twig', [
                 'username' => $username,
                 'token' => $token
             ])
