@@ -2,9 +2,9 @@ App\Domain\DTO\ImageDTO:
     properties:
         file:
             - Image:
-                maxSize: 500k
-                maxSizeMessage: Image too big (500ko max)
-                uploadIniSizeErrorMessage: Image too big (500ko max)
+                maxSize: 2000k
+                maxSizeMessage: Image too big (2mo max)
+                uploadIniSizeErrorMessage: Image too big (2mo max)
                 allowSquare: false
                 allowSquareMessage: Please don't use square images
                 mimeTypes:

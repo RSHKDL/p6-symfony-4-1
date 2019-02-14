@@ -354,3 +354,18 @@ body {
     font-family: 'Droid Serif', serif;
     line-height: 24px;
 }
+
+/**
+ ** TRICKS INDEX **
+ */
+
+.trick-index .card .img-container {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+    .trick-index .card .img-container {
+        max-height: 180px;
+    }
+}

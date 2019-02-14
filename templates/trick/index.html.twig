@@ -13,24 +13,26 @@
             <span class="fas fa-plus-circle" aria-hidden="true"></span> Add a trick
         </a>
     </section>
-{% if tricks %}
-    {% for row in tricks | batch(5) %}
-        <div class="row card-deck mb-3 mt-3">
-        {% for trick in row %}
+    {% if tricks %}
+    <div class="row card-deck trick-index">
+        {% for trick in tricks %}
+        <div class="col-sm-4 mb-3">
             <div class="card">
+                <div class="img-container">
                 {% if trick.imageFeatured %}
                     <img
                             src="{{ trick.imageFeatured.webPath }}"
                             alt="{{ trick.imageFeatured.alt }}"
-                            class="image-card-top w-100"
+                            class="card-img-top"
                     >
                 {% else %}
                     <img
                             src="{{ asset('uploads/default/default-image-featured.png') }}"
                             alt="default-image-featured"
-                            class="image-card-top w-100"
+                            class="card-img-top"
                     >
                 {% endif %}
+                </div>
                 <div class="card-body">
                     <a href="{{ path('trick_view', {slug: trick.slug}) }}">{{ trick.name }}</a>
                 </div>
@@ -48,10 +50,10 @@
                     {% endif %}
                 </div>
             </div>
-        {% endfor %}
         </div>
     {% endfor %}
-    <nav aria-label="Figures pagination">
+    </div>
+    <nav aria-label="Tricks pagination">
         <ul class="pagination justify-content-center">
             {% for p in range(1, nbPages) %}
                 <li{% if p == page %} class="page-item"{% endif %}>
@@ -60,8 +62,7 @@
             {% endfor %}
         </ul>
     </nav>
-{% else %}
+    {% else %}
     <p>No Tricks yet</p>
-{% endif %}
-
+    {% endif %}
 {% endblock %}
