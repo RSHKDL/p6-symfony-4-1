@@ -1,0 +1,10 @@
+App\Domain\Entity\Comment:
+    properties:
+        content:
+            - NotBlank:
+                message: You must comment something.
+            - Length:
+                min: 3
+                minMessage: Comment is too short.
+                max: 240
+                maxMessage: Comment is too long.

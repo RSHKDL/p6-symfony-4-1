@@ -5,15 +5,11 @@ namespace App\Domain\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Domain\Repository\UserRepository")
- * @UniqueEntity(fields="username", message="Username already exist")
- * @UniqueEntity(fields="email", message="Email already exist")
  */
 class User implements UserInterface, \Serializable
 {
@@ -26,21 +22,16 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=32, unique=true)
-     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=32, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
      */
     private $email;
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @Assert\Length(max="4096")
      */
     private $plainPassword;
 

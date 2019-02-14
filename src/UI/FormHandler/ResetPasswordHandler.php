@@ -45,7 +45,7 @@ final class ResetPasswordHandler implements RegisterPasswordHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $plainPassword = $data['plainPassword'];
+            $plainPassword = $data->getPlainPassword();
             $password = $this->passwordEncoder->encodePassword($user, $plainPassword);
             $user->setPassword($password);
             $user->setConfirmationToken(null);

@@ -3,7 +3,6 @@
 namespace App\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_comments")
@@ -22,20 +21,19 @@ class Comment
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *     min=5,
-     *     max=240
-     * )
      */
     private $content;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", name="created_at")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime", name="updated_at", nullable=true)
      */
     private $updatedAt;

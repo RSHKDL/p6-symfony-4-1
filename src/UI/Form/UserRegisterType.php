@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class UserRegisterType extends AbstractType
 {
@@ -29,12 +31,20 @@ final class UserRegisterType extends AbstractType
                 'required' => true,
                 'label' => 'Your email *'
             ])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'required' => true,
-                'first_options' => ['label' => 'Your password *'],
-                'second_options' => ['label' => 'Confirm your password *'],
-            ]);
+            ->add('plainPassword', PasswordType::class, [
+                'label' => 'Your password *',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a password',
+                    ]),
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'max' => 4096
+                    ]),
+                ],
+            ])
+        ;
     }
     
     /**

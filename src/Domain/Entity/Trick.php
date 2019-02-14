@@ -3,67 +3,66 @@
 namespace App\Domain\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_tricks")
  * @ORM\Entity(repositoryClass="App\Domain\Repository\TrickRepository")
- * @UniqueEntity(
- *     fields={"name"},
- *     message="This Trick already exist"
- * )
  */
 class Trick
 {
     /**
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @var int
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=140)
-     * @Assert\NotBlank()
      * @var string
+     *
+     * @ORM\Column(type="string", length=140)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank()
      * @var string
+     *
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=190, unique=true)
      * @var string
+     *
+     * @ORM\Column(type="string", length=190, unique=true)
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime", name="created_at")
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", name="created_at")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
      */
     private $updatedAt;
 
     /**
+     * @var User
+     *
      * @ORM\ManyToOne(
      *     targetEntity="App\Domain\Entity\User",
      *     inversedBy="tricks"
      * )
      * @ORM\JoinColumn(nullable=false)
-     * @var User
      */
     private $author;
 
@@ -73,23 +72,18 @@ class Trick
      *     cascade={"persist"}
      * )
      * @ORM\JoinTable(name="app_tricks_categories")
-     * @Assert\Count(
-     *      min = 1,
-     *      max = 3,
-     *      minMessage = "You must choose at least one category",
-     *      maxMessage = "You cannot choose more than {{ limit }} category"
-     * )
      */
     private $categories;
 
     /**
+     * @var Image
+     *
      * @ORM\OneToOne(
      *     targetEntity="App\Domain\Entity\Image",
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
      * @ORM\JoinColumn()
-     * @var Image
      */
     private $imageFeatured;
 
@@ -107,7 +101,6 @@ class Trick
      *     joinColumns={@ORM\JoinColumn(name="trick_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
      * )
-     * @Assert\Valid()
      */
     private $images;
 
@@ -120,7 +113,6 @@ class Trick
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
-     * @Assert\Valid()
      */
     private $videos;
 

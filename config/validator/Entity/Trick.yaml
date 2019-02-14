@@ -1,0 +1,33 @@
+App\Domain\Entity\Trick:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: name
+            message: This Trick already exist
+    properties:
+        name:
+            - NotBlank:
+                message: A trick name cannot be omited.
+            - Length:
+                min: 3
+                minMessage: Trick name is too short.
+                max: 140
+                maxMessage: Trick name is too long.
+        description:
+            - NotBlank:
+                message: A trick description cannot be omited.
+        categories:
+            - Count:
+                min: 1
+                minMessage: You must choose at least one category
+                max: 3
+                maxMessage: You cannot choose more than {{ limit }} category
+        imageFeatured:
+            - NotBlank:
+                message: A featured image is required.
+            - Valid:
+        images:
+            - Valid:
+                traverse: true
+        videos:
+            - Valid:
+                traverse: true
