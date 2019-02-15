@@ -1,6 +1,8 @@
 # Snowtricks
 **OpenClassroom school project**
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a098370e5cb2445e996f97510d1ebad1)](https://www.codacy.com/app/RSHKDL/p6-symfony-4-1?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RSHKDL/p6-symfony-4-1&amp;utm_campaign=Badge_Grade)
+
 Developed with:
 
 * Symfony 4.1
