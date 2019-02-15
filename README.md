@@ -22,6 +22,7 @@ Install
 
 1. Clone or download the repository into your environment. `https://github.com/RSHKDL/p6-symfony-4-1.git`
 2. Change the files .env.dist with your own data.
-3. Install the database and optionally inject the fixtures.
+3. Install the database and inject the fixtures.
+    * Only the category fixture is injected. The others need some tweaking.
 
 Should be good to go!
