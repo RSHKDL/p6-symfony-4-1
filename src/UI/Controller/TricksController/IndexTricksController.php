@@ -49,12 +49,12 @@ final class IndexTricksController implements IndexTricksControllerInterface
         }
 
         $totalItems = $this->repository->count([]);
-        $items = $this->repository->getPaginatedTricks($page, 15);
-        $totalPages = ceil(count($items) / 15);
+        $items = $this->repository->getPaginatedTricks($page, 6);
+        $totalPages = ceil(count($items) / 6);
 
-        if ($page > $totalPages) {
+        /*if ($page > $totalPages) {
             throw new NotFoundHttpException('The page '.$page. ' does not exist.');
-        }
+        }*/
 
         return new Response(
             $this->environment->render('trick/index.html.twig', [

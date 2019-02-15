@@ -20,7 +20,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('en_US');
 
-        for ($i = 0; $i < 20; $i++) {
+        /*for ($i = 0; $i < 20; $i++) {
             $comment = new Comment();
             $comment->setTrick($this->getReference(TrickFixtures::TRICK_REFERENCE));
             $comment->setAuthor($this->getReference(UserFixtures::USER_REFERENCE));
@@ -28,7 +28,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $comment->setCreatedAt($faker->dateTimeBetween('-1 months', 'now'));
             $manager->persist($comment);
         }
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**

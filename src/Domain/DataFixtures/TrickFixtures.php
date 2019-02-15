@@ -20,7 +20,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('en_US');
-        $user = $this->getReference(UserFixtures::USER_REFERENCE);
+        /*$user = $this->getReference(UserFixtures::USER_REFERENCE);
         $category = $this->getReference(CategoryFixtures::CATEGORY_REFERENCE);
 
         for ($i = 0; $i < 20; $i++) {
@@ -39,7 +39,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($trick);
             $this->setReference(self::TRICK_REFERENCE, $trick);
         }
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**
