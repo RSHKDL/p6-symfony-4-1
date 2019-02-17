@@ -18,13 +18,10 @@ App\Domain\DTO\TrickDTO:
                 groups:
                     - trickDTO
         imageFeatured:
-            - NotBlank:
-                message: You must provide one featured image for the trick
-                groups:
-                    - trickDTO
             - Valid:
                 groups:
                     - trickDTO
+                    - trickCreateDTO
         images:
             - Valid:
                 traverse: true

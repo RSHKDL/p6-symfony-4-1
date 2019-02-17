@@ -8,6 +8,7 @@ use App\Domain\Builder\Interfaces\CreateTrickBuilderInterface;
 use App\Domain\Entity\Trick;
 use App\Domain\Repository\TrickRepository;
 use App\UI\FormHandler\Interfaces\CreateTrickHandlerInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -80,14 +81,33 @@ final class CreateTrickHandler implements CreateTrickHandlerInterface
      */
     public function handle(FormInterface $form): bool
     {
-        if ($form->isSubmitted() && $form->isValid()) {
-            $trick = $this->builder->build($form->getData());
-            $trick->setSlug($this->slugMaker->slugify($trick->getName(), true));
-            $this->repository->save($trick);
-            $this->fileUploader->uploadFiles();
-            $this->session->set('slug', $trick->getSlug());
-            $this->flashBag->add('success', 'Trick created successfully');
-            return true;
+        if ($form->isSubmitted()) {
+
+            /*$data = $form->getData();
+            $imageFeatured = $data->imageFeatured->file;
+
+            if ($imageFeatured == null) {
+                $data->imageFeatured = null;
+                $error = new FormError(
+                    'A featured image is required',
+                    null,
+                    [],
+                    null,
+                    'imageFeatured'
+                );
+                $error->setOrigin($form);
+                $form->addError($error);
+            }*/
+
+            if($form->isValid()) {
+                $trick = $this->builder->build($form->getData());
+                $trick->setSlug($this->slugMaker->slugify($trick->getName(), true));
+                $this->repository->save($trick);
+                $this->fileUploader->uploadFiles();
+                $this->session->set('slug', $trick->getSlug());
+                $this->flashBag->add('success', 'Trick created successfully');
+                return true;
+            }
         }
         return false;
     }

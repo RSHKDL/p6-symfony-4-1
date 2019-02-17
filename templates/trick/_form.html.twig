@@ -37,6 +37,7 @@
 {% block h2 %}{% endblock %}
 
 {{ form_start(form) }}
+    {{ form_errors(form) }}
     {% form_theme form 'form/template.html.twig' %}
     <div class="form-group">
         {{ form_label(form.name) }}

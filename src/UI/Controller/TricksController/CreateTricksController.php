@@ -49,7 +49,6 @@ final class CreateTricksController implements CreateTricksControllerInterface
     public function __invoke(Request $request, TrickResponderInterface $responder): Response
     {
         $form = $this->formFactory->create(CreateTrickType::class)->handleRequest($request);
-
         if ($this->handler->handle($form)) {
             return $responder('create', true);
         }

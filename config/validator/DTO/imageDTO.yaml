@@ -1,6 +1,10 @@
 App\Domain\DTO\ImageDTO:
     properties:
         file:
+            - NotNull:
+                message: A featured image is required
+                groups:
+                    - trickCreateDTO
             - Image:
                 maxSize: 2000k
                 maxSizeMessage: Image too big (2mo max)

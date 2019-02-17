@@ -5,6 +5,7 @@ namespace App\UI\Form;
 use App\UI\FormSubscriber\UpdateTrickSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UpdateTrickType extends AbstractType
 {
@@ -43,5 +44,12 @@ final class UpdateTrickType extends AbstractType
     public function getParent()
     {
         return CreateTrickType::class;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'validation_groups' => ['trickDTO']
+        ]);
     }
 }

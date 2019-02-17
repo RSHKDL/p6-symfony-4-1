@@ -23,7 +23,7 @@ final class ImageType extends AbstractType
     {
         $builder
             ->add('file', FileType::class, [
-                'help'  => 'Must be a valid jpg or png file (500ko max)',
+                'help'  => 'Must be a valid jpg or png file (2mo max)',
                 'attr'  => [
                     'accept' => '.jpeg, .jpg, .png'
                 ]
@@ -38,7 +38,7 @@ final class ImageType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ImageDTO::class,
             'validation_groups' => ['trickDTO'],
-            'error_bubbling' => true,
+            'error_bubbling' => false,
             'empty_data' => function (FormInterface $form) {
                 return new ImageDTO(
                     $form->get('file')->getData()

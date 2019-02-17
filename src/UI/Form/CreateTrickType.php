@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class CreateTrickType extends AbstractType
 {
@@ -36,7 +37,7 @@ final class CreateTrickType extends AbstractType
                 'help'          => 'Choose between 1 and 3 categories'
             ])
             ->add('imageFeatured', ImageType::class, [
-                'required'  => false,
+                'required'  => true,
                 'label'     => 'Add a featured image'
             ])
             ->add('images', CollectionType::class, [
@@ -67,7 +68,7 @@ final class CreateTrickType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => TrickDTO::class,
-            'validation_groups' => ['trickDTO'],
+            'validation_groups' => ['trickCreateDTO', 'trickDTO'],
             'empty_data' => function (FormInterface $form) {
                 return new TrickDTO(
                     $form->get('name')->getData(),
