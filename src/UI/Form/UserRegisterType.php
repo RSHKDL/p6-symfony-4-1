@@ -31,19 +31,12 @@ final class UserRegisterType extends AbstractType
                 'required' => true,
                 'label' => 'Your email *'
             ])
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Your password *',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 4,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096
-                    ]),
-                ],
-            ])
+            ->add('plainPassword', RepeatedType::class, array(
+                'type'              => PasswordType::class,
+                'first_options'     => array('label' => 'Your password *'),
+                'second_options'    => array('label' => 'Confirm your password *'),
+                //'invalid_message'   => 'The fields doesn\'t match'
+            ))
         ;
     }
     
@@ -53,7 +46,8 @@ final class UserRegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class
+            'data_class' => User::class,
+            'validation_groups' => ['registration']
         ]);
     }
 }

@@ -3,35 +3,46 @@ App\Domain\Entity\User:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: username
             message: Username already exist
+            groups: [registration]
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: email
             message: Email already exist
+            groups: [registration]
     properties:
         username:
             - NotBlank:
                 message: Username is mandatory.
+                groups: [registration]
             - Length:
                 min: 3
                 minMessage: Username is too short.
                 max: 32
                 maxMessage: Username is too long.
+                groups: [registration]
         email:
             - NotBlank:
                 message: Email is mandatory.
+                groups: [registration]
             - Email:
                 message: Email is not valid.
+                groups: [registration]
             - Length:
                 max: 32
                 maxMessage: Email is too long.
+                groups: [registration]
         plainPassword:
             - NotBlank:
-                message: Password is mandatory.
-                groups: [changePassword]
+                message: Please enter a password.
+                groups:
+                    - registration
+                    - changePassword
             - Length:
                 min: 4
-                minMessage: Password is too short.
-                max: 32
+                minMessage: Your password should be at least {{ limit }} characters.
+                max: 4096
                 maxMessage: Password is too long.
-                groups: [changePassword]
+                groups:
+                    - registration
+                    - changePassword
         avatar:
             - Valid:
