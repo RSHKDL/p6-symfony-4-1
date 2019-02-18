@@ -76,7 +76,7 @@
                     data-target="#collapse-media"
             >Show medias</button>
             <div id="collapse-media" class="collapse">
-                {% for row in trick.images | batch(5) %}
+                {% for row in trick.images | batch(trick.images.count) %}
                     <div class="card-columns">
                         {% for image in row %}
                             <div class="card">
@@ -89,7 +89,7 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                {% for row in trick.videos | batch(5) %}
+                {% for row in trick.videos | batch(trick.videos.count) %}
                     <div class="card-columns">
                         {% for video in row %}
                             <div class="card">
