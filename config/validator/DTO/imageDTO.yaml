@@ -17,4 +17,5 @@ App\Domain\DTO\ImageDTO:
                     - 'image/png'
                 mimeTypesMessage: Only jpg, jpeg and png allowed
                 groups:
+                    - trickCreateDTO
                     - trickDTO
